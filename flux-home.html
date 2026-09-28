@@ -6,7 +6,7 @@
 <title>Flux Creative Universe</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Exo+2:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Exo+2:wght@400;500;600&family=Yellowtail&display=swap" rel="stylesheet">
 <style>
 /* =========================================================
    TOKEN — warna & font seluruh halaman
@@ -44,24 +44,25 @@ a{color:inherit}
    ========================================================= */
 .nav{
   position:fixed;z-index:30;top:env(safe-area-inset-top,0px);left:0;right:0;height:var(--nav-h);
-  display:flex;align-items:center;gap:2rem;padding:0 clamp(1rem,4vw,4rem);
-  /* efek kaca */
-  background:linear-gradient(180deg,rgba(24,8,52,.55),rgba(24,8,52,.35));
-  backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);
-  border-bottom:1px solid rgba(255,122,217,.28);
-  box-shadow:0 8px 32px rgba(10,4,24,.45),inset 0 1px 0 rgba(255,255,255,.08);
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:0 clamp(1rem,3vw,2.5rem);
 }
-.logo{display:flex;flex-direction:column;text-decoration:none;line-height:1}
-.logo img{display:block;height:calc(var(--nav-h) - 1.5rem);width:auto;filter:drop-shadow(0 0 10px rgba(255,47,185,.35))}
+/* kapsul kaca terpisah: logo (kiri), menu (tengah), tombol (kanan) */
+.logo,.links,.menu-btn{
+  background:rgba(24,8,52,.55);
+  backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);
+  border:1px solid rgba(255,122,217,.22);border-radius:999px;
+  box-shadow:0 6px 24px rgba(10,4,24,.4),inset 0 1px 0 rgba(255,255,255,.08);
+}
+.logo{display:flex;align-items:center;text-decoration:none;line-height:1;padding:.3rem 1.1rem}
+.logo img{display:block;height:calc(var(--nav-h) - 2.4rem);width:auto;filter:drop-shadow(0 0 10px rgba(255,47,185,.35))}
 .logo b{font:700 2rem/1 var(--display);letter-spacing:.02em;background:linear-gradient(180deg,#fff,#D9B8FF 60%,#9B6BFF);-webkit-background-clip:text;background-clip:text;color:transparent}
 .logo small{font:500 .62rem/1 var(--display);letter-spacing:.28em;color:var(--muted);margin-top:.35rem}
 /* ganti .logo isinya dengan: <img src="aset/logo-flux.png" alt="Flux Creative Universe" height="56"> */
 
-.links{display:flex;gap:clamp(1rem,2.4vw,2.6rem);list-style:none;margin:0 auto;padding:0}
-.links a{position:relative;text-decoration:none;font:600 .8rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--ice);padding:.6rem 0;opacity:.85}
-.links a:hover,.links a[aria-current]{opacity:1;color:#fff}
-.links a[aria-current]{color:var(--pink)}
-.links a[aria-current]::after,.links a:hover::after{content:"";position:absolute;left:-.4rem;right:-.4rem;bottom:-.3rem;height:2px;background:var(--magenta);box-shadow:0 0 12px var(--magenta)}
+.links{position:absolute;left:50%;translate:-50% 0;display:flex;gap:.2rem;list-style:none;margin:0;padding:.35rem}
+.links a{display:block;white-space:nowrap;text-decoration:none;font:600 .78rem/1 var(--body);letter-spacing:.1em;text-transform:uppercase;color:var(--ice);padding:.8rem clamp(.7rem,1vw,1.05rem);border-radius:999px;opacity:.85;transition:background .2s,color .2s}
+.links a:hover{opacity:1;color:#fff;background:rgba(255,255,255,.08)}
+.links a[aria-current]{opacity:1;color:var(--pink);background:rgba(255,47,185,.16);box-shadow:inset 0 0 0 1px rgba(255,122,217,.35)}
 
 /* tombol bersudut ala panel sci-fi */
 .cut{
@@ -80,12 +81,13 @@ a{color:inherit}
 .cut{clip-path:none;border-radius:999px}
 .cut::before{clip-path:none;border-radius:inherit}
 .cut svg{width:1.1rem;height:1.1rem;flex:none}
-.menu-btn{display:none;margin-left:auto;background:none;border:0;color:var(--ice);font:600 .8rem var(--body);letter-spacing:.14em;cursor:pointer;padding:.6rem}
+.menu-btn{display:none;margin-left:auto;color:var(--ice);font:600 .8rem var(--body);letter-spacing:.14em;cursor:pointer;padding:.85rem 1.3rem}
 
 /* =========================================================
    HERO — disusun per lapisan (paling belakang → paling depan)
    ========================================================= */
-.hero{position:relative;height:100vh;height:100dvh;min-height:40rem;overflow:hidden;isolation:isolate}
+.hero{position:sticky;top:0;z-index:0;height:100vh;height:100dvh;min-height:40rem;overflow:hidden;isolation:isolate}
+.hero::after{content:"";position:absolute;inset:0;z-index:8;pointer-events:none;background:#07021A;opacity:var(--cover,0)}
 .layer{position:absolute;inset:-3%;pointer-events:none;will-change:transform}
 
 /* LAPISAN 1: luar angkasa.
@@ -122,9 +124,11 @@ a{color:inherit}
    jadi elemen HTML yang diposisikan dengan % akan selalu menempel
    di titik yang sama pada gambar, di ukuran layar apa pun.
    ========================================================= */
-.stage-wrap{position:absolute;inset:-2%;container-type:size;will-change:transform}
+.stage-wrap{position:absolute;inset:-2%;container-type:size;will-change:transform;scale:calc(1.06 - var(--p,0) * .1)}
+/* partikel debu/bintang lembut yang melayang saat di-scroll */
+.dust{position:absolute;inset:0;z-index:4;width:100%;height:100%;pointer-events:none;opacity:0}
 .stage{position:absolute;left:50%;top:50%;translate:-50% -50%;width:max(100cqw,calc(100cqh * 16 / 9));aspect-ratio:16/9;container-type:inline-size}
-.stage picture,.stage img{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover}
+.stage picture,.stage img,.stage video{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover}
 /* bintang berkelip — hanya digambar di area kaca jendela */
 .stars{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;mix-blend-mode:screen}
 .stage::after{ /* gelapkan sedikit area tengah supaya judul lebih terbaca */
@@ -144,7 +148,7 @@ a{color:inherit}
 .hud-list a:hover::before{background:var(--pink)}
 
 /* LAPISAN 3: konten (HTML) */
-.content{position:relative;z-index:5;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:calc(var(--nav-h) + 1rem) 1.25rem 22vh;pointer-events:none}
+.content{scale:calc(1 - var(--p,0) * .1);opacity:calc(1 - var(--p,0) * 1.4);position:relative;z-index:5;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:calc(var(--nav-h) + 1rem) 1.25rem 22vh;pointer-events:none}
 .content a{pointer-events:auto}
 .mark{display:flex;flex-direction:column;align-items:center;margin-bottom:clamp(1.5rem,3vh,2.5rem)}
 .mark b{font:700 clamp(2.8rem,6vw,4.4rem)/1 var(--display);background:linear-gradient(180deg,#fff 10%,#E3C9FF 50%,#8A55FF);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 14px rgba(180,120,255,.6))}
@@ -198,26 +202,84 @@ h1{margin:.4rem 0 0;font:900 clamp(2.2rem,6.2vw,5.4rem)/1 var(--display);letter-
 .globe .ball::after{animation:turn 12s linear infinite}
 @keyframes turn{to{background-position:0 0,120px 0}}
 
-.scroll{position:absolute;z-index:7;left:50%;bottom:.6rem;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.35rem;font:600 .6rem/1 var(--display);letter-spacing:.3em;color:var(--muted);text-decoration:none}
+.scroll{opacity:calc(1 - var(--p,0) * 4);position:absolute;z-index:7;left:50%;bottom:.6rem;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.35rem;font:600 .6rem/1 var(--display);letter-spacing:.3em;color:var(--muted);text-decoration:none}
 .scroll i{width:1.1rem;height:1.8rem;border:1.5px solid var(--muted);border-radius:1rem;position:relative}
 .scroll i::after{content:"";position:absolute;left:50%;top:.3rem;width:2px;height:.4rem;margin-left:-1px;background:var(--pink);border-radius:2px;animation:wheel 1.8s ease-in-out infinite}
 @keyframes wheel{50%{transform:translateY(.45rem);opacity:.2}}
 
 /* section setelah hero (contoh) */
-.next{min-height:60vh;display:grid;place-items:center;padding:4rem 1.25rem;background:linear-gradient(180deg,var(--void),var(--deep));text-align:center}
+.next{--tear-h:clamp(64px,9vw,140px);position:relative;z-index:10;margin-top:var(--tear-h);min-height:100vh;display:grid;place-items:center;padding:6rem 1.25rem 4rem;background:linear-gradient(180deg,var(--deep) 0,var(--deep) 160px,#12062A 60%,var(--void));text-align:center}
+
+/* TEPI SOBEK NEON — menempel di atas section, bentuknya berganti ala stop-motion */
+.tear{position:absolute;z-index:1;left:0;right:0;bottom:calc(100% - 2px);height:var(--tear-h);pointer-events:none}
+.tear svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.tear .glow{fill:none;stroke:var(--magenta);stroke-width:22;opacity:.4;filter:blur(12px);vector-effect:non-scaling-stroke}
+.tear .paper{fill:#E9D2FF;filter:url(#fray)}
+.tear .fill{fill:var(--deep);filter:url(#fray2)}
+.tear .speck{fill:none;stroke:#FFE4F7;stroke-width:2;stroke-dasharray:1 4 2 7 1 3 3 9;opacity:.6;vector-effect:non-scaling-stroke;filter:url(#fray)}
 .next h2{font:700 clamp(1.6rem,4vw,2.6rem)/1.1 var(--display);margin:0 0 .75rem}
 .next p{margin:0 auto;color:var(--muted);max-width:40ch}
 
 /* =========================================================
+   OUR SERVICES — section dipin, kartu gambar bertumpuk saat di-scroll
+   ========================================================= */
+.next.services{display:block;padding:0;text-align:left;height:calc(var(--n,5) * 85vh + 30vh)}
+.svc-sticky{position:sticky;top:0;height:100vh;height:100dvh;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:clamp(1.5rem,5vw,6rem);padding:calc(var(--nav-h) + 1rem) clamp(1.25rem,6vw,7rem) 2rem;overflow:hidden}
+.svc-text{max-width:30rem;justify-self:center;text-align:center;display:flex;flex-direction:column;align-items:center}
+.services .svc-title{margin:0;display:flex;flex-direction:column;align-items:center;font:900 clamp(2.6rem,5.6vw,5rem)/.9 var(--display);letter-spacing:.02em;text-transform:uppercase;
+  background:linear-gradient(180deg,#FFFFFF 0%,#FFD9F4 45%,#C77DFF 75%,#FF7AD9 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 18px rgba(255,47,185,.35))}
+.svc-our{font:400 clamp(2.6rem,5vw,4.4rem)/1 "Yellowtail",cursive;text-transform:none;letter-spacing:0;color:var(--magenta);-webkit-text-fill-color:var(--magenta);margin-bottom:-.35em;rotate:-6deg;text-shadow:0 0 18px rgba(255,47,185,.8);position:relative;z-index:1}
+.services .svc-desc{margin:1.4rem 0 1.6rem;color:var(--muted);font-size:clamp(.95rem,1.2vw,1.08rem);line-height:1.6;max-width:34ch}
+.svc-all{padding:.85rem 1.5rem;font-size:.75rem}
+.svc-index{list-style:none;margin:2rem 0 0;padding:0;display:flex;gap:.5rem}
+.svc-index li{width:.55rem;height:.55rem;border-radius:50%;background:rgba(233,220,255,.25);transition:background .3s,width .3s}
+.svc-index li.on{width:1.8rem;border-radius:1rem;background:var(--pink);box-shadow:0 0 10px var(--magenta)}
+
+.svc-stage{position:relative;height:min(72vh,40rem);display:grid;place-items:center}
+.svc-cards{position:relative;width:min(100%,24rem);aspect-ratio:4/5.2;max-height:100%}
+.svc-card{position:absolute;inset:0;border-radius:1.2rem;overflow:hidden;background:#12062A;
+  border:1px solid rgba(255,122,217,.35);box-shadow:0 30px 60px rgba(0,0,0,.55),0 0 30px rgba(255,47,185,.18);
+  transform-origin:50% 100%;will-change:transform}
+.svc-img{position:absolute;inset:0;
+  background:
+    radial-gradient(60% 50% at 30% 30%,var(--a),transparent 70%),
+    radial-gradient(55% 55% at 75% 70%,var(--b),transparent 70%),
+    repeating-linear-gradient(0deg,rgba(255,255,255,.05) 0 1px,transparent 1px 28px),
+    repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 1px,transparent 1px 28px),
+    var(--c);
+  display:grid;place-items:center}
+.svc-img span{font:700 .72rem/1 var(--display);letter-spacing:.3em;color:rgba(255,255,255,.55);border:1px dashed rgba(255,255,255,.35);padding:.6rem .9rem;border-radius:.4rem}
+.svc-img img,.svc-img video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.svc-card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(10,4,24,.85));pointer-events:none}
+.svc-num{position:absolute;z-index:1;top:1rem;left:1.1rem;font:700 .72rem/1 var(--display);letter-spacing:.2em;color:var(--pink)}
+.svc-card h3{position:absolute;z-index:1;left:1.1rem;bottom:1.1rem;margin:0;font:900 clamp(1.1rem,1.8vw,1.5rem)/1 var(--display);text-transform:uppercase;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.6)}
+.svc-go{position:absolute;z-index:1;right:1.1rem;bottom:1rem;color:var(--pink);text-decoration:none;font:600 1.3rem/1 var(--body);transition:translate .2s}
+.svc-go:hover{translate:4px 0}
+
+.svc-squiggle{position:absolute;right:max(-5rem,calc(50% - 25rem));top:50%;translate:0 -50%;width:clamp(10rem,18vw,17rem);height:auto;overflow:visible;pointer-events:none}
+.svc-squiggle path{fill:none;stroke:var(--magenta);stroke-width:16;stroke-linecap:round;filter:drop-shadow(0 0 10px rgba(255,47,185,.8));
+  translate:0 var(--wig,0px);transition:translate .1s linear}
+
+@media (max-width:820px){
+  .next.services{height:calc(var(--n,5) * 75vh + 30vh)}
+  .svc-sticky{grid-template-columns:1fr;grid-template-rows:auto 1fr;gap:1rem;padding-top:calc(var(--nav-h) + .5rem);align-items:start}
+  .services .svc-desc{margin:.8rem 0 1rem;font-size:.9rem}
+  .svc-index{margin-top:1rem}
+  .svc-stage{height:100%;max-height:52vh}
+  .svc-cards{width:auto;height:100%;max-height:none}
+  .svc-squiggle{width:7rem;right:-1rem}
+}
+
+/* =========================================================
    RESPONSIVE
    ========================================================= */
-@media (max-width:1100px){
+@media (max-width:1320px){
   .links{display:none}
   .menu-btn{display:block}
   .nav > .cut{display:none}
-  .nav.open .links{display:flex;position:absolute;top:var(--nav-h);left:1rem;right:1rem;flex-direction:column;gap:0;padding:.75rem 1.25rem;background:rgba(20,8,44,.95);border:1px solid rgba(255,122,217,.4);border-radius:1rem}
-  .nav.open .links a{display:block;padding:.9rem 0}
-  .nav.open .links a::after{display:none}
+  .nav.open .links{display:flex;position:absolute;top:var(--nav-h);left:1rem;right:1rem;translate:none;flex-direction:column;gap:.2rem;padding:.6rem;background:rgba(20,8,44,.92);border-radius:1.4rem}
+  .nav.open .links a{padding:1rem 1.1rem}
 }
 @media (max-width:820px){
   .content{padding-bottom:18vh}
@@ -254,28 +316,87 @@ h1{margin:.4rem 0 0;font:900 clamp(2.2rem,6.2vw,5.4rem)/1 var(--display);letter-
     <!-- BACKGROUND: gambar kokpit -->
     <div class="stage-wrap" data-depth="14">
       <div class="stage">
-        <picture>
-          <source type="image/webp" srcset="aset/hero-img-1600.webp 1600w, aset/hero-img-2560.webp 2560w" sizes="100vw">
-          <img src="aset/hero-img-2560.jpg" alt="" fetchpriority="high" decoding="async">
-        </picture>
+        <!-- video loop hero (webm lebih kecil, mp4 cadangan); poster tampil sebelum video siap -->
+        <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="aset/hero-loop-poster.webp" aria-hidden="true">
+          <source src="aset/hero-loop.webm" type="video/webm">
+          <source src="aset/hero-loop.mp4" type="video/mp4">
+        </video>
         <canvas class="stars" aria-hidden="true"></canvas>
       </div>
     </div>
 
     <!-- LAPISAN 3: konten -->
+    <canvas class="dust" aria-hidden="true"></canvas>
+
     <div class="content">
       <h1 class="sr">Flux Creative Universe</h1>
       <img class="hero-logo" src="aset/FCU-Logo.webp" alt="" width="534" height="369" decoding="async">
-      <a class="cut big" href="#about">Explore our universe
+      <a class="cut big" href="#services">Explore our universe
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
       </a>
     </div>
 
-    <a class="scroll" href="#about"><i aria-hidden="true"></i>SCROLL</a>
+    <a class="scroll" href="#services"><i aria-hidden="true"></i>SCROLL</a>
   </section>
 
-  <section class="next" id="about">
-    <div><h2>Section berikutnya</h2><p>Mulai dari sini, lanjutkan dengan konten About, Events, dan seterusnya.</p></div>
+  <section class="next services" id="services">
+    <div class="tear" aria-hidden="true">
+      <svg viewBox="0 0 1440 140" preserveAspectRatio="none">
+        <defs>
+          <!-- tekstur serat kertas sobek -->
+          <filter id="fray" x="-2%" y="-20%" width="104%" height="140%">
+            <feTurbulence type="fractalNoise" baseFrequency=".9 .3" numOctaves="3" seed="7"/>
+            <feDisplacementMap in="SourceGraphic" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+          </filter>
+          <filter id="fray2" x="-2%" y="-20%" width="104%" height="140%">
+            <feTurbulence type="fractalNoise" baseFrequency=".6 .2" numOctaves="2" seed="21"/>
+            <feDisplacementMap in="SourceGraphic" scale="5" xChannelSelector="R" yChannelSelector="G"/>
+          </filter>
+        </defs>
+        <!-- glow neon, lapisan kertas terang (tepi sobek), lalu isi ungu -->
+        <path class="glow"/><path class="paper"/><path class="speck"/><path class="fill"/>
+      </svg>
+    </div>
+
+    <!-- OUR SERVICES: teks kiri diam, kartu kanan berganti saat di-scroll.
+         Tambah/kurangi kartu cukup dengan menambah/menghapus <article class="svc-card">.
+         Ganti gambar dummy: isi <div class="svc-img"> dengan <img src="aset/service-1.webp" alt=""> -->
+    <div class="svc-sticky">
+      <div class="svc-text">
+        <h2 class="svc-title"><span class="svc-our">Our</span>Services</h2>
+        <p class="svc-desc">From concept to final cut, we craft AI-powered films, campaigns, and experiences that move people, built to shine across every screen and every touchpoint.</p>
+        <a class="cut svc-all" href="#services">All services
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <ol class="svc-index" aria-label="Daftar layanan"></ol>
+      </div>
+
+      <div class="svc-stage">
+        <svg class="svc-squiggle" viewBox="0 0 300 400" aria-hidden="true"><path pathLength="1" d="M20 210 C 60 80, 130 80, 120 200 S 150 330, 200 230 S 250 60, 290 150"/></svg>
+        <div class="svc-cards">
+          <article class="svc-card" data-name="AI Film Production">
+            <div class="svc-img" style="--a:#7B3CFF;--b:#FF2FB9;--c:#12062A"><span>DUMMY 01</span></div>
+            <span class="svc-num">01</span><h3>AI Film<br>Production</h3><a href="#services" class="svc-go" aria-label="AI Film Production">→</a>
+          </article>
+          <article class="svc-card" data-name="Brand Campaigns">
+            <div class="svc-img" style="--a:#FF7AD9;--b:#5B2BFF;--c:#1B0A3A"><span>DUMMY 02</span></div>
+            <span class="svc-num">02</span><h3>Brand<br>Campaigns</h3><a href="#services" class="svc-go" aria-label="Brand Campaigns">→</a>
+          </article>
+          <article class="svc-card" data-name="Music Videos">
+            <div class="svc-img" style="--a:#3CC8FF;--b:#B13CFF;--c:#0A0418"><span>DUMMY 03</span></div>
+            <span class="svc-num">03</span><h3>Music<br>Videos</h3><a href="#services" class="svc-go" aria-label="Music Videos">→</a>
+          </article>
+          <article class="svc-card" data-name="Social Content">
+            <div class="svc-img" style="--a:#FF9C5B;--b:#FF2FB9;--c:#1B0A3A"><span>DUMMY 04</span></div>
+            <span class="svc-num">04</span><h3>Social<br>Content</h3><a href="#services" class="svc-go" aria-label="Social Content">→</a>
+          </article>
+          <article class="svc-card" data-name="Creative Events">
+            <div class="svc-img" style="--a:#9B6BFF;--b:#3CFFD2;--c:#12062A"><span>DUMMY 05</span></div>
+            <span class="svc-num">05</span><h3>Creative<br>Events</h3><a href="#services" class="svc-go" aria-label="Creative Events">→</a>
+          </article>
+        </div>
+      </div>
+    </div>
   </section>
 </main>
 
@@ -364,9 +485,177 @@ h1{margin:.4rem 0 0;font:900 clamp(2.2rem,6.2vw,5.4rem)/1 var(--display);letter-
   }
 
   new ResizeObserver(build).observe(cv);
-  new IntersectionObserver(e=>{visible=e[0].isIntersecting;update()}).observe(cv.closest('.hero'));
+  const nextSec=document.querySelector('.next');
+  addEventListener('scroll',()=>{const v=!nextSec||nextSec.getBoundingClientRect().top>0; if(v!==visible){visible=v;update()}},{passive:true});
   document.addEventListener('visibilitychange',update);
   build(); update();
+})();
+
+/* =========================================================
+   TEPI SOBEK — bentuknya berubah mengikuti scroll (seperti kertas
+   yang terus disobek), ditambah goyang halus terus-menerus.
+   Dua lapisan: kertas terang (tepi) + isi ungu di bawahnya.
+   ========================================================= */
+(function(){
+  const tear=document.querySelector('.tear'); if(!tear) return;
+  const sec=tear.parentElement;
+  const [glow,paper,speck,fill]=tear.querySelectorAll('path');
+  const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // value-noise 1D yang halus (deterministik)
+  const R=[]; for(let i=0;i<512;i++) R.push(Math.random());
+  const n1=x=>{const i=Math.floor(x),f=x-i,a=R[i&511],b=R[(i+1)&511],u=f*f*(3-2*f);return a+(b-a)*u};
+  const fbm=x=>n1(x)*.6+n1(x*2.13+17)*.28+n1(x*4.7+41)*.12;
+
+  const N=120; let cur=0, target=0;
+  function path(ys){
+    let d=`M0,${ys[0].toFixed(1)}`;
+    for(let i=1;i<N;i++){const x=i/N*1440,x2=(i+1)/N*1440;
+      d+=`Q${x.toFixed(1)},${ys[i].toFixed(1)} ${((x+x2)/2).toFixed(1)},${((ys[i]+ys[i+1])/2).toFixed(1)}`;}
+    return d+`L1440,${ys[N].toFixed(1)}`;
+  }
+  function draw(t){
+    const s=t/1000;
+    cur+=(target-cur)*.12;                 // ikuti scroll dengan halus
+    const o=cur*2.6, w=s*.12;               // o: geser karena scroll, w: goyang pelan
+    const top=[],bot=[];
+    for(let i=0;i<=N;i++){
+      const x=i/N*6;
+      // tepi kertas: sobekan besar + potongan-potongan sedang
+      const f=Math.max(0,Math.min(1,(fbm(x+o+w)-.28)/.44));
+      const a=14+96*f+(n1(x*9+o*3)-.5)*12;
+      // isi ungu: selalu sedikit di bawah tepi kertas, lebarnya tidak rata
+      const b=a+5+26*fbm(x*1.7-o*1.3+50+w*1.5);
+      top.push(Math.min(126,a)); bot.push(Math.min(138,b));
+    }
+    const dt=path(top), db=path(bot);
+    glow.setAttribute('d',dt); speck.setAttribute('d',dt);
+    paper.setAttribute('d',dt+'L1440,170L0,170Z');
+    fill.setAttribute('d',db+'L1440,240L0,240Z');
+  }
+  function measure(){const r=sec.getBoundingClientRect();
+    target=Math.max(0,Math.min(1.4,(innerHeight-r.top)/innerHeight));}
+  let raf=0,inView=false;
+  function loop(t){draw(t);raf=requestAnimationFrame(loop)}
+  function run(){const go=!still&&inView&&!document.hidden;
+    if(go&&!raf)raf=requestAnimationFrame(loop); if(!go&&raf){cancelAnimationFrame(raf);raf=0}}
+  measure(); cur=target; draw(0);
+  addEventListener('scroll',()=>{measure(); if(still) {cur=target;draw(0)}},{passive:true});
+  addEventListener('resize',measure);
+  new IntersectionObserver(e=>{inView=e[0].isIntersecting;run()},{rootMargin:'150px 0px'}).observe(tear);
+  document.addEventListener('visibilitychange',run);
+})();
+
+/* =========================================================
+   SCROLL HERO: zoom-out, meredup, dan partikel lembut melayang
+   --p = 0 di home, 1 saat hero sudah tertutup section berikutnya
+   ========================================================= */
+(function(){
+  const hero=document.querySelector('.hero'), sec=document.querySelector('.next');
+  const cv=document.querySelector('.dust'); if(!hero||!sec||!cv) return;
+  const ctx=cv.getContext('2d');
+  const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let W=0,H=0,dpr=1,parts=[],p=0,vel=0,lastY=scrollY,raf=0;
+
+  // sprite titik bercahaya lembut (dipakai ulang supaya ringan)
+  function sprite(rgb){const c=document.createElement('canvas');c.width=c.height=64;
+    const g=c.getContext('2d'),gr=g.createRadialGradient(32,32,0,32,32,32);
+    gr.addColorStop(0,`rgba(${rgb},1)`);gr.addColorStop(.25,`rgba(${rgb},.55)`);gr.addColorStop(1,`rgba(${rgb},0)`);
+    g.fillStyle=gr;g.fillRect(0,0,64,64);return c;}
+  const SPR=[sprite('255,255,255'),sprite('255,190,240'),sprite('205,175,255')];
+
+  function resize(){dpr=Math.min(devicePixelRatio||1,2);
+    W=cv.width=Math.round(cv.clientWidth*dpr);H=cv.height=Math.round(cv.clientHeight*dpr);
+    const n=Math.round(cv.clientWidth*cv.clientHeight/9000);
+    parts=Array.from({length:n},()=>newPart(true));}
+  function newPart(anyY){return{
+    x:Math.random()*W, y:anyY?Math.random()*H:H+20*dpr,
+    r:(Math.random()<.12?5+Math.random()*6:1.5+Math.random()*3.5)*dpr,
+    vy:(.08+Math.random()*.35)*dpr, sw:Math.random()*6.28, ss:.3+Math.random()*.8,
+    tw:Math.random()*6.28, ts:.8+Math.random()*1.8, s:SPR[Math.random()*SPR.length|0]};}
+
+  function frame(t){
+    const s=t/1000;
+    ctx.clearRect(0,0,W,H);
+    ctx.globalCompositeOperation='lighter';
+    for(const q of parts){
+      q.y-=q.vy*(1+vel*6); q.x+=Math.sin(s*q.ss+q.sw)*.25*dpr;
+      if(q.y<-20*dpr) Object.assign(q,newPart(false));
+      const a=(.35+.65*(.5+.5*Math.sin(s*q.ts+q.tw)));
+      ctx.globalAlpha=a; ctx.drawImage(q.s,q.x-q.r*2,q.y-q.r*2,q.r*4,q.r*4);
+    }
+    ctx.globalAlpha=1; vel*=.9;
+    raf=requestAnimationFrame(frame);
+  }
+  function run(){const go=!still&&p>.005&&p<1&&!document.hidden;
+    if(go&&!raf)raf=requestAnimationFrame(frame); if(!go&&raf){cancelAnimationFrame(raf);raf=0}}
+
+  function onScroll(){
+    const r=sec.getBoundingClientRect(), h=innerHeight;
+    p=Math.max(0,Math.min(1,1-r.top/h));
+    hero.style.setProperty('--p',p.toFixed(3));
+    hero.style.setProperty('--cover',(p*.7).toFixed(3));
+    cv.style.opacity=Math.min(1,p*2.2).toFixed(3);
+    vel=Math.min(1,vel+Math.abs(scrollY-lastY)/600); lastY=scrollY;
+    run();
+  }
+  new ResizeObserver(resize).observe(cv); resize();
+  addEventListener('scroll',onScroll,{passive:true}); addEventListener('resize',onScroll);
+  document.addEventListener('visibilitychange',run); onScroll();
+})();
+
+/* video hero: diam untuk pengguna yang mematikan animasi, dan berhenti saat hero tertutup */
+(function(){
+  const v=document.querySelector('.hero-video'); if(!v) return;
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){v.removeAttribute('autoplay');v.pause();return}
+  const sec=document.querySelector('.next');
+  addEventListener('scroll',()=>{
+    const covered=sec&&sec.getBoundingClientRect().top<=0;
+    if(covered&&!v.paused) v.pause(); else if(!covered&&v.paused) v.play().catch(()=>{});
+  },{passive:true});
+})();
+
+/* =========================================================
+   OUR SERVICES — kartu masuk satu per satu mengikuti scroll
+   ========================================================= */
+(function(){
+  const sec=document.querySelector('.services'); if(!sec) return;
+  const cards=[...sec.querySelectorAll('.svc-card')], n=cards.length;
+  const squig=sec.querySelector('.svc-squiggle');
+  const idx=sec.querySelector('.svc-index');
+  sec.style.setProperty('--n',n);
+  // penanda aktif (titik-titik)
+  cards.forEach(c=>{const li=document.createElement('li');li.title=c.dataset.name;idx.appendChild(li)});
+  const dots=[...idx.children];
+  const tilt=cards.map((_,i)=>i%2?2.5:-2.5);  // kemiringan akhir tiap kartu
+  const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let target=0,cur=0,raf=0;
+  const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+
+  function measure(){
+    const r=sec.getBoundingClientRect(), total=r.height-innerHeight;
+    const prog=Math.max(0,Math.min(1,-r.top/total));
+    target=prog*(n-1);
+    if(!raf) raf=requestAnimationFrame(tick);
+  }
+  function tick(){
+    cur+= still?(target-cur):(target-cur)*.14;
+    cards.forEach((c,i)=>{
+      // kartu ke-i masuk saat posisi scroll bergerak dari i-1 ke i
+      const e=i===0?1:ease(Math.max(0,Math.min(1,cur-(i-1))));
+      const behind=Math.max(0,cur-i);                 // seberapa jauh kartu sudah tertumpuk
+      const y=(1-e)*innerHeight*.95, rot=tilt[i]+(1-e)*(i%2?14:-14);
+      const sc=1-Math.min(behind,3)*.05;
+      c.style.transform=`translateY(${y.toFixed(1)}px) rotate(${rot.toFixed(2)}deg) scale(${sc.toFixed(3)})`;
+      c.style.filter=behind>0?`brightness(${(1-Math.min(behind,2)*.25).toFixed(2)})`:'';
+      c.style.zIndex=i+1;
+    });
+    const active=Math.round(cur);
+    dots.forEach((d,i)=>d.classList.toggle('on',i===active));
+    if(squig) squig.style.setProperty('--wig',(cur*-18).toFixed(1)+'px');
+    if(Math.abs(target-cur)>.001){raf=requestAnimationFrame(tick)}else{raf=0}
+  }
+  addEventListener('scroll',measure,{passive:true}); addEventListener('resize',measure); measure();
 })();
 
 /* menu mobile */
