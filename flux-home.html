@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Flux Creative Universe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Exo+2:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   TOKEN — warna & font seluruh halaman
+   ========================================================= */
+:root{
+  --void:#0A0418;          /* latar paling gelap */
+  --deep:#1B0A3A;
+  --violet:#7B3CFF;
+  --magenta:#FF2FB9;
+  --pink:#FF7AD9;
+  --ice:#E9DCFF;           /* teks terang */
+  --muted:#B9A6DF;
+  --glass:rgba(40,14,78,.55);
+  --display:"Orbitron","Eurostile","Arial Black",sans-serif;
+  --body:"Exo 2","Segoe UI",system-ui,sans-serif;
+  --nav-h:5.5rem;
+  box-sizing:border-box;
+  color-scheme:dark;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+/* halaman ini sengaja selalu gelap; token tetap didefinisikan untuk kedua mode */
+@media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){ --void:#0A0418 } }
+:root[data-theme="dark"]{ --void:#0A0418 }
+
+*,*::before,*::after{box-sizing:inherit}
+html,body{height:100%}
+body{margin:0;background:var(--void);color:var(--ice);font:400 1rem/1.5 var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--pink);outline-offset:4px;border-radius:4px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* =========================================================
+   NAV
+   ========================================================= */
+.nav{
+  position:fixed;z-index:30;top:env(safe-area-inset-top,0px);left:0;right:0;height:var(--nav-h);
+  display:flex;align-items:center;gap:2rem;padding:0 clamp(1rem,4vw,4rem);
+  /* efek kaca */
+  background:linear-gradient(180deg,rgba(24,8,52,.55),rgba(24,8,52,.35));
+  backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);
+  border-bottom:1px solid rgba(255,122,217,.28);
+  box-shadow:0 8px 32px rgba(10,4,24,.45),inset 0 1px 0 rgba(255,255,255,.08);
+}
+.logo{display:flex;flex-direction:column;text-decoration:none;line-height:1}
+.logo img{display:block;height:calc(var(--nav-h) - 1.5rem);width:auto;filter:drop-shadow(0 0 10px rgba(255,47,185,.35))}
+.logo b{font:700 2rem/1 var(--display);letter-spacing:.02em;background:linear-gradient(180deg,#fff,#D9B8FF 60%,#9B6BFF);-webkit-background-clip:text;background-clip:text;color:transparent}
+.logo small{font:500 .62rem/1 var(--display);letter-spacing:.28em;color:var(--muted);margin-top:.35rem}
+/* ganti .logo isinya dengan: <img src="aset/logo-flux.png" alt="Flux Creative Universe" height="56"> */
+
+.links{display:flex;gap:clamp(1rem,2.4vw,2.6rem);list-style:none;margin:0 auto;padding:0}
+.links a{position:relative;text-decoration:none;font:600 .8rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--ice);padding:.6rem 0;opacity:.85}
+.links a:hover,.links a[aria-current]{opacity:1;color:#fff}
+.links a[aria-current]{color:var(--pink)}
+.links a[aria-current]::after,.links a:hover::after{content:"";position:absolute;left:-.4rem;right:-.4rem;bottom:-.3rem;height:2px;background:var(--magenta);box-shadow:0 0 12px var(--magenta)}
+
+/* tombol bersudut ala panel sci-fi */
+.cut{
+  --c:.9rem;position:relative;display:inline-flex;align-items:center;gap:.7rem;
+  font:600 .82rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:#fff;
+  padding:1rem 1.6rem;background:linear-gradient(90deg,rgba(123,60,255,.35),rgba(255,47,185,.35));
+  clip-path:polygon(var(--c) 0,calc(100% - var(--c)) 0,100% 50%,calc(100% - var(--c)) 100%,var(--c) 100%,0 50%);
+  filter:drop-shadow(0 0 10px rgba(255,47,185,.55));transition:filter .25s,background .25s;
+}
+.cut::before{ /* garis tepi neon */
+  content:"";position:absolute;inset:0;padding:1.5px;background:linear-gradient(90deg,var(--violet),var(--magenta),var(--pink));
+  clip-path:inherit;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;
+}
+.cut:hover{filter:drop-shadow(0 0 18px rgba(255,47,185,.9));background:linear-gradient(90deg,rgba(123,60,255,.55),rgba(255,47,185,.55))}
+/* semua tombol .cut: versi rounded (kapsul) */
+.cut{clip-path:none;border-radius:999px}
+.cut::before{clip-path:none;border-radius:inherit}
+.cut svg{width:1.1rem;height:1.1rem;flex:none}
+.menu-btn{display:none;margin-left:auto;background:none;border:0;color:var(--ice);font:600 .8rem var(--body);letter-spacing:.14em;cursor:pointer;padding:.6rem}
+
+/* =========================================================
+   HERO — disusun per lapisan (paling belakang → paling depan)
+   ========================================================= */
+.hero{position:relative;height:100vh;height:100dvh;min-height:40rem;overflow:hidden;isolation:isolate}
+.layer{position:absolute;inset:-3%;pointer-events:none;will-change:transform}
+
+/* LAPISAN 1: luar angkasa.
+   Ganti fallback ini dengan gambar/video bersih (tanpa teks):
+   <img class="fill" src="aset/space.jpg" alt="">  atau
+   <video class="fill" src="aset/space-loop.mp4" autoplay muted loop playsinline></video> */
+.l-space{
+  background:
+    radial-gradient(38% 42% at 18% 42%,rgba(255,47,185,.55),transparent 70%),
+    radial-gradient(34% 40% at 82% 38%,rgba(255,110,210,.45),transparent 70%),
+    radial-gradient(30% 34% at 50% 30%,rgba(123,60,255,.55),transparent 70%),
+    radial-gradient(60% 60% at 50% 50%,#2A0F5C,var(--void) 80%);
+}
+.l-space canvas,.fill{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+
+/* LAPISAN 2: rangka kokpit (PNG transparan).
+   Ganti isi .l-frame dengan: <img class="fill" src="aset/cockpit-frame.png" alt="">
+   Fallback: dua jendela bersudut + lantai berkilau */
+.l-frame .win{position:absolute;top:14%;bottom:30%;width:30%;border:3px solid rgba(255,90,200,.55);
+  box-shadow:0 0 30px rgba(255,47,185,.35),inset 0 0 40px rgba(255,47,185,.2);border-radius:1.2rem}
+.l-frame .win.l{left:2%;clip-path:polygon(0 0,82% 0,100% 12%,100% 100%,0 100%);transform:perspective(900px) rotateY(18deg)}
+.l-frame .win.r{right:2%;clip-path:polygon(18% 0,100% 0,100% 100%,0 100%,0 12%);transform:perspective(900px) rotateY(-18deg)}
+.l-frame .floor{position:absolute;left:0;right:0;bottom:0;height:30%;
+  background:
+    linear-gradient(180deg,transparent,rgba(10,4,24,.9) 55%),
+    repeating-linear-gradient(90deg,rgba(255,47,185,.18) 0 1px,transparent 1px 8%),
+    linear-gradient(180deg,#2B0F4E,#0A0418);
+  transform:perspective(500px) rotateX(55deg);transform-origin:bottom}
+.l-frame .rail{position:absolute;left:0;right:0;bottom:29%;height:3px;background:linear-gradient(90deg,transparent,var(--magenta),var(--violet),var(--magenta),transparent);box-shadow:0 0 20px var(--magenta)}
+
+/* =========================================================
+   PANGGUNG GAMBAR — background kokpit (satu gambar datar)
+   .stage selalu 16:9 dan menutupi layar (seperti object-fit:cover),
+   jadi elemen HTML yang diposisikan dengan % akan selalu menempel
+   di titik yang sama pada gambar, di ukuran layar apa pun.
+   ========================================================= */
+.stage-wrap{position:absolute;inset:-2%;container-type:size;will-change:transform}
+.stage{position:absolute;left:50%;top:50%;translate:-50% -50%;width:max(100cqw,calc(100cqh * 16 / 9));aspect-ratio:16/9;container-type:inline-size}
+.stage picture,.stage img{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover}
+/* bintang berkelip — hanya digambar di area kaca jendela */
+.stars{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;mix-blend-mode:screen}
+.stage::after{ /* gelapkan sedikit area tengah supaya judul lebih terbaca */
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(28% 34% at 50% 42%,rgba(10,4,24,.55),transparent 75%)}
+
+/* teks di atas panel HUD yang ada di gambar (posisi dalam % gambar) */
+.hud-title{position:absolute;z-index:1;margin:0;font:600 max(9px,.62cqw)/1 var(--display);letter-spacing:.2em;color:var(--ice);text-shadow:0 0 8px rgba(255,47,185,.6)}
+.hud-title.l{left:9.5%;top:71.3%;rotate:-2deg}
+.hud-title.r{left:69.5%;top:70.6%;rotate:2deg}
+.hud-list{position:absolute;z-index:1;list-style:none;margin:0;padding:0;display:grid;gap:.55em;font:600 max(10px,.7cqw)/1 var(--body)}
+.hud-list.l{left:23.5%;top:73.5%;rotate:-2.5deg}
+.hud-list.r{left:83.8%;top:72.8%;rotate:2.5deg}
+.hud-list a{display:flex;align-items:center;gap:.6em;text-decoration:none;letter-spacing:.16em;text-transform:uppercase;color:var(--ice);pointer-events:auto}
+.hud-list a::before{content:"";width:.85em;height:.85em;border-radius:50%;border:2px solid var(--pink);box-shadow:0 0 8px var(--magenta)}
+.hud-list a:hover{color:#fff}
+.hud-list a:hover::before{background:var(--pink)}
+
+/* LAPISAN 3: konten (HTML) */
+.content{position:relative;z-index:5;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:calc(var(--nav-h) + 1rem) 1.25rem 22vh;pointer-events:none}
+.content a{pointer-events:auto}
+.mark{display:flex;flex-direction:column;align-items:center;margin-bottom:clamp(1.5rem,3vh,2.5rem)}
+.mark b{font:700 clamp(2.8rem,6vw,4.4rem)/1 var(--display);background:linear-gradient(180deg,#fff 10%,#E3C9FF 50%,#8A55FF);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 14px rgba(180,120,255,.6))}
+.mark span{display:flex;align-items:center;gap:1rem;font:700 clamp(.9rem,1.6vw,1.2rem)/1.1 var(--display);letter-spacing:.2em;color:#F1E6FF;margin-top:.5rem}
+.mark span::before,.mark span::after{content:"";width:clamp(2rem,5vw,4.5rem);height:2px;background:linear-gradient(90deg,transparent,var(--pink))}
+.mark span::after{transform:scaleX(-1)}
+/* ganti .mark dengan logo besar: <img src="aset/logo-flux-besar.png" alt="Flux Creative Universe" width="260"> */
+
+.kicker{margin:0;text-transform:uppercase;font:500 clamp(1rem,2.2vw,1.9rem)/1 var(--display);letter-spacing:.3em;color:transparent;-webkit-text-stroke:1px rgba(255,190,240,.85);text-shadow:0 0 18px rgba(255,47,185,.5)}
+h1{margin:.4rem 0 0;font:900 clamp(2.2rem,6.2vw,5.4rem)/1 var(--display);letter-spacing:.03em;text-transform:uppercase}
+.chrome{
+  display:block;
+  background:linear-gradient(180deg,#FFFFFF 0%,#FFD9F4 38%,#C77DFF 52%,#FFE8FA 64%,#FF7AD9 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 2px rgba(255,255,255,.6)) drop-shadow(0 0 22px rgba(255,47,185,.55));
+}
+.beam{width:min(34rem,70vw);height:2px;margin:1.1rem auto 1.4rem;background:linear-gradient(90deg,transparent,#FFB36B,#fff,#FFB36B,transparent);box-shadow:0 0 18px #FF9C5B}
+.tag{margin:0;font:500 clamp(.8rem,1.3vw,1.05rem)/1.9 var(--display);letter-spacing:.35em;text-transform:uppercase;color:var(--ice)}
+.tag span{color:var(--pink);padding:0 .5em}
+.hero-logo{display:block;width:clamp(12rem,26vw,22rem);height:auto;filter:drop-shadow(0 0 18px rgba(255,47,185,.45))}
+.hero .cut.big{margin-top:clamp(1.5rem,3.5vh,2.5rem);font-size:.95rem;padding:1.2rem 2.4rem;--c:1.2rem}
+
+/* LAPISAN 4: konsol HUD */
+.console{position:absolute;z-index:6;left:0;right:0;bottom:clamp(1rem,4vh,3rem);display:grid;grid-template-columns:1fr auto 1fr;align-items:end;gap:clamp(1rem,3vw,3rem);padding:0 clamp(1rem,4vw,4rem)}
+.hud{
+  position:relative;background:var(--glass);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border:1px solid rgba(255,122,217,.55);box-shadow:0 0 24px rgba(255,47,185,.3),inset 0 0 30px rgba(123,60,255,.25);
+  padding:1rem 1.25rem;display:grid;grid-template-columns:1fr auto;gap:1rem;width:min(26rem,32vw);
+  clip-path:polygon(0 12%,6% 0,100% 0,100% 88%,94% 100%,0 100%);
+}
+.hud.left{justify-self:start;transform:perspective(800px) rotateY(14deg)}
+.hud.right{justify-self:end;transform:perspective(800px) rotateY(-14deg)}
+.hud h2{grid-column:1/-1;margin:0;font:600 .72rem/1 var(--display);letter-spacing:.2em;color:var(--ice)}
+.hud .viz{height:5.5rem;border-radius:.4rem;background:radial-gradient(circle at 50% 50%,rgba(255,122,217,.9),rgba(123,60,255,.5) 25%,transparent 60%),rgba(10,4,24,.5)}
+/* ganti .viz dengan gambar kecil: <img src="aset/flux-map.png" alt="" style="width:100%;border-radius:.4rem"> */
+.hud ul{list-style:none;margin:0;padding:0;display:grid;gap:.35rem;align-content:center}
+.hud a{display:flex;align-items:center;gap:.55rem;text-decoration:none;font:600 .72rem/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--ice)}
+.hud a::before{content:"";width:.6rem;height:.6rem;border-radius:50%;border:2px solid var(--pink);box-shadow:0 0 8px var(--magenta)}
+.hud a:hover{color:#fff}
+.hud a:hover::before{background:var(--pink)}
+
+/* hologram — ganti dengan video loop kecil jika ada:
+   <video src="aset/globe.mp4" autoplay muted loop playsinline width="200"></video> */
+.globe{position:relative;width:clamp(7rem,12vw,10rem);aspect-ratio:1;margin-bottom:1rem}
+.globe .ball{position:absolute;inset:18%;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#fff,#C9A3FF 18%,#7B3CFF 45%,#2A0F5C 75%);
+  box-shadow:0 0 40px rgba(123,60,255,.9),0 0 90px rgba(255,47,185,.35)}
+.globe .ball::after{content:"";position:absolute;inset:0;border-radius:50%;background:repeating-linear-gradient(0deg,transparent 0 9px,rgba(255,255,255,.18) 9px 10px),repeating-linear-gradient(90deg,transparent 0 9px,rgba(255,255,255,.12) 9px 10px);mix-blend-mode:screen}
+.globe .ring{position:absolute;left:-10%;right:-10%;top:42%;height:22%;border:2px solid rgba(255,122,217,.7);border-radius:50%;box-shadow:0 0 14px var(--magenta);transform:rotate(-8deg)}
+.globe .ring.b{left:-24%;right:-24%;top:52%;height:18%;opacity:.5;transform:rotate(6deg)}
+.globe .ball::after{animation:turn 12s linear infinite}
+@keyframes turn{to{background-position:0 0,120px 0}}
+
+.scroll{position:absolute;z-index:7;left:50%;bottom:.6rem;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.35rem;font:600 .6rem/1 var(--display);letter-spacing:.3em;color:var(--muted);text-decoration:none}
+.scroll i{width:1.1rem;height:1.8rem;border:1.5px solid var(--muted);border-radius:1rem;position:relative}
+.scroll i::after{content:"";position:absolute;left:50%;top:.3rem;width:2px;height:.4rem;margin-left:-1px;background:var(--pink);border-radius:2px;animation:wheel 1.8s ease-in-out infinite}
+@keyframes wheel{50%{transform:translateY(.45rem);opacity:.2}}
+
+/* section setelah hero (contoh) */
+.next{min-height:60vh;display:grid;place-items:center;padding:4rem 1.25rem;background:linear-gradient(180deg,var(--void),var(--deep));text-align:center}
+.next h2{font:700 clamp(1.6rem,4vw,2.6rem)/1.1 var(--display);margin:0 0 .75rem}
+.next p{margin:0 auto;color:var(--muted);max-width:40ch}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width:1100px){
+  .links{display:none}
+  .menu-btn{display:block}
+  .nav > .cut{display:none}
+  .nav.open .links{display:flex;position:absolute;top:var(--nav-h);left:1rem;right:1rem;flex-direction:column;gap:0;padding:.75rem 1.25rem;background:rgba(20,8,44,.95);border:1px solid rgba(255,122,217,.4);border-radius:1rem}
+  .nav.open .links a{display:block;padding:.9rem 0}
+  .nav.open .links a::after{display:none}
+}
+@media (max-width:820px){
+  .content{padding-bottom:18vh}
+  .hud-title,.hud-list{display:none}
+  .hero .cut.big{white-space:nowrap;padding:1.1rem 1.6rem;font-size:.85rem;letter-spacing:.1em}
+}
+@media (prefers-reduced-motion:reduce){
+  .scroll i::after{animation:none}
+}
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <a class="logo" href="#home"><img src="aset/FCU-Logo-atas.webp" alt="Flux Creative Universe, beranda" width="534" height="369"></a>
+  <button class="menu-btn" type="button" aria-expanded="false" aria-controls="links">MENU</button>
+  <ul class="links" id="links">
+    <li><a href="#home" aria-current="page">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#hub">Creative Hub</a></li>
+    <li><a href="#partners">Partners</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a class="cut" href="#join">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="5"/><ellipse cx="12" cy="12" rx="11" ry="3.5" transform="rotate(-20 12 12)"/></svg>
+    Join the universe
+  </a>
+</header>
+
+<main>
+  <section class="hero" id="home">
+    <!-- BACKGROUND: gambar kokpit -->
+    <div class="stage-wrap" data-depth="14">
+      <div class="stage">
+        <picture>
+          <source type="image/webp" srcset="aset/hero-img-1600.webp 1600w, aset/hero-img-2560.webp 2560w" sizes="100vw">
+          <img src="aset/hero-img-2560.jpg" alt="" fetchpriority="high" decoding="async">
+        </picture>
+        <canvas class="stars" aria-hidden="true"></canvas>
+      </div>
+    </div>
+
+    <!-- LAPISAN 3: konten -->
+    <div class="content">
+      <h1 class="sr">Flux Creative Universe</h1>
+      <img class="hero-logo" src="aset/FCU-Logo.webp" alt="" width="534" height="369" decoding="async">
+      <a class="cut big" href="#about">Explore our universe
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <a class="scroll" href="#about"><i aria-hidden="true"></i>SCROLL</a>
+  </section>
+
+  <section class="next" id="about">
+    <div><h2>Section berikutnya</h2><p>Mulai dari sini, lanjutkan dengan konten About, Events, dan seterusnya.</p></div>
+  </section>
+</main>
+
+<script>
+/* parallax halus mengikuti mouse: tiap lapisan bergerak sesuai data-depth */
+(function(){
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches || matchMedia('(pointer: coarse)').matches) return;
+  const layers=[...document.querySelectorAll('[data-depth]')];
+  let tx=0,ty=0,cx=0,cy=0;
+  addEventListener('pointermove',e=>{tx=e.clientX/innerWidth-.5;ty=e.clientY/innerHeight-.5});
+  (function loop(){
+    cx+=(tx-cx)*.06;cy+=(ty-cy)*.06;
+    layers.forEach(l=>{const d=+l.dataset.depth;l.style.transform=`translate(${-cx*d}px,${-cy*d}px)`});
+    requestAnimationFrame(loop);
+  })();
+})();
+
+/* =========================================================
+   BINTANG BERKELIP di luar jendela
+   Area jendela didefinisikan dalam % gambar (x, y).
+   Kalau ganti gambar hero, sesuaikan titik-titik WINDOWS di bawah.
+   ========================================================= */
+(function(){
+  const cv=document.querySelector('.stars'); if(!cv) return;
+  const ctx=cv.getContext('2d');
+  const WINDOWS=[
+    [[14,19],[29,18],[32,23],[32,58],[35,64],[2.5,64],[2,48],[9,27]],   // jendela kiri
+    [[36.8,15.5],[63.8,15.5],[63.8,67],[36.8,67]],                   // jendela tengah
+    [[71,18],[86,19],[91,27],[98,48],[97.5,64],[70,64],[67.8,58],[67.8,23]] // jendela kanan
+  ];
+  const COLORS=['255,255,255','255,215,245','225,205,255','200,220,255'];
+  const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let W=0,H=0,dpr=1,stars=[],clip=null,running=false,visible=true,raf=0;
+
+  function build(){
+    const r=cv.getBoundingClientRect(); if(!r.width) return;
+    dpr=Math.min(devicePixelRatio||1,2);
+    W=cv.width=Math.round(r.width*dpr); H=cv.height=Math.round(r.height*dpr);
+    clip=new Path2D();
+    WINDOWS.forEach(poly=>{poly.forEach(([x,y],i)=>{const px=x/100*W,py=y/100*H;i?clip.lineTo(px,py):clip.moveTo(px,py)});clip.closePath()});
+    const n=Math.round(r.width*r.height/5200);   // kepadatan bintang
+    stars=[];
+    let tries=0;
+    while(stars.length<n && tries<n*20){
+      tries++;
+      const x=Math.random()*W,y=Math.random()*H;
+      if(!ctx.isPointInPath(clip,x,y)) continue;
+      const big=Math.random()<.06;
+      stars.push({x,y,
+        r:(big?1.4+Math.random()*1.2:.4+Math.random()*.9)*dpr,
+        c:COLORS[Math.random()*COLORS.length|0],
+        base:.25+Math.random()*.45,
+        amp:.3+Math.random()*.5,
+        sp:.6+Math.random()*2.2,
+        ph:Math.random()*Math.PI*2,
+        big});
+    }
+    draw(performance.now());
+  }
+
+  function draw(t){
+    ctx.clearRect(0,0,W,H);
+    ctx.save(); ctx.clip(clip);
+    const s=t/1000;
+    for(const st of stars){
+      const a=still?st.base+st.amp*.5:Math.max(0,Math.min(1,st.base+st.amp*Math.sin(s*st.sp+st.ph)));
+      if(a<.03) continue;
+      ctx.globalAlpha=a;
+      ctx.fillStyle=`rgb(${st.c})`;
+      ctx.beginPath(); ctx.arc(st.x,st.y,st.r,0,Math.PI*2); ctx.fill();
+      if(st.big && a>.55){ // kilau silang untuk bintang besar
+        const L=st.r*5*a;
+        ctx.globalAlpha=(a-.55)*1.6;
+        ctx.strokeStyle=`rgb(${st.c})`; ctx.lineWidth=.6*dpr;
+        ctx.beginPath(); ctx.moveTo(st.x-L,st.y); ctx.lineTo(st.x+L,st.y); ctx.moveTo(st.x,st.y-L); ctx.lineTo(st.x,st.y+L); ctx.stroke();
+      }
+    }
+    ctx.restore(); ctx.globalAlpha=1;
+  }
+
+  function loop(t){ draw(t); raf=requestAnimationFrame(loop); }
+  function update(){
+    const go=!still && visible && !document.hidden;
+    if(go && !running){ running=true; raf=requestAnimationFrame(loop); }
+    if(!go && running){ running=false; cancelAnimationFrame(raf); }
+  }
+
+  new ResizeObserver(build).observe(cv);
+  new IntersectionObserver(e=>{visible=e[0].isIntersecting;update()}).observe(cv.closest('.hero'));
+  document.addEventListener('visibilitychange',update);
+  build(); update();
+})();
+
+/* menu mobile */
+const nav=document.getElementById('nav'),mb=nav.querySelector('.menu-btn');
+mb.addEventListener('click',()=>{const o=nav.classList.toggle('open');mb.setAttribute('aria-expanded',o)});
+nav.querySelectorAll('.links a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');mb.setAttribute('aria-expanded',false)}));
+</script>
+</body>
+</html>
