@@ -372,7 +372,7 @@ h1{margin:.4rem 0 0;font:900 clamp(2.2rem,6.2vw,5.4rem)/1 var(--display);letter-
 .work-tabs a{font:700 .66rem/1 var(--display);letter-spacing:.16em;text-transform:uppercase;text-decoration:none;padding:.7rem 1rem;border-radius:999px;border:1px solid rgba(255,122,217,.3);color:var(--ice);transition:background .2s,border-color .2s}
 .work-tabs a:hover{background:rgba(255,47,185,.16);border-color:var(--pink);color:#fff}
 
-.wrow{margin-top:clamp(2.5rem,5vw,3.5rem)}
+.wrow{margin-top:clamp(2.5rem,5vw,3.5rem);scroll-margin-top:calc(var(--nav-h) + .5rem)}
 .wrow-bar{position:relative;z-index:4;max-width:76rem;margin:0 auto;padding:0 clamp(1.25rem,6vw,7rem);display:flex;align-items:center;gap:1rem}
 .wrow-bar h3{margin:0;display:flex;align-items:baseline;gap:.8rem;font:900 clamp(1.5rem,2.6vw,2.2rem)/1 var(--display);text-transform:uppercase;color:#fff}
 .wrow-bar h3 small{font:600 .72rem/1 var(--body);letter-spacing:.08em;text-transform:none;color:var(--muted)}
@@ -513,7 +513,7 @@ h1{margin:.4rem 0 0;font:900 clamp(2.2rem,6.2vw,5.4rem)/1 var(--display);letter-
 /* =========================================================
    RESPONSIVE
    ========================================================= */
-@media (max-width:1180px){
+@media (max-width:1340px){
   .links{display:none}
   .menu-btn{display:block}
   .nav > .cut{display:none}
@@ -539,7 +539,8 @@ h1{margin:.4rem 0 0;font:900 clamp(2.2rem,6.2vw,5.4rem)/1 var(--display);letter-
     <li><a href="#home" aria-current="page">Home</a></li>
     <li><a href="#awards">Awards</a></li>
     <li><a href="#portfolio">Portfolio</a></li>
-    <li><a href="#jagoan">Jagoan Flux</a></li>
+    <li><a href="#w-ugc">UGC Viral</a></li>
+    <li><a href="#w-tvc">360 Campaign</a></li>
     <li><a href="#services">Services</a></li>
     <li><a href="play.html">Games</a></li>
   </ul>
@@ -1182,10 +1183,11 @@ function heroSilhouette(c,i){
 /* menu aktif mengikuti section yang sedang dilihat */
 (function(){
   const links=[...document.querySelectorAll('.links a[href^="#"]')];
-  const secs=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
   function spy(){
-    const y=innerHeight*.35;let cur=secs[0];
-    secs.forEach(s=>{if(s.getBoundingClientRect().top<=y)cur=s});
+    // pilih section yang posisinya paling dekat di atas garis 35% layar
+    const secs=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    const y=innerHeight*.35;let cur=secs[0],best=-Infinity;
+    secs.forEach(s=>{const t=s.getBoundingClientRect().top;if(t<=y&&t>best&&s.id!=='home'){best=t;cur=s}});
     links.forEach(a=>{if(a.getAttribute('href')==='#'+cur.id)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
   }
   addEventListener('scroll',spy,{passive:true});spy();
