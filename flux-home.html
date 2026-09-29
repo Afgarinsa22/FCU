@@ -272,6 +272,238 @@ h1{margin:.4rem 0 0;font:900 clamp(2.2rem,6.2vw,5.4rem)/1 var(--display);letter-
 }
 
 /* =========================================================
+   AWARDS & MURI — lanjutan scroll setelah Our Services
+   ========================================================= */
+.awards{position:relative;z-index:10;overflow:hidden;padding:clamp(5rem,10vw,9rem) clamp(1.25rem,6vw,7rem) clamp(5rem,9vw,8rem);
+  background:
+    linear-gradient(180deg,var(--void) 0,transparent 18rem),
+    radial-gradient(40% 35% at 15% 20%,rgba(123,60,255,.22),transparent 70%),
+    radial-gradient(35% 30% at 90% 60%,rgba(255,47,185,.16),transparent 70%),
+    var(--void)}
+.aw-in{max-width:76rem;margin:0 auto}
+.aw-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:1.5rem 3rem}
+.aw-eyebrow{display:flex;align-items:center;gap:.8rem;margin:0 0 1rem;font:700 .7rem/1 var(--display);letter-spacing:.28em;text-transform:uppercase;color:var(--pink)}
+.aw-eyebrow .dummy-tag{font-size:.55rem;letter-spacing:.15em;color:#FFD84D;border:1px dashed #FFD84D;padding:.3rem .5rem;border-radius:.3rem}
+.aw-title{margin:0;font:900 clamp(2.4rem,5.5vw,4.6rem)/.95 var(--display);text-transform:uppercase}
+.aw-title .our{display:block;font:400 clamp(2.4rem,4.6vw,4rem)/1 "Yellowtail",cursive;text-transform:none;color:var(--magenta);text-shadow:0 0 16px rgba(255,47,185,.8);rotate:-5deg;width:max-content;margin-bottom:-.15em}
+.aw-title em{font-style:normal;background:linear-gradient(180deg,#FFFFFF 0%,#FFD9F4 40%,#C77DFF 70%,#FF7AD9 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 18px rgba(255,47,185,.45))}
+.aw-lead{margin:0;max-width:38ch;color:var(--muted);line-height:1.6}
+
+/* statistik */
+.aw-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin:3rem 0 0}
+.aw-stat{padding:1.3rem 1.5rem;border-radius:1.2rem;background:rgba(24,8,52,.5);border:1px solid rgba(255,122,217,.2)}
+.aw-stat b{display:block;font:900 clamp(2rem,4vw,3.2rem)/1 var(--display);color:#fff;text-shadow:0 0 18px rgba(255,47,185,.5)}
+.aw-stat span{display:block;margin-top:.5rem;font:700 .62rem/1.3 var(--display);letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+
+/* sorotan MURI */
+.muri{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(2rem,6vw,5.5rem);align-items:center;margin-top:clamp(3.5rem,7vw,5.5rem);
+  padding:clamp(1.8rem,4vw,3.2rem);border-radius:2rem;background:linear-gradient(135deg,rgba(40,14,78,.75),rgba(20,6,40,.75));
+  border:1px solid rgba(255,216,77,.35);box-shadow:0 0 40px rgba(255,216,77,.12),inset 0 1px 0 rgba(255,255,255,.08);position:relative}
+.muri::after{content:"";position:absolute;inset:-1px;border-radius:inherit;pointer-events:none;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.12) 45%,transparent 60%) 0 0/250% 100%;animation:sheen 6s ease-in-out infinite}
+@keyframes sheen{0%,60%{background-position:120% 0}100%{background-position:-120% 0}}
+.medal{position:relative;width:clamp(13rem,24vw,19rem);aspect-ratio:1;perspective:700px}
+.medal .disc{position:absolute;inset:0;border-radius:50%;overflow:hidden;box-shadow:0 0 50px rgba(255,216,77,.35),0 0 90px rgba(255,47,185,.25)}
+.medal .disc::before{content:"";position:absolute;inset:-25%;background:conic-gradient(#FFD84D,#FF9C5B,#FF7AD9,#9B6BFF,#3CC8FF,#3CFFD2,#FFD84D);animation:turn360 8s linear infinite}
+@keyframes turn360{to{rotate:360deg}}
+.medal .face{position:absolute;inset:7%;border-radius:50%;display:grid;place-items:center;text-align:center;
+  background:radial-gradient(circle at 35% 28%,#3A1670,#12062A 70%);box-shadow:inset 0 0 30px rgba(0,0,0,.6),inset 0 0 0 2px rgba(255,216,77,.5)}
+.medal .face img{position:absolute;inset:14%;width:72%;height:72%;object-fit:contain}
+.medal .face small{display:block;font:700 .62rem/1 var(--display);letter-spacing:.3em;color:#FFD84D}
+.medal .face strong{display:block;margin:.35rem 0;font:900 clamp(2.2rem,4vw,3.2rem)/1 var(--display);letter-spacing:.06em;
+  background:linear-gradient(180deg,#FFF6C8,#FFD84D 55%,#FF9C5B);-webkit-background-clip:text;background-clip:text;color:transparent}
+.medal .face i{font-style:normal;color:#FFD84D;letter-spacing:.3em;font-size:.8rem}
+.medal .ring{position:absolute;inset:-14%;border-radius:50%;border:1.5px solid rgba(255,122,217,.55);box-shadow:0 0 14px rgba(255,47,185,.5);transform:rotateX(72deg);animation:orbit 10s linear infinite}
+.medal .ring.b{inset:-24%;border-color:rgba(60,200,255,.4);box-shadow:0 0 14px rgba(60,200,255,.4);transform:rotateX(76deg) rotateY(18deg);animation-duration:16s;animation-direction:reverse}
+@keyframes orbit{to{rotate:0 0 1 360deg}}
+.muri .label{display:inline-flex;align-items:center;gap:.5rem;font:700 .65rem/1 var(--display);letter-spacing:.24em;text-transform:uppercase;color:#FFD84D}
+.muri .label::before{content:"★";font-size:.9rem}
+.muri h3{margin:1rem 0 .6rem;font:900 clamp(1.5rem,3vw,2.4rem)/1.1 var(--display);text-transform:uppercase;color:#fff}
+.muri p{margin:0;color:var(--muted);line-height:1.65;max-width:52ch}
+.muri .chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.4rem}
+.muri .chips span{font:700 .6rem/1 var(--display);letter-spacing:.14em;text-transform:uppercase;padding:.55rem .8rem;border-radius:999px;border:1px solid rgba(255,216,77,.4);color:#FFE899}
+
+/* daftar award */
+.aw-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.1rem;margin-top:clamp(2.5rem,5vw,3.5rem)}
+.aw-card{position:relative;display:flex;flex-direction:column;gap:.7rem;min-height:14rem;padding:1.5rem;border-radius:1.4rem;
+  background:rgba(24,8,52,.55);border:1px solid rgba(255,122,217,.22);backdrop-filter:blur(10px);transition:transform .35s,border-color .35s,box-shadow .35s}
+.aw-card:hover{transform:translateY(-6px);border-color:var(--pink);box-shadow:0 0 30px rgba(255,47,185,.3)}
+.aw-card .top{display:flex;align-items:center;justify-content:space-between}
+.aw-card .yr{font:700 .62rem/1 var(--display);letter-spacing:.16em;padding:.45rem .7rem;border-radius:999px;background:rgba(255,47,185,.15);color:var(--pink)}
+.aw-card svg{width:2.2rem;height:2.2rem;color:#FFD84D;filter:drop-shadow(0 0 8px rgba(255,216,77,.6))}
+.aw-card h4{margin:auto 0 0;font:700 clamp(1.05rem,1.4vw,1.25rem)/1.25 var(--body);color:#fff}
+.aw-card p{margin:0;font-size:.82rem;color:var(--muted)}
+.aw-card .tier{font:700 .58rem/1 var(--display);letter-spacing:.2em;text-transform:uppercase;color:#FFD84D}
+
+/* muncul saat di-scroll */
+.rv{opacity:0;translate:0 34px;transition:opacity .8s cubic-bezier(.2,.8,.2,1),translate .8s cubic-bezier(.2,.8,.2,1);transition-delay:var(--d,0s)}
+.rv.in{opacity:1;translate:0 0}
+
+@media (max-width:900px){
+  .muri{grid-template-columns:1fr;justify-items:center;text-align:center}
+  .muri p{margin:0 auto}
+  .muri .chips{justify-content:center}
+  .aw-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:560px){
+  .aw-grid{grid-template-columns:1fr;gap:.8rem}
+  .aw-card{min-height:auto;padding:1.2rem}
+  .aw-card h4{margin-top:.2rem}
+  .aw-stats{gap:.5rem}
+  .aw-stat{padding:1rem .8rem}
+  .aw-stat b{font-size:1.6rem}
+  .aw-stat span{font-size:.5rem;letter-spacing:.1em}
+}
+@media (prefers-reduced-motion:reduce){
+  .rv{opacity:1;translate:none;transition:none}
+  .medal .disc::before,.medal .ring,.muri::after{animation:none}
+}
+
+/* =========================================================
+   PORTFOLIO FLUX — baris per kategori, bisa digeser
+   ========================================================= */
+.work{position:relative;z-index:10;padding:clamp(5rem,9vw,8rem) 0 clamp(4rem,8vw,7rem);
+  background:linear-gradient(180deg,var(--void),#12062A 50%,var(--void))}
+.work-head{max-width:76rem;margin:0 auto;padding:0 clamp(1.25rem,6vw,7rem);display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:1.5rem 3rem}
+.work-title{margin:0;font:900 clamp(2.4rem,5.5vw,4.6rem)/.95 var(--display);text-transform:uppercase}
+.work-title .our{display:block;font:400 clamp(2.4rem,4.6vw,4rem)/1 "Yellowtail",cursive;text-transform:none;color:var(--magenta);text-shadow:0 0 16px rgba(255,47,185,.8);rotate:-5deg;width:max-content;margin-bottom:-.15em}
+.work-title em{font-style:normal;background:linear-gradient(180deg,#FFFFFF 0%,#FFD9F4 40%,#C77DFF 70%,#FF7AD9 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 18px rgba(255,47,185,.45))}
+.work-lead{margin:0;max-width:38ch;color:var(--muted);line-height:1.6}
+.work-tabs{display:flex;flex-wrap:wrap;gap:.5rem;max-width:76rem;margin:2.2rem auto 0;padding:0 clamp(1.25rem,6vw,7rem)}
+.work-tabs a{font:700 .66rem/1 var(--display);letter-spacing:.16em;text-transform:uppercase;text-decoration:none;padding:.7rem 1rem;border-radius:999px;border:1px solid rgba(255,122,217,.3);color:var(--ice);transition:background .2s,border-color .2s}
+.work-tabs a:hover{background:rgba(255,47,185,.16);border-color:var(--pink);color:#fff}
+
+.wrow{margin-top:clamp(2.5rem,5vw,3.5rem)}
+.wrow-bar{position:relative;z-index:4;max-width:76rem;margin:0 auto;padding:0 clamp(1.25rem,6vw,7rem);display:flex;align-items:center;gap:1rem}
+.wrow-bar h3{margin:0;display:flex;align-items:baseline;gap:.8rem;font:900 clamp(1.5rem,2.6vw,2.2rem)/1 var(--display);text-transform:uppercase;color:#fff}
+.wrow-bar h3 small{font:600 .72rem/1 var(--body);letter-spacing:.08em;text-transform:none;color:var(--muted)}
+.wrow-bar .cnt{margin-left:auto;font:700 .62rem/1 var(--display);letter-spacing:.16em;color:var(--muted)}
+.wrow-bar button{width:2.6rem;height:2.6rem;border-radius:50%;cursor:pointer;color:var(--ice);font-size:1rem;background:rgba(24,8,52,.6);border:1px solid rgba(255,122,217,.3);transition:background .2s,box-shadow .2s}
+.wrow-bar button:hover:not(:disabled){background:rgba(255,47,185,.2);box-shadow:0 0 16px rgba(255,47,185,.45)}
+.wrow-bar button:disabled{opacity:.3;cursor:default}
+
+/* rel geser: padding atas-bawah memberi ruang untuk kartu yang "pop up" + label */
+.wtrack{display:flex;gap:clamp(1rem,1.8vw,1.6rem);overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;
+  padding:5.2rem max(clamp(1.25rem,6vw,7rem),calc((100vw - 76rem)/2 + clamp(1.25rem,6vw,7rem))) 2.6rem;scroll-padding-inline:max(clamp(1.25rem,6vw,7rem),calc((100vw - 76rem)/2 + clamp(1.25rem,6vw,7rem)));
+  margin-top:-2.6rem;scrollbar-width:none;cursor:grab}
+.wtrack::-webkit-scrollbar{display:none}
+.wtrack.dragging{scroll-snap-type:none;scroll-behavior:auto;cursor:grabbing}
+.witem{position:relative;flex:none;scroll-snap-align:start;border:0;padding:0;background:none;cursor:pointer;
+  width:var(--w);translate:0 var(--y,0);transition:translate .5s cubic-bezier(.2,.8,.2,1)}
+.wtrack[data-shape="h"] .witem{--w:clamp(16rem,30vw,24rem)}
+.wtrack[data-shape="v"] .witem{--w:clamp(10rem,16vw,13.5rem)}
+.wthumb{position:relative;display:block;border-radius:1rem;overflow:hidden;aspect-ratio:var(--ar);
+  background:var(--g);border:1px solid rgba(255,122,217,.18);
+  opacity:.62;filter:saturate(.7) brightness(.8);transform:scale(.96);
+  transition:transform .45s cubic-bezier(.2,.8,.2,1),opacity .35s,filter .35s,box-shadow .45s,border-color .35s}
+.wtrack[data-shape="h"] .wthumb{--ar:16/9}
+.wtrack[data-shape="v"] .wthumb{--ar:9/16}
+.wthumb img,.wthumb video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.wthumb .play{position:absolute;left:50%;top:50%;translate:-50% -50%;width:3.2rem;height:3.2rem;border-radius:50%;display:grid;place-items:center;
+  background:rgba(10,4,24,.5);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.35);color:#fff;font-size:.9rem;transition:transform .3s,background .3s}
+.wthumb .dm{position:absolute;right:.6rem;top:.6rem;font:700 .5rem/1 var(--display);letter-spacing:.18em;color:rgba(255,255,255,.7);border:1px dashed rgba(255,255,255,.45);padding:.25rem .4rem;border-radius:.25rem}
+.wthumb::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(10,4,24,.75));pointer-events:none}
+.wcap{position:absolute;z-index:1;left:.8rem;right:.8rem;bottom:.7rem;text-align:left}
+.wcap b{display:block;font:700 .9rem/1.2 var(--body);color:#fff}
+.wcap span{font-size:.72rem;color:var(--muted)}
+/* label yang muncul di atas kartu */
+.wtag{position:absolute;z-index:4;left:50%;bottom:calc(100% + 1.7rem);translate:-50% 8px;white-space:nowrap;opacity:0;pointer-events:none;
+  display:flex;align-items:center;gap:.5rem;padding:.5rem .8rem;border-radius:999px;
+  background:rgba(24,8,52,.85);backdrop-filter:blur(10px);border:1px solid var(--pink);box-shadow:0 0 18px rgba(255,47,185,.5);
+  font:700 .62rem/1 var(--display);letter-spacing:.16em;text-transform:uppercase;color:#fff;transition:opacity .3s,translate .35s cubic-bezier(.2,.8,.2,1)}
+.wtag i{font-style:normal;color:var(--pink)}
+/* hover: kartu jadi tajam, membesar, naik; kartu lain meredup */
+.wtrack:hover .witem:not(:hover) .wthumb{opacity:.38}
+.witem:hover,.witem:focus-visible{z-index:3;outline:none}
+.witem:hover .wthumb,.witem:focus-visible .wthumb{opacity:1;filter:none;transform:scale(1.1) translateY(-10px);border-color:var(--pink);
+  box-shadow:0 0 0 1px var(--pink),0 0 34px rgba(255,47,185,.55),0 26px 50px rgba(0,0,0,.6)}
+.witem:hover .wtag,.witem:focus-visible .wtag{opacity:1;translate:-50% -10px}
+.witem:hover .play{transform:scale(1.12);background:linear-gradient(135deg,var(--violet),var(--magenta))}
+
+/* pemutar video (lightbox) */
+.wbox{position:fixed;inset:0;z-index:60;display:none;place-items:center;padding:1.25rem;background:rgba(6,2,16,.85);backdrop-filter:blur(8px)}
+.wbox.on{display:grid;animation:fadein .3s}
+@keyframes fadein{from{opacity:0}}
+.wbox-in{position:relative;width:min(100%,64rem)}
+.wbox-in.v{width:min(100%,24rem)}
+.wbox-frame{position:relative;border-radius:1rem;overflow:hidden;background:#000;aspect-ratio:16/9;box-shadow:0 0 50px rgba(255,47,185,.4)}
+.wbox-in.v .wbox-frame{aspect-ratio:9/16;max-height:80vh;margin:0 auto}
+.wbox-frame video,.wbox-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.wbox-frame .none{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:1.5rem;color:var(--muted);background:var(--g)}
+.wbox-meta{margin-top:1rem;display:flex;flex-wrap:wrap;align-items:baseline;gap:.4rem 1rem}
+.wbox-meta b{font:900 1.1rem/1.2 var(--display);text-transform:uppercase}
+.wbox-meta span{color:var(--muted);font-size:.9rem}
+.wbox-close{position:absolute;right:0;top:-3rem;width:2.4rem;height:2.4rem;border-radius:50%;cursor:pointer;color:#fff;font-size:1.1rem;background:rgba(24,8,52,.8);border:1px solid rgba(255,122,217,.4)}
+
+@media (max-width:700px){
+  .wrow-bar button{display:none}
+  .wtrack[data-shape="h"] .witem{--w:78vw}
+  .wtrack[data-shape="v"] .witem{--w:44vw}
+  .witem:hover .wthumb{transform:scale(1.04) translateY(-6px)}
+}
+@media (prefers-reduced-motion:reduce){
+  .wtrack{scroll-behavior:auto}
+}
+
+/* =========================================================
+   JAGOAN FLUX — 5 figur, panel melebar saat di-hover
+   ========================================================= */
+.squad{position:relative;z-index:10;padding:clamp(5rem,9vw,8rem) clamp(1.25rem,5vw,5rem) clamp(5rem,9vw,8rem);
+  background:linear-gradient(180deg,var(--void),#14052E 45%,var(--void))}
+.squad-in{max-width:80rem;margin:0 auto}
+.squad-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:1.5rem 3rem;margin-bottom:clamp(2.5rem,5vw,3.5rem)}
+.squad-row{display:flex;gap:.8rem;height:clamp(30rem,70vh,40rem)}
+.hero-p{--c:#9B6BFF;position:relative;flex:1 1 0;min-width:0;border-radius:1.4rem;overflow:hidden;cursor:pointer;outline:none;
+  background:
+    radial-gradient(90% 60% at 50% 100%,color-mix(in srgb,var(--c) 55%,transparent),transparent 70%),
+    radial-gradient(circle,rgba(255,255,255,.14) 1.2px,transparent 1.6px) 0 0/14px 14px,
+    linear-gradient(180deg,#12062A,#0A0418);
+  border:1px solid color-mix(in srgb,var(--c) 45%,transparent);
+  transition:flex-grow .6s cubic-bezier(.2,.8,.2,1),filter .4s,box-shadow .4s,border-color .4s}
+.squad-row:hover .hero-p:not(:hover):not(:focus-visible){filter:brightness(.55) saturate(.7)}
+.hero-p:hover,.hero-p:focus-visible,.hero-p.open{flex-grow:2.8;border-color:var(--c);box-shadow:0 0 0 1px var(--c),0 0 40px color-mix(in srgb,var(--c) 55%,transparent)}
+/* sorot cahaya dari atas */
+.hero-p::before{content:"";position:absolute;left:50%;top:-10%;width:140%;height:80%;translate:-50% 0;pointer-events:none;
+  background:conic-gradient(from 160deg at 50% 0%,transparent 0deg,color-mix(in srgb,var(--c) 35%,transparent) 20deg,transparent 40deg);opacity:.0;transition:opacity .6s}
+.hero-p:hover::before,.hero-p:focus-visible::before,.hero-p.open::before{opacity:1}
+.hero-num{position:absolute;top:1rem;left:1.1rem;z-index:3;font:900 .8rem/1 var(--display);letter-spacing:.14em;color:var(--c)}
+/* nama tegak saat panel sempit */
+.hero-v{position:absolute;z-index:3;left:50%;bottom:1.4rem;translate:-50% 0;writing-mode:vertical-rl;rotate:180deg;white-space:nowrap;
+  font:900 clamp(1.1rem,1.8vw,1.6rem)/1 var(--display);letter-spacing:.08em;text-transform:uppercase;color:#fff;text-shadow:0 0 16px var(--c);transition:opacity .3s}
+.hero-p:hover .hero-v,.hero-p:focus-visible .hero-v,.hero-p.open .hero-v{opacity:0}
+/* figur */
+.hero-fig{position:absolute;z-index:1;left:50%;bottom:0;height:88%;aspect-ratio:1/2;translate:-50% 0;transition:translate .6s cubic-bezier(.2,.8,.2,1),height .6s cubic-bezier(.2,.8,.2,1)}
+.hero-fig svg,.hero-fig img{width:100%;height:100%;display:block;object-fit:contain;object-position:bottom}
+.hero-p:hover .hero-fig,.hero-p:focus-visible .hero-fig,.hero-p.open .hero-fig{translate:-8% 0;height:94%}
+.hero-dm{position:absolute;z-index:3;top:1rem;right:1rem;font:700 .5rem/1 var(--display);letter-spacing:.18em;color:rgba(255,255,255,.6);border:1px dashed rgba(255,255,255,.4);padding:.25rem .4rem;border-radius:.25rem}
+/* info saat panel melebar */
+.hero-info{position:absolute;z-index:4;left:1.4rem;bottom:1.4rem;width:min(17rem,calc(100% - 2.8rem));opacity:0;translate:-12px 0;pointer-events:none;
+  transition:opacity .35s .15s,translate .45s .15s cubic-bezier(.2,.8,.2,1)}
+.hero-p:hover .hero-info,.hero-p:focus-visible .hero-info,.hero-p.open .hero-info{opacity:1;translate:0 0}
+.hero-info .alias{margin:0;font:900 clamp(1.6rem,2.6vw,2.4rem)/.95 var(--display);text-transform:uppercase;color:#fff;text-shadow:0 0 20px var(--c)}
+.hero-info .real{margin:.6rem 0 0;font:600 .9rem/1.3 var(--body);color:#fff}
+.hero-info .role{display:inline-block;margin-top:.5rem;font:700 .58rem/1 var(--display);letter-spacing:.16em;text-transform:uppercase;padding:.4rem .6rem;border-radius:999px;background:color-mix(in srgb,var(--c) 25%,transparent);color:#fff;border:1px solid var(--c)}
+.hero-info .quote{margin:.9rem 0 0;font-size:.82rem;font-style:italic;color:var(--ice);line-height:1.45}
+.stats{display:grid;gap:.45rem;margin-top:1rem;padding:.8rem .9rem;border-radius:.9rem;background:rgba(10,4,24,.65);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.1)}
+.stats div{display:grid;grid-template-columns:5.5rem 1fr;align-items:center;gap:.6rem;font:700 .52rem/1 var(--display);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.stats i{display:block;height:5px;border-radius:5px;background:rgba(255,255,255,.1);overflow:hidden}
+.stats i b{display:block;height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,var(--c),#fff);box-shadow:0 0 8px var(--c);transition:width .9s .3s cubic-bezier(.2,.8,.2,1)}
+.hero-p:hover .stats i b,.hero-p:focus-visible .stats i b,.hero-p.open .stats i b{width:var(--v)}
+
+@media (max-width:900px){
+  .squad-row{height:auto;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:1rem;scrollbar-width:none}
+  .squad-row::-webkit-scrollbar{display:none}
+  .hero-p{flex:none;width:80vw;height:34rem;scroll-snap-align:center}
+  .hero-p .hero-v{opacity:0}
+  .hero-p .hero-info{opacity:1;translate:0 0}
+  .hero-p .stats i b{width:var(--v)}
+  .hero-p .hero-fig{translate:-8% 0}
+  .squad-row:hover .hero-p:not(:hover){filter:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .hero-p,.hero-fig,.hero-info,.stats i b{transition:none}
+}
+
+/* =========================================================
    RESPONSIVE
    ========================================================= */
 @media (max-width:1480px){
@@ -399,6 +631,119 @@ h1{margin:.4rem 0 0;font:900 clamp(2.2rem,6.2vw,5.4rem)/1 var(--display);letter-
       </div>
     </div>
   </section>
+
+  <!-- AWARDS & MURI =====================================================
+       DATA MASIH DUMMY — ganti teks bertanda [ ... ], tahun 20XX, dan angka.
+       Logo/sertifikat MURI: isi <div class="face"> dengan <img src="aset/muri.webp" alt="Rekor MURI">
+       Setelah data asli masuk, hapus <span class="dummy-tag">. -->
+  <section class="awards" id="awards" aria-labelledby="aw-title">
+    <div class="aw-in">
+      <div class="aw-head rv">
+        <div>
+          <p class="aw-eyebrow">Recognition <span class="dummy-tag">DATA DUMMY</span></p>
+          <h2 class="aw-title" id="aw-title"><span class="our">Achievements</span><em>Unlocked</em></h2>
+        </div>
+        <p class="aw-lead">Karya yang lahir dari semesta FCU sudah dicatat, dirayakan, dan diakui — dari rekor nasional sampai panggung penghargaan kreatif.</p>
+      </div>
+
+      <div class="aw-stats">
+        <div class="aw-stat rv"><b data-count="1">0</b><span>Rekor MURI</span></div>
+        <div class="aw-stat rv" style="--d:.1s"><b data-count="12" data-suffix="+">0</b><span>Awards &amp; nominasi</span></div>
+        <div class="aw-stat rv" style="--d:.2s"><b data-count="150" data-suffix="+">0</b><span>Project kreatif</span></div>
+      </div>
+
+      <div class="muri rv">
+        <div class="medal" aria-hidden="true">
+          <span class="ring"></span><span class="ring b"></span>
+          <div class="disc"></div>
+          <div class="face"><div><small>REKOR</small><strong>MURI</strong><i>★ ★ ★</i></div></div>
+        </div>
+        <div>
+          <span class="label">Museum Rekor-Dunia Indonesia</span>
+          <h3>[Judul rekor MURI]</h3>
+          <p>[Ceritakan singkat pencapaiannya: apa yang dibuat, berapa banyak orang yang terlibat, dan kenapa ini jadi rekor pertama di Indonesia.]</p>
+          <div class="chips"><span>Tahun 20XX</span><span>No. rekor XXXX</span><span>[Kategori]</span></div>
+        </div>
+      </div>
+
+      <div class="aw-grid">
+        <article class="aw-card rv" style="--d:0.00s">
+          <div class="top"><span class="yr">20XX</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 4h8v5a4 4 0 0 1-8 0V4z"/><path d="M8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M8.5 20h7M10 17h4"/></svg></div>
+          <span class="tier">Gold</span>
+          <h4>Nama Award</h4>
+          <p>Kategori · Penyelenggara</p>
+        </article>
+        <article class="aw-card rv" style="--d:0.08s">
+          <div class="top"><span class="yr">20XX</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="9" r="5.5"/><path d="M12 6.5l.9 1.8 2 .3-1.45 1.4.35 2-1.8-.95-1.8.95.35-2L9.1 8.6l2-.3z"/><path d="M8.5 13.5L7 21l5-2.5 5 2.5-1.5-7.5"/></svg></div>
+          <span class="tier">Winner</span>
+          <h4>Nama Award</h4>
+          <p>Kategori · Penyelenggara</p>
+        </article>
+        <article class="aw-card rv" style="--d:0.16s">
+          <div class="top"><span class="yr">20XX</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 4h8v5a4 4 0 0 1-8 0V4z"/><path d="M8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M8.5 20h7M10 17h4"/></svg></div>
+          <span class="tier">Silver</span>
+          <h4>Nama Award</h4>
+          <p>Kategori · Penyelenggara</p>
+        </article>
+        <article class="aw-card rv" style="--d:0.24s">
+          <div class="top"><span class="yr">20XX</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="9" r="5.5"/><path d="M12 6.5l.9 1.8 2 .3-1.45 1.4.35 2-1.8-.95-1.8.95.35-2L9.1 8.6l2-.3z"/><path d="M8.5 13.5L7 21l5-2.5 5 2.5-1.5-7.5"/></svg></div>
+          <span class="tier">Finalist</span>
+          <h4>Nama Award</h4>
+          <p>Kategori · Penyelenggara</p>
+        </article>
+        <article class="aw-card rv" style="--d:0.32s">
+          <div class="top"><span class="yr">20XX</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 4h8v5a4 4 0 0 1-8 0V4z"/><path d="M8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M8.5 20h7M10 17h4"/></svg></div>
+          <span class="tier">Best of</span>
+          <h4>Nama Award</h4>
+          <p>Kategori · Penyelenggara</p>
+        </article>
+        <article class="aw-card rv" style="--d:0.40s">
+          <div class="top"><span class="yr">20XX</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="9" r="5.5"/><path d="M12 6.5l.9 1.8 2 .3-1.45 1.4.35 2-1.8-.95-1.8.95.35-2L9.1 8.6l2-.3z"/><path d="M8.5 13.5L7 21l5-2.5 5 2.5-1.5-7.5"/></svg></div>
+          <span class="tier">Honoree</span>
+          <h4>Nama Award</h4>
+          <p>Kategori · Penyelenggara</p>
+        </article>
+      </div>
+    </div>
+  </section>
+  <!-- PORTFOLIO FLUX ====================================================
+       Isi karya diatur di JavaScript bagian "PORTFOLIO — DATA" (cari: const WORK).
+       Satu kategori = satu baris yang bisa digeser. -->
+  <section class="work" id="gallery" aria-labelledby="work-title">
+    <div class="work-head">
+      <div>
+        <p class="aw-eyebrow">Portfolio <span class="dummy-tag">DATA DUMMY</span></p>
+        <h2 class="work-title" id="work-title"><span class="our">Flux</span><em>Portfolio</em></h2>
+      </div>
+      <p class="work-lead">Arahkan kursor ke karya untuk melihatnya lebih dekat, geser tiap baris untuk karya lainnya, klik untuk memutar.</p>
+    </div>
+    <nav class="work-tabs" id="work-tabs" aria-label="Kategori portfolio"></nav>
+    <div id="work-rows"></div>
+  </section>
+
+  <!-- JAGOAN FLUX =======================================================
+       Data diatur di JavaScript bagian "JAGOAN FLUX — DATA" (cari: const SQUAD).
+       Foto kostum: simpan PNG transparan (potret badan penuh) di aset, lalu isi "img". -->
+  <section class="squad" id="about" aria-labelledby="squad-title">
+    <div class="squad-in">
+      <div class="squad-head">
+        <div>
+          <p class="aw-eyebrow">Meet the squad <span class="dummy-tag">DATA DUMMY</span></p>
+          <h2 class="aw-title" id="squad-title"><span class="our">Jagoan</span><em>Flux</em></h2>
+        </div>
+        <p class="aw-lead">Lima jagoan di balik semesta FCU. Arahkan kursor (atau geser di HP) untuk kenalan dengan kekuatan super masing-masing.</p>
+      </div>
+      <div class="squad-row" id="squad-row"></div>
+    </div>
+  </section>
+
+  <div class="wbox" id="wbox" role="dialog" aria-modal="true" aria-label="Pemutar karya">
+    <div class="wbox-in" id="wbox-in">
+      <button class="wbox-close" type="button" id="wbox-close" aria-label="Tutup">✕</button>
+      <div class="wbox-frame" id="wbox-frame"></div>
+      <div class="wbox-meta" id="wbox-meta"></div>
+    </div>
+  </div>
 </main>
 
 <script>
@@ -657,6 +1002,174 @@ h1{margin:.4rem 0 0;font:900 clamp(2.2rem,6.2vw,5.4rem)/1 var(--display);letter-
     if(Math.abs(target-cur)>.001){raf=requestAnimationFrame(tick)}else{raf=0}
   }
   addEventListener('scroll',measure,{passive:true}); addEventListener('resize',measure); measure();
+})();
+
+/* =========================================================
+   AWARDS — muncul saat di-scroll + angka menghitung naik
+   ========================================================= */
+(function(){
+  const els=document.querySelectorAll('.rv');
+  const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function count(b){const to=+b.dataset.count,suf=b.dataset.suffix||'';
+    if(still){b.textContent=to+suf;return}
+    const t0=performance.now(),dur=1400;
+    (function step(t){const k=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-k,3);b.textContent=Math.round(to*e)+(k===1?suf:'');if(k<1)requestAnimationFrame(step)})(t0);}
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;
+    e.target.classList.add('in');e.target.querySelectorAll('[data-count]').forEach(count);io.unobserve(e.target)}),{threshold:.2});
+  els.forEach(el=>io.observe(el));
+})();
+
+/* =========================================================
+   PORTFOLIO — DATA
+   Tiap kategori: key, name (label besar), full (kepanjangan), shape ('h' = 16:9, 'v' = 9:16)
+   Tiap karya: title, client, thumb (gambar sampul), preview (video pendek tanpa suara
+   yang diputar saat hover, opsional), video (file .mp4) ATAU youtube (ID video YouTube).
+   Selama thumb kosong, kartu memakai warna dummy.
+   ========================================================= */
+const WORK=[
+  {key:'tvc',name:'TVC',full:'TV Commercial',shape:'h',items:[
+    {title:'Judul TVC 1',client:'Nama Brand'},{title:'Judul TVC 2',client:'Nama Brand'},{title:'Judul TVC 3',client:'Nama Brand'},
+    {title:'Judul TVC 4',client:'Nama Brand'},{title:'Judul TVC 5',client:'Nama Brand'}]},
+  {key:'dvc',name:'DVC',full:'Digital Video Commercial',shape:'h',items:[
+    {title:'Judul DVC 1',client:'Nama Brand'},{title:'Judul DVC 2',client:'Nama Brand'},{title:'Judul DVC 3',client:'Nama Brand'},
+    {title:'Judul DVC 4',client:'Nama Brand'},{title:'Judul DVC 5',client:'Nama Brand'}]},
+  {key:'ugc',name:'UGC',full:'User Generated Content',shape:'v',items:[
+    {title:'Judul UGC 1',client:'Nama Brand'},{title:'Judul UGC 2',client:'Nama Brand'},{title:'Judul UGC 3',client:'Nama Brand'},
+    {title:'Judul UGC 4',client:'Nama Brand'},{title:'Judul UGC 5',client:'Nama Brand'},{title:'Judul UGC 6',client:'Nama Brand'},
+    {title:'Judul UGC 7',client:'Nama Brand'}]},
+  {key:'sosmed',name:'Sosmed',full:'Social Media Content',shape:'v',items:[
+    {title:'Judul Konten 1',client:'Nama Brand'},{title:'Judul Konten 2',client:'Nama Brand'},{title:'Judul Konten 3',client:'Nama Brand'},
+    {title:'Judul Konten 4',client:'Nama Brand'},{title:'Judul Konten 5',client:'Nama Brand'},{title:'Judul Konten 6',client:'Nama Brand'},
+    {title:'Judul Konten 7',client:'Nama Brand'}]}
+];
+
+/* =========================================================
+   PORTFOLIO — tampilan, geser, hover, pemutar
+   ========================================================= */
+(function(){
+  const rows=document.getElementById('work-rows'),tabs=document.getElementById('work-tabs'); if(!rows) return;
+  const PAL=[['#7B3CFF','#FF2FB9'],['#3CC8FF','#7B3CFF'],['#FF9C5B','#FF2FB9'],['#3CFFD2','#5B2BFF'],['#FFD84D','#FF7AD9'],['#FF2FB9','#1B0A3A']];
+  const esc=t=>String(t||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  WORK.forEach((cat,ci)=>{
+    tabs.insertAdjacentHTML('beforeend',`<a href="#w-${cat.key}">${esc(cat.name)}</a>`);
+    const row=document.createElement('div');row.className='wrow';row.id='w-'+cat.key;
+    row.innerHTML=`<div class="wrow-bar"><h3>${esc(cat.name)} <small>${esc(cat.full)}</small></h3><span class="cnt">${String(cat.items.length).padStart(2,'0')} karya</span>
+      <button type="button" class="wprev" aria-label="Sebelumnya">←</button><button type="button" class="wnext" aria-label="Berikutnya">→</button></div>
+      <div class="wtrack" data-shape="${cat.shape}" role="list"></div>`;
+    const track=row.querySelector('.wtrack');
+    cat.items.forEach((it,i)=>{
+      const [a,b]=PAL[(i+ci)%PAL.length];
+      const g=`radial-gradient(70% 60% at 30% 25%,${a},transparent 70%),radial-gradient(60% 60% at 80% 80%,${b},transparent 70%),#12062A`;
+      const btn=document.createElement('button');btn.type='button';btn.className='witem';btn.setAttribute('role','listitem');
+      btn.style.setProperty('--y',[0,18,-10,24,6][i%5]+'px');   // posisi naik-turun ala "melayang"
+      btn.innerHTML=`<span class="wtag"><i>${esc(cat.name)}</i>${esc(it.client)}</span>
+        <span class="wthumb" style="--g:${g}">
+          ${it.thumb?`<img src="${esc(it.thumb)}" alt="" loading="lazy" draggable="false">`:'<i class="dm">DUMMY</i>'}
+          ${it.preview?`<video src="${esc(it.preview)}" muted loop playsinline preload="none"></video>`:''}
+          <span class="play" aria-hidden="true">▶</span>
+          <span class="wcap"><b>${esc(it.title)}</b><span>${esc(it.client)}</span></span>
+        </span>`;
+      btn.setAttribute('aria-label',`${cat.name}: ${it.title} — ${it.client}`);
+      const pv=btn.querySelector('video');
+      if(pv){btn.addEventListener('mouseenter',()=>pv.play().catch(()=>{}));btn.addEventListener('mouseleave',()=>{pv.pause();pv.currentTime=0})}
+      btn.addEventListener('click',e=>{if(track.dataset.moved==='1'){e.preventDefault();return}openBox(cat,it,g)});
+      track.appendChild(btn);
+    });
+    rows.appendChild(row);
+
+    // tombol panah
+    const prev=row.querySelector('.wprev'),next=row.querySelector('.wnext');
+    const step=()=>track.clientWidth*.8;
+    prev.onclick=()=>track.scrollBy({left:-step()});next.onclick=()=>track.scrollBy({left:step()});
+    const upd=()=>{prev.disabled=track.scrollLeft<4;next.disabled=track.scrollLeft+track.clientWidth>=track.scrollWidth-4};
+    track.addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd();
+
+    // seret pakai mouse
+    let down=false,x0=0,s0=0;
+    track.addEventListener('pointerdown',e=>{if(e.pointerType!=='mouse')return;down=true;x0=e.clientX;s0=track.scrollLeft;track.dataset.moved='0'});
+    addEventListener('pointermove',e=>{if(!down)return;const dx=e.clientX-x0;if(Math.abs(dx)>6){track.dataset.moved='1';track.classList.add('dragging')}track.scrollLeft=s0-dx});
+    addEventListener('pointerup',()=>{if(!down)return;down=false;track.classList.remove('dragging');setTimeout(()=>track.dataset.moved='0',0)});
+  });
+
+  // pemutar video
+  const box=document.getElementById('wbox'),inner=document.getElementById('wbox-in'),frame=document.getElementById('wbox-frame'),meta=document.getElementById('wbox-meta');
+  let last=null;
+  function openBox(cat,it,g){
+    last=document.activeElement;
+    inner.classList.toggle('v',cat.shape==='v');
+    frame.style.setProperty('--g',g);
+    if(it.youtube) frame.innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(it.youtube)}?autoplay=1&rel=0" allow="autoplay; encrypted-media; fullscreen" allowfullscreen title="${esc(it.title)}"></iframe>`;
+    else if(it.video) frame.innerHTML=`<video src="${esc(it.video)}" controls autoplay playsinline></video>`;
+    else frame.innerHTML=`<div class="none">Video belum dipasang.<br>Isi "video" atau "youtube" untuk karya ini.</div>`;
+    meta.innerHTML=`<b>${esc(it.title)}</b><span>${esc(cat.name)} · ${esc(it.client)}</span>`;
+    box.classList.add('on');document.getElementById('wbox-close').focus();
+  }
+  function closeBox(){box.classList.remove('on');frame.innerHTML='';if(last)last.focus()}
+  document.getElementById('wbox-close').onclick=closeBox;
+  box.addEventListener('click',e=>{if(e.target===box)closeBox()});
+  addEventListener('keydown',e=>{if(e.key==='Escape'&&box.classList.contains('on'))closeBox()});
+})();
+
+/* =========================================================
+   JAGOAN FLUX — DATA
+   alias = nama superhero, name = nama asli, role = jabatan,
+   c = warna kostum/glow, img = foto kostum PNG transparan (kosong = siluet dummy),
+   stats = 3 kekuatan (angka 0–100)
+   ========================================================= */
+const SQUAD=[
+  {alias:'Captain Flux',name:'[Nama Asli]',role:'Founder & CEO',c:'#9B6BFF',img:'',
+   quote:'"Setiap ide besar dimulai dari satu sinyal kecil."',stats:[['Vision',98],['Leadership',95],['Hype',80]]},
+  {alias:'Shutter Storm',name:'[Nama Asli]',role:'Director & DOP',c:'#3CC8FF',img:'',
+   quote:'"Satu frame bisa bercerita lebih dari seribu kata."',stats:[['Framing',97],['Lighting',92],['Speed',78]]},
+  {alias:'Render Phantom',name:'[Nama Asli]',role:'AI Artist & VFX',c:'#3CFFD2',img:'',
+   quote:'"Kalau belum ada tools-nya, kita bikin sendiri."',stats:[['AI Magic',99],['VFX',93],['Sleep',12]]},
+  {alias:'Sonic Pulse',name:'[Nama Asli]',role:'Sound & Music',c:'#FF9C5B',img:'',
+   quote:'"Mood itu dimulai dari bunyi."',stats:[['Rhythm',96],['Sound Design',94],['Chill',88]]},
+  {alias:'Hype Striker',name:'[Nama Asli]',role:'Social & Strategy',c:'#FF2FB9',img:'',
+   quote:'"Tren bukan dikejar, tapi diciptakan."',stats:[['Trend Radar',98],['Copywriting',90],['Network',94]]}
+];
+
+/* siluet superhero dummy (dua pose bergantian) */
+function heroSilhouette(c,i){
+  const id='hs'+i, pose=i%2;
+  const arms=pose
+    ? '<path d="M60 92 L34 150 L40 154 L70 104Z"/><path d="M140 92 L166 150 L160 154 L130 104Z"/>'
+    : '<path d="M60 92 L40 118 L60 148 L70 142 L56 120 L72 104Z"/><path d="M140 92 L160 118 L140 148 L130 142 L144 120 L128 104Z"/>';
+  return `<svg viewBox="0 0 200 400" aria-hidden="true"><defs>
+    <linearGradient id="${id}r" x1="0" x2="1"><stop offset="0" stop-color="${c}" stop-opacity=".95"/><stop offset=".25" stop-color="#1a0b33"/><stop offset=".75" stop-color="#1a0b33"/><stop offset="1" stop-color="${c}" stop-opacity=".95"/></linearGradient>
+    <linearGradient id="${id}k" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${c}" stop-opacity=".55"/><stop offset="1" stop-color="${c}" stop-opacity=".05"/></linearGradient></defs>
+    <path d="M62 88 Q100 78 138 88 L176 392 L24 392Z" fill="url(#${id}k)"/>
+    <g fill="url(#${id}r)" stroke="${c}" stroke-opacity=".6" stroke-width="1.2">
+      ${arms}
+      <path d="M64 86 Q100 74 136 86 L130 176 Q100 186 70 176Z"/>
+      <path d="M72 176 L98 182 L94 392 L72 392 L66 290Z"/><path d="M128 176 L102 182 L106 392 L128 392 L134 290Z"/>
+      <circle cx="100" cy="52" r="24"/><path d="M92 74 h16 v12 h-16z"/>
+    </g>
+    <path d="M78 48 Q100 40 122 48 L120 58 Q100 52 80 58Z" fill="${c}"/>
+    <path d="M100 104 l8 12 -8 12 -8 -12z" fill="${c}" opacity=".9"/>
+  </svg>`;
+}
+
+(function(){
+  const row=document.getElementById('squad-row'); if(!row) return;
+  const esc=t=>String(t||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  SQUAD.forEach((h,i)=>{
+    const el=document.createElement('article');
+    el.className='hero-p';el.tabIndex=0;el.style.setProperty('--c',h.c);
+    el.setAttribute('aria-label',`${h.alias} — ${h.role}`);
+    el.innerHTML=`<span class="hero-num">0${i+1}</span>${h.img?'':'<i class="hero-dm">DUMMY</i>'}
+      <div class="hero-fig">${h.img?`<img src="${esc(h.img)}" alt="${esc(h.alias)}" loading="lazy">`:heroSilhouette(h.c,i)}</div>
+      <span class="hero-v" aria-hidden="true">${esc(h.alias)}</span>
+      <div class="hero-info">
+        <p class="alias">${esc(h.alias)}</p>
+        <p class="real">${esc(h.name)}</p><span class="role">${esc(h.role)}</span>
+        <p class="quote">${esc(h.quote)}</p>
+        <div class="stats">${h.stats.map(([k,v])=>`<div>${esc(k)}<i><b style="--v:${v}%"></b></i></div>`).join('')}</div>
+      </div>`;
+    // di layar sentuh: tap untuk membuka
+    el.addEventListener('click',()=>{if(matchMedia('(hover: none)').matches){row.querySelectorAll('.hero-p').forEach(p=>p!==el&&p.classList.remove('open'));el.classList.toggle('open')}});
+    row.appendChild(el);
+  });
 })();
 
 /* menu mobile */
