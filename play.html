@@ -1,0 +1,799 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>What's Your Creative Signal? — Flux Creative Universe</title>
+<meta name="description" content="18 momen. Satu sinyal. Kamu tipe kreator yang mana? Game interaktif dari Flux Creative Universe.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Exo+2:wght@400;500;600;700&family=Yellowtail&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   TOKEN — sama dengan flux-home.html
+   ========================================================= */
+:root{
+  --void:#0A0418;
+  --deep:#1B0A3A;
+  --violet:#7B3CFF;
+  --magenta:#FF2FB9;
+  --pink:#FF7AD9;
+  --ice:#E9DCFF;
+  --muted:#B9A6DF;
+  --glass:rgba(40,14,78,.55);
+  --display:"Orbitron","Eurostile","Arial Black",sans-serif;
+  --body:"Exo 2","Segoe UI",system-ui,sans-serif;
+  --script:"Yellowtail",cursive;
+  --nav-h:5.5rem;
+  --card-w:clamp(15.5rem,78vw,21rem);
+  box-sizing:border-box;
+  color-scheme:dark;
+}
+@media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){ --void:#0A0418 } }
+:root[data-theme="dark"]{ --void:#0A0418 }
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;background:var(--void);color:var(--ice);font:400 1rem/1.5 var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--pink);outline-offset:4px;border-radius:6px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* latar: gradasi neon + bintang */
+.bg{position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(40% 45% at 12% 20%,rgba(123,60,255,.35),transparent 70%),
+    radial-gradient(38% 42% at 88% 30%,rgba(255,47,185,.28),transparent 70%),
+    radial-gradient(45% 50% at 60% 100%,rgba(60,200,255,.14),transparent 70%),
+    radial-gradient(80% 80% at 50% 40%,#1A0838,var(--void) 80%)}
+.bg canvas{position:absolute;inset:0;width:100%;height:100%}
+
+/* =========================================================
+   NAV — sama dengan home
+   ========================================================= */
+.nav{position:fixed;z-index:30;top:0;left:0;right:0;height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:0 clamp(1rem,3vw,2.5rem)}
+.logo,.links,.menu-btn{background:rgba(24,8,52,.55);backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);border:1px solid rgba(255,122,217,.22);border-radius:999px;box-shadow:0 6px 24px rgba(10,4,24,.4),inset 0 1px 0 rgba(255,255,255,.08)}
+.logo{display:flex;align-items:center;text-decoration:none;line-height:1;padding:.3rem 1.1rem}
+.logo img{display:block;height:calc(var(--nav-h) - 2.4rem);width:auto;filter:drop-shadow(0 0 10px rgba(255,47,185,.35))}
+.links{position:absolute;left:50%;translate:-50% 0;display:flex;gap:.2rem;list-style:none;margin:0;padding:.35rem}
+.links a{display:block;white-space:nowrap;text-decoration:none;font:600 .78rem/1 var(--body);letter-spacing:.1em;text-transform:uppercase;color:var(--ice);padding:.8rem clamp(.6rem,.9vw,1rem);border-radius:999px;opacity:.85;transition:background .2s,color .2s}
+.links a:hover{opacity:1;color:#fff;background:rgba(255,255,255,.08)}
+.links a[aria-current]{opacity:1;color:var(--pink);background:rgba(255,47,185,.16);box-shadow:inset 0 0 0 1px rgba(255,122,217,.35)}
+.menu-btn{display:none;margin-left:auto;font:600 .8rem var(--body);letter-spacing:.14em;cursor:pointer;padding:.85rem 1.3rem}
+
+/* tombol kapsul neon (sama dengan home) */
+.cut{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:.7rem;font:600 .82rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:#fff;
+  padding:1rem 1.6rem;border:0;cursor:pointer;border-radius:999px;background:linear-gradient(90deg,rgba(123,60,255,.35),rgba(255,47,185,.35));
+  filter:drop-shadow(0 0 10px rgba(255,47,185,.55));transition:filter .25s,background .25s,transform .2s}
+.cut::before{content:"";position:absolute;inset:0;padding:1.5px;border-radius:inherit;background:linear-gradient(90deg,var(--violet),var(--magenta),var(--pink));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.cut:hover{filter:drop-shadow(0 0 18px rgba(255,47,185,.9));background:linear-gradient(90deg,rgba(123,60,255,.55),rgba(255,47,185,.55))}
+.cut:active{transform:scale(.97)}
+.cut svg{width:1.1rem;height:1.1rem;flex:none}
+.cut.solid{background:linear-gradient(90deg,var(--violet),var(--magenta))}
+.ghost{display:inline-flex;align-items:center;gap:.5rem;background:none;border:0;cursor:pointer;padding:.4rem 0;font:600 .72rem/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);text-decoration:none;border-bottom:1px solid rgba(185,166,223,.4)}
+.ghost:hover{color:var(--pink);border-color:var(--pink)}
+
+/* =========================================================
+   LAYAR (screen) — hanya satu yang tampil
+   ========================================================= */
+.screen{display:none;min-height:100vh;min-height:100dvh;padding:calc(var(--nav-h) + 1.5rem) clamp(1.25rem,5vw,5rem) 3rem;position:relative}
+.screen.on{display:flex;animation:enter .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes enter{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.eyebrow{margin:0 0 .8rem;font:700 .7rem/1 var(--display);letter-spacing:.28em;text-transform:uppercase;color:var(--pink)}
+.big{margin:0;font:900 clamp(2.4rem,6vw,5rem)/.95 var(--display);text-transform:uppercase;letter-spacing:.01em}
+.big em{font-style:normal;background:linear-gradient(180deg,#FFFFFF 0%,#FFD9F4 40%,#C77DFF 70%,#FF7AD9 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 18px rgba(255,47,185,.45))}
+.lead{color:var(--muted);font-size:clamp(.95rem,1.3vw,1.1rem);line-height:1.6;max-width:44ch}
+
+/* ---------- KARTU (dipakai di semua layar) ---------- */
+.card{position:relative;width:var(--card-w);aspect-ratio:3/4;border-radius:1.4rem;overflow:hidden;user-select:none;-webkit-user-select:none;
+  border:2px solid transparent;
+  background:linear-gradient(var(--bg),var(--bg)) padding-box,linear-gradient(140deg,var(--pink),var(--violet) 45%,var(--magenta)) border-box;
+  box-shadow:0 0 0 1px rgba(255,122,217,.15),0 0 26px rgba(255,47,185,.45),0 24px 50px rgba(0,0,0,.5)}
+.art{position:absolute;inset:0;overflow:hidden;background:var(--bg)}
+.art::before{content:"";position:absolute;width:78%;aspect-ratio:1;border-radius:50%;right:-14%;top:-8%;background:var(--ac);opacity:.9}
+.art::after{content:"";position:absolute;left:-20%;right:-20%;bottom:-18%;height:52%;border-radius:50% 50% 0 0;background:var(--ac2)}
+.art .emo{position:absolute;left:50%;top:40%;translate:-50% -50%;z-index:1;font-size:calc(var(--card-w) * .38);line-height:1;filter:drop-shadow(0 10px 18px rgba(0,0,0,.35))}
+.art .dots{position:absolute;inset:0;z-index:1;background:radial-gradient(circle,rgba(255,255,255,.35) 1.5px,transparent 2px) 0 0/22px 22px;opacity:.25;mask:linear-gradient(180deg,#000,transparent 55%);-webkit-mask:linear-gradient(180deg,#000,transparent 55%)}
+.art img{position:absolute;inset:0;z-index:2;width:100%;height:100%;object-fit:cover}
+.dummy{position:absolute;z-index:2;right:.8rem;bottom:38%;font:700 .55rem/1 var(--display);letter-spacing:.2em;color:rgba(255,255,255,.7);border:1px dashed rgba(255,255,255,.5);padding:.3rem .45rem;border-radius:.3rem}
+.no{position:absolute;z-index:3;top:.8rem;left:.8rem;font:700 .62rem/1 var(--display);letter-spacing:.12em;color:#fff;background:rgba(10,4,24,.45);backdrop-filter:blur(6px);padding:.4rem .6rem;border-radius:999px}
+.info{position:absolute;z-index:3;left:.7rem;right:.7rem;bottom:.7rem;padding:.8rem .9rem;border-radius:1rem;background:rgba(20,8,44,.62);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.14)}
+.info .tag{display:flex;align-items:center;gap:.4rem;font:700 .55rem/1 var(--display);letter-spacing:.18em;text-transform:uppercase;color:var(--pink)}
+.info .tag::before{content:"";width:.45rem;height:.45rem;border-radius:50%;background:var(--pink);box-shadow:0 0 8px var(--magenta)}
+.info h3{margin:.45rem 0 .25rem;font:700 clamp(1rem,1.5vw,1.2rem)/1.2 var(--body);color:#fff}
+.info p{margin:0;font-size:.75rem;color:var(--muted);font-style:italic}
+.stamp{position:absolute;z-index:4;top:1.4rem;padding:.45rem .7rem;border:3px solid;border-radius:.5rem;font:900 1rem/1 var(--display);letter-spacing:.08em;opacity:0;pointer-events:none}
+.stamp.yes{left:1rem;rotate:-12deg;color:#FF7AD9;border-color:#FF7AD9;text-shadow:0 0 10px var(--magenta);box-shadow:0 0 14px rgba(255,47,185,.6)}
+.stamp.nope{right:1rem;rotate:12deg;color:#B9A6DF;border-color:#B9A6DF}
+
+/* =========================================================
+   1. INTRO
+   ========================================================= */
+#s-intro{align-items:center;justify-content:center;flex-direction:column}
+.intro-grid{width:min(100%,76rem);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(2rem,5vw,5rem);align-items:center}
+.panel{padding:clamp(1.6rem,3vw,2.6rem);border-radius:1.6rem;background:rgba(24,8,52,.55);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,122,217,.25);box-shadow:0 20px 60px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.08)}
+.panel .big{font-size:clamp(2.1rem,4.6vw,4rem)}
+.panel .big .our{display:block;font:400 clamp(2.4rem,4.4vw,3.8rem)/1 var(--script);text-transform:none;color:var(--magenta);text-shadow:0 0 16px rgba(255,47,185,.8);rotate:-5deg;width:max-content;margin:0 0 -.1em .1em}
+.row{display:flex;flex-wrap:wrap;align-items:center;gap:1rem 1.4rem;margin-top:1.6rem}
+.meta{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.4rem}
+.meta span{font:700 .6rem/1 var(--display);letter-spacing:.14em;text-transform:uppercase;padding:.5rem .75rem;border-radius:999px;border:1px solid rgba(255,122,217,.3);color:var(--ice)}
+.fine{margin:1rem 0 0;font-size:.75rem;color:var(--muted);opacity:.8}
+.fan{position:relative;height:calc(var(--card-w) * 1.45);display:grid;place-items:center}
+.fan .card{position:absolute;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.fan .card:nth-child(1){transform:translateX(-38%) rotate(-14deg) scale(.88)}
+.fan .card:nth-child(2){transform:translateX(38%) rotate(12deg) scale(.88)}
+.fan .card:nth-child(3){transform:translateY(-2%) rotate(-2deg)}
+.fan:hover .card:nth-child(1){transform:translateX(-46%) rotate(-18deg) scale(.88)}
+.fan:hover .card:nth-child(2){transform:translateX(46%) rotate(16deg) scale(.88)}
+.fan .unlock{position:absolute;top:-2.2rem;right:0;z-index:5;font:700 .62rem/1.4 var(--display);letter-spacing:.18em;text-transform:uppercase;text-align:right;color:var(--ice)}
+.fan .unlock b{display:block;color:var(--pink);font-size:.8rem}
+.marquee{position:absolute;left:0;right:0;bottom:0;overflow:hidden;border-top:1px solid rgba(255,122,217,.25);background:rgba(10,4,24,.5);padding:.7rem 0}
+.marquee div{display:flex;width:max-content;gap:2rem;animation:mq 40s linear infinite;font:700 .65rem/1 var(--display);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.marquee i{font-style:normal;color:var(--pink)}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* =========================================================
+   2. PILIH PERAN
+   ========================================================= */
+#s-lens{flex-direction:column;justify-content:center;max-width:80rem;margin:0 auto}
+.lenses{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(1rem,2vw,1.6rem);margin-top:2.4rem}
+.lens{position:relative;text-align:left;cursor:pointer;padding:1.6rem 1.5rem 1.4rem;min-height:15rem;border-radius:1.4rem;display:flex;flex-direction:column;
+  background:rgba(24,8,52,.55);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,122,217,.25);transition:transform .3s,border-color .3s,box-shadow .3s}
+.lens:hover,.lens:focus-visible{transform:translateY(-6px);border-color:var(--pink);box-shadow:0 0 30px rgba(255,47,185,.35)}
+.lens small{font:700 .62rem/1 var(--display);letter-spacing:.2em;color:var(--pink)}
+.lens .ico{font-size:2rem;margin:1.2rem 0 auto}
+.lens h3{margin:1rem 0 .4rem;font:900 1.2rem/1.1 var(--display);text-transform:uppercase}
+.lens p{margin:0;font-size:.85rem;color:var(--muted);line-height:1.5}
+.lens .go{position:absolute;right:1.4rem;bottom:1.3rem;color:var(--pink);font-size:1.2rem}
+.back{margin-top:2rem;align-self:flex-start}
+
+/* =========================================================
+   3. TUTORIAL
+   ========================================================= */
+#s-tutor{align-items:center;justify-content:center}
+.tutor-grid{width:min(100%,72rem);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(2rem,6vw,6rem);align-items:center}
+.demo-wrap{position:relative;display:flex;align-items:center;gap:1.4rem}
+.demo-wrap .hint{font:700 .6rem/1 var(--display);letter-spacing:.2em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.demo-wrap .hint.r{color:var(--pink)}
+#demo{touch-action:none;cursor:grab}
+#demo .try{position:absolute;z-index:4;left:50%;top:44%;translate:-50% -50%;font:700 .62rem/1 var(--display);letter-spacing:.2em;padding:.55rem .8rem;border-radius:999px;background:rgba(10,4,24,.7);color:#fff;animation:nudge 2.4s ease-in-out infinite}
+@keyframes nudge{0%,100%{transform:translateX(0)}25%{transform:translateX(10px)}75%{transform:translateX(-10px)}}
+
+/* =========================================================
+   4. GAME
+   ========================================================= */
+#s-game{flex-direction:column;align-items:center;justify-content:center;gap:1.4rem}
+.deckbar{width:min(100%,26rem);display:flex;align-items:center;gap:1rem;font:700 .62rem/1 var(--display);letter-spacing:.16em;text-transform:uppercase}
+.deckbar .track{flex:1;height:3px;border-radius:3px;background:rgba(233,220,255,.15);overflow:hidden}
+.deckbar .fill{height:100%;width:0;background:linear-gradient(90deg,var(--violet),var(--magenta),var(--pink));box-shadow:0 0 10px var(--magenta);transition:width .4s}
+.stack{position:relative;width:var(--card-w);aspect-ratio:3/4}
+.stack .card{position:absolute;inset:0;width:100%;transition:transform .35s cubic-bezier(.2,.8,.2,1),opacity .35s}
+.stack .card.top{touch-action:none;cursor:grab}
+.stack .card.top.drag{transition:none;cursor:grabbing}
+.controls{display:flex;align-items:flex-start;gap:1.2rem}
+.ctl{display:flex;flex-direction:column;align-items:center;gap:.45rem;font:700 .55rem/1 var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.ctl button{width:3.6rem;height:3.6rem;border-radius:50%;cursor:pointer;display:grid;place-items:center;font-size:1.3rem;
+  background:rgba(24,8,52,.7);border:1px solid rgba(255,122,217,.3);backdrop-filter:blur(10px);transition:transform .2s,box-shadow .2s,background .2s}
+.ctl button:hover{transform:translateY(-3px);box-shadow:0 0 20px rgba(255,47,185,.5)}
+.ctl.small button{width:2.8rem;height:2.8rem;font-size:1rem;margin-top:.4rem}
+.ctl.yes{color:var(--pink)}
+.ctl.yes button{background:linear-gradient(135deg,var(--violet),var(--magenta));border-color:transparent}
+.ctl button:disabled{opacity:.35;cursor:default;transform:none;box-shadow:none}
+.keys{font-size:.72rem;color:var(--muted);opacity:.7;margin:0;text-align:center}
+
+/* =========================================================
+   5. REVEAL
+   ========================================================= */
+#s-reveal{align-items:center;justify-content:center;flex-direction:column;text-align:center;overflow:hidden}
+.rays{position:absolute;inset:-50%;background:repeating-conic-gradient(from 0deg,rgba(255,122,217,.10) 0 4deg,transparent 4deg 18deg);animation:spin 18s linear infinite;mask:radial-gradient(circle,#000 10%,transparent 55%);-webkit-mask:radial-gradient(circle,#000 10%,transparent 55%)}
+@keyframes spin{to{rotate:360deg}}
+#s-reveal .big{position:relative;font-size:clamp(3rem,9vw,7.5rem);animation:pulse 1.4s ease-in-out infinite alternate}
+@keyframes pulse{from{filter:drop-shadow(0 0 10px rgba(255,47,185,.3))}to{filter:drop-shadow(0 0 40px rgba(255,47,185,.9))}}
+#s-reveal p{position:relative}
+.loader{position:relative;width:12rem;height:3px;margin-top:1.4rem;border-radius:3px;background:rgba(233,220,255,.15);overflow:hidden}
+.loader i{position:absolute;inset:0;width:40%;background:linear-gradient(90deg,transparent,var(--pink),transparent);animation:load 1s linear infinite}
+@keyframes load{from{left:-40%}to{left:100%}}
+
+/* =========================================================
+   6. HASIL
+   ========================================================= */
+#s-result{flex-direction:column;padding-left:0;padding-right:0;padding-bottom:0}
+.wrap{width:min(100% - 2.5rem,76rem);margin:0 auto}
+.res-hero{display:grid;grid-template-columns:minmax(0,1.1fr) auto;gap:clamp(2rem,6vw,6rem);align-items:center;padding:1rem 0 4rem}
+.res-name{margin:0;font:900 clamp(2.6rem,6.4vw,5.6rem)/.95 var(--display);text-transform:uppercase;
+  background:linear-gradient(180deg,#FFFFFF 0%,#FFD9F4 40%,var(--acc) 75%,#FF7AD9 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 20px rgba(255,47,185,.4))}
+.bonus{display:inline-flex;align-items:center;gap:.5rem;margin:1.2rem 0 0;padding:.5rem .9rem;border-radius:999px;background:rgba(24,8,52,.6);border:1px solid rgba(255,122,217,.3);font-size:.82rem}
+.bonus b{color:var(--pink);font:700 .72rem/1 var(--display);letter-spacing:.1em;text-transform:uppercase}
+.res-tag{margin:1.4rem 0 0;font:600 clamp(1.3rem,2.4vw,2rem)/1.25 var(--body);color:#fff;max-width:26ch}
+.res-desc{margin:.9rem 0 0;color:var(--muted);line-height:1.65;max-width:52ch}
+.hero-card{--card-w:clamp(15rem,70vw,20rem);rotate:3deg;animation:float 5s ease-in-out infinite}
+@keyframes float{50%{translate:0 -10px;rotate:1deg}}
+.hero-card .info h3{font:900 1.3rem/1.1 var(--display);text-transform:uppercase}
+
+.block{padding:clamp(3rem,7vw,5.5rem) 0;border-top:1px solid rgba(255,122,217,.14)}
+.block h2{margin:0;font:900 clamp(1.8rem,4vw,3.2rem)/1 var(--display);text-transform:uppercase}
+.block h2 em{font-style:normal;color:var(--pink);text-shadow:0 0 18px rgba(255,47,185,.6)}
+
+.coll{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2.2fr);gap:2rem;align-items:center}
+.coll-count{font:700 clamp(1.6rem,3vw,2.4rem)/1.1 var(--display)}
+.coll-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:.8rem}
+.mini{position:relative;aspect-ratio:3/4;border-radius:.9rem;overflow:hidden;display:grid;place-items:center;font-size:2rem;background:var(--bg);border:1px solid rgba(255,122,217,.3)}
+.mini small{position:absolute;left:0;right:0;bottom:.5rem;text-align:center;font:700 .5rem/1.2 var(--display);letter-spacing:.08em;text-transform:uppercase;padding:0 .3rem}
+.mini.locked{filter:grayscale(1) blur(3px);opacity:.35}
+.mini.me{box-shadow:0 0 0 2px var(--pink),0 0 20px rgba(255,47,185,.6)}
+
+.carousel{display:flex;gap:1rem;overflow-x:auto;padding:2rem 0 1rem;scroll-snap-type:x mandatory;scrollbar-color:var(--pink) transparent}
+.carousel .card{--card-w:13rem;flex:none;scroll-snap-align:start}
+.carousel .card .info h3{font-size:.95rem}
+.empty{color:var(--muted);margin-top:1.5rem}
+
+.decode{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin-top:2rem}
+.decode div{padding:1.4rem;border-radius:1.2rem;background:rgba(24,8,52,.55);border:1px solid rgba(255,122,217,.22)}
+.decode small{font:700 .6rem/1 var(--display);letter-spacing:.2em;color:var(--pink)}
+.decode p{margin:.7rem 0 0;font-weight:600;color:#fff}
+.match{margin-top:1.4rem;color:var(--muted)}
+.match b{color:var(--pink)}
+
+/* form kontak */
+.lead-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(2rem,5vw,4rem);align-items:start}
+form{display:grid;gap:.9rem;padding:clamp(1.4rem,3vw,2rem);border-radius:1.4rem;background:rgba(24,8,52,.6);border:1px solid rgba(255,122,217,.25);backdrop-filter:blur(14px)}
+label{display:grid;gap:.35rem;font:700 .62rem/1 var(--display);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+input,select{width:100%;padding:.85rem 1rem;border-radius:.8rem;border:1px solid rgba(255,122,217,.25);background:rgba(10,4,24,.6);color:#fff;font:500 1rem/1.2 var(--body)}
+input:focus,select:focus{outline:none;border-color:var(--pink);box-shadow:0 0 0 3px rgba(255,47,185,.2)}
+.check{display:flex;gap:.6rem;align-items:flex-start;font:400 .8rem/1.45 var(--body);letter-spacing:0;text-transform:none;color:var(--muted)}
+.check input{width:1.1rem;height:1.1rem;margin-top:.1rem;accent-color:var(--magenta);flex:none}
+.hp{position:absolute;left:-9999px}
+.ok{display:none;padding:1.2rem;border-radius:1rem;background:rgba(255,47,185,.14);border:1px solid var(--pink);color:#fff}
+.err{color:#FF9C9C;font-size:.8rem;margin:0;min-height:1em}
+
+/* share */
+.share-grid{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(2rem,6vw,6rem);align-items:center}
+.story{width:clamp(12rem,32vw,17rem);aspect-ratio:9/16;border-radius:1.2rem;overflow:hidden;box-shadow:0 0 30px rgba(255,47,185,.4),0 30px 60px rgba(0,0,0,.5);background:#12062A}
+.story img{width:100%;height:100%;display:block}
+
+.final{text-align:center;padding:clamp(4rem,9vw,7rem) 0;border-top:1px solid rgba(255,122,217,.14)}
+.final h2{margin:.6rem auto 2rem;max-width:22ch;font:700 clamp(1.6rem,3.4vw,2.8rem)/1.2 var(--body);text-transform:none}
+.final .row{justify-content:center}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width:1480px){
+  .links{display:none}
+  .menu-btn{display:block}
+  .nav > .cut{display:none}
+  .nav.open .links{display:flex;position:absolute;top:var(--nav-h);left:1rem;right:1rem;translate:none;flex-direction:column;gap:.2rem;padding:.6rem;background:rgba(20,8,44,.92);border-radius:1.4rem}
+  .nav.open .links a{padding:1rem 1.1rem}
+}
+@media (max-width:900px){
+  .intro-grid,.tutor-grid,.res-hero,.coll,.lead-grid,.share-grid{grid-template-columns:1fr}
+  .fan{order:-1;height:calc(var(--card-w) * 1.2)}
+  .fan .unlock{display:none}
+  #s-intro{padding-bottom:4rem}
+  .lenses{grid-template-columns:1fr}
+  .lens{min-height:auto}
+  .demo-wrap{justify-content:center}
+  .demo-wrap .hint{display:none}
+  .hero-card{justify-self:center;order:-1}
+  .coll-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .decode{grid-template-columns:1fr}
+  .story{justify-self:center}
+}
+@media (max-width:520px){
+  :root{--card-w:min(74vw,19rem)}
+  .intro-grid .fan{--card-w:min(52vw,13rem)}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body data-screen="intro">
+<div class="bg" aria-hidden="true"><canvas id="stars"></canvas></div>
+
+<!-- NAV: sama dengan home -->
+<header class="nav" id="nav">
+  <a class="logo" href="flux-home.html"><img src="aset/FCU-Logo-atas.webp" alt="Flux Creative Universe, kembali ke beranda" width="534" height="369"></a>
+  <button class="menu-btn" type="button" aria-expanded="false" aria-controls="links">MENU</button>
+  <ul class="links" id="links">
+    <li><a href="flux-home.html">Home</a></li>
+    <li><a href="flux-home.html#services">Services</a></li>
+    <li><a href="flux-home.html#events">Events</a></li>
+    <li><a href="flux-home.html#hub">Creative Hub</a></li>
+    <li><a href="flux-home.html#partners">Partners</a></li>
+    <li><a href="flux-home.html#gallery">Gallery</a></li>
+    <li><a href="play.html" aria-current="page">Play</a></li>
+    <li><a href="flux-home.html#contact">Contact</a></li>
+  </ul>
+  <a class="cut" href="flux-home.html#join">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="5"/><ellipse cx="12" cy="12" rx="11" ry="3.5" transform="rotate(-20 12 12)"/></svg>
+    Join the universe
+  </a>
+</header>
+
+<main>
+  <!-- 1. INTRO ======================================================= -->
+  <section class="screen on" id="s-intro" aria-labelledby="t-intro">
+    <div class="intro-grid">
+      <div class="panel">
+        <p class="eyebrow">FCU presents</p>
+        <h1 class="big" id="t-intro"><span class="our">What's your</span><em>Creative Signal?</em></h1>
+        <p class="lead" style="margin-top:1.2rem">Pilih momen yang paling kamu banget. Kami baca pola di balik cara kamu berkarya, nongkrong, dan dapet ide.</p>
+        <div class="row">
+          <button class="cut solid" type="button" data-go="lens">Shuffle the deck
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+          <a class="ghost" href="flux-home.html#services">What's FCU? ↗</a>
+        </div>
+        <div class="meta"><span>18 moments</span><span>6 creative signals</span><span>± 2 menit</span></div>
+        <p class="fine">Nggak ada jawaban benar. Main pakai feeling.</p>
+      </div>
+      <div class="fan" id="fan" aria-hidden="true">
+        <p class="unlock">Collectible signal deck<b>6 signals to unlock</b></p>
+      </div>
+    </div>
+    <div class="marquee" aria-hidden="true"><div id="mq"></div></div>
+  </section>
+
+  <!-- 2. PILIH PERAN ================================================= -->
+  <section class="screen" id="s-lens" aria-labelledby="t-lens">
+    <p class="eyebrow">01 / Pick your lens</p>
+    <h2 class="big" id="t-lens">Who's <em>playing?</em></h2>
+    <p class="lead" style="margin-top:1rem">Satu deck, tiga cara baca.</p>
+    <div class="lenses">
+      <button class="lens" type="button" data-lens="creator"><small>01</small><span class="ico">✦</span><h3>Creator</h3><p>Cari tahu tipe kreator kamu dan energi yang kamu bawa ke setiap project.</p><span class="go">→</span></button>
+      <button class="lens" type="button" data-lens="brand"><small>02</small><span class="ico">◎</span><h3>Brand</h3><p>Baca energi brand kamu dan jenis kolaborasi kreatif yang paling cocok.</p><span class="go">→</span></button>
+      <button class="lens" type="button" data-lens="community"><small>03</small><span class="ico">♥</span><h3>Community</h3><p>Lihat peran kamu di komunitas kreatif — tanpa sadar selalu kamu mainkan.</p><span class="go">→</span></button>
+    </div>
+    <button class="ghost back" type="button" data-go="intro">← Back</button>
+  </section>
+
+  <!-- 3. TUTORIAL ==================================================== -->
+  <section class="screen" id="s-tutor" aria-labelledby="t-tutor">
+    <div class="tutor-grid">
+      <div>
+        <p class="eyebrow">02 / Quick warm-up</p>
+        <h2 class="big" id="t-tutor">Main pakai <em>feeling.</em></h2>
+        <p class="lead" style="margin-top:1rem">Geser ke <b style="color:var(--pink)">kanan</b> kalau "gue banget" — <b>LOCK SIGNAL</b>.<br>Geser ke <b>kiri</b> kalau "skip dulu".<br>Bisa juga pakai tombol atau panah keyboard ← →.</p>
+        <div class="row"><button class="cut solid" type="button" id="deal">Okay, deal the cards</button></div>
+      </div>
+      <div class="demo-wrap">
+        <span class="hint">← Skip dulu</span>
+        <div id="demo-slot"></div>
+        <span class="hint r">Gue banget →</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. GAME ======================================================== -->
+  <section class="screen" id="s-game" aria-label="Deck kartu">
+    <div class="deckbar"><span id="count">Your deck · 01 / 18</span><span class="track"><span class="fill" id="bar"></span></span><button class="ghost" type="button" id="restart">Restart</button></div>
+    <div class="stack" id="stack" aria-live="polite"></div>
+    <div class="controls">
+      <div class="ctl small"><button type="button" id="undo" aria-label="Batalkan kartu terakhir" disabled>↶</button>Undo</div>
+      <div class="ctl"><button type="button" id="nope" aria-label="Skip dulu">✕</button>Skip dulu</div>
+      <div class="ctl yes"><button type="button" id="yes" aria-label="Gue banget">♥</button>Gue banget</div>
+    </div>
+    <p class="keys">Seret kartunya, tap tombol, atau pakai tombol ← → di keyboard</p>
+  </section>
+
+  <!-- 5. REVEAL ====================================================== -->
+  <section class="screen" id="s-reveal" aria-live="polite">
+    <div class="rays" aria-hidden="true"></div>
+    <p class="eyebrow" style="position:relative">18 moments. One signal.</p>
+    <h2 class="big"><em>Signal<br>detected</em></h2>
+    <p class="lead">Lagi ngeracik sinyal kamu…</p>
+    <div class="loader" aria-hidden="true"><i></i></div>
+  </section>
+
+  <!-- 6. HASIL ======================================================= -->
+  <section class="screen" id="s-result" aria-labelledby="r-name">
+    <div class="wrap res-hero">
+      <div>
+        <p class="eyebrow" id="r-eyebrow">Your creative signal</p>
+        <h1 class="res-name" id="r-name">The Visionary</h1>
+        <p class="bonus">Bonus energy: <b id="r-bonus">The Storyteller</b></p>
+        <p class="res-tag" id="r-tag"></p>
+        <p class="res-desc" id="r-desc"></p>
+        <div class="row">
+          <a class="ghost" href="#my-deck">See my deck ↓</a>
+          <a class="cut solid" href="#share">Share to story ↗</a>
+        </div>
+      </div>
+      <div class="hero-card" id="r-card"></div>
+    </div>
+
+    <div class="wrap block coll">
+      <div><p class="eyebrow">Your collection</p><p class="coll-count" id="c-count">1 / 6 signals unlocked</p><p class="fine">Main lagi pakai lens lain untuk buka signal baru.</p></div>
+      <div class="coll-grid" id="c-grid"></div>
+    </div>
+
+    <div class="wrap block" id="my-deck">
+      <p class="eyebrow">Your locked moments</p>
+      <h2>Here's what <em>gave you away.</em></h2>
+      <div class="carousel" id="liked"></div>
+    </div>
+
+    <div class="wrap block">
+      <p class="eyebrow">Your signal, decoded</p>
+      <h2 id="d-title">Superpower <em>kamu</em></h2>
+      <div class="decode" id="decode"></div>
+      <p class="match" id="d-match"></p>
+    </div>
+
+    <div class="wrap block lead-grid" id="join-list">
+      <div>
+        <p class="eyebrow">Stay on the frequency</p>
+        <h2>Kirim kartu HD kamu <em>+ undangan event FCU</em></h2>
+        <p class="lead" style="margin-top:1rem">Tinggalkan kontakmu — kami kirim kartu signal versi HD, dan kabari kamu duluan soal event, kelas, dan open call kolaborasi dari Flux Creative Universe.</p>
+      </div>
+      <div>
+        <form id="lead" novalidate>
+          <label>Nama<input name="name" autocomplete="name" required></label>
+          <label>Email<input name="email" type="email" autocomplete="email" required></label>
+          <label>Instagram (opsional)<input name="instagram" placeholder="@username"></label>
+          <label>Kamu main sebagai
+            <select name="lens" id="f-lens"><option value="creator">Creator</option><option value="brand">Brand</option><option value="community">Community</option></select>
+          </label>
+          <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <label class="check"><input type="checkbox" name="consent" required><span>Saya setuju data ini disimpan dan dipakai Flux Creative Universe untuk mengirim kartu dan info kegiatan. Bisa berhenti berlangganan kapan saja.</span></label>
+          <p class="err" id="f-err" role="alert"></p>
+          <button class="cut solid" type="submit">Kirim ke email saya</button>
+        </form>
+        <p class="ok" id="f-ok" role="status">✦ Sinyal diterima! Cek email kamu dalam beberapa hari ya.</p>
+      </div>
+    </div>
+
+    <div class="wrap block share-grid" id="share">
+      <div class="story"><img id="story-img" alt="Pratinjau kartu signal untuk Instagram Story"></div>
+      <div>
+        <p class="eyebrow">Take your signal with you</p>
+        <h2>Your card. <em>Your story.</em></h2>
+        <p class="lead" style="margin-top:1rem">Kartu ukuran Instagram Story (1080×1920). Di HP, tombol share langsung membuka menu bagikan.</p>
+        <div class="row">
+          <button class="cut solid" type="button" id="share-btn">Share to story ↗</button>
+          <button class="ghost" type="button" id="dl-btn">Download PNG ↓</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrap final">
+      <p class="eyebrow">Build the universe with us</p>
+      <h2>Bawa sinyalmu ke semesta yang lebih besar. FCU mempertemukan kreator, brand, dan komunitas.</h2>
+      <div class="row">
+        <a class="cut solid" href="flux-home.html#join">Join the universe</a>
+        <a class="cut" href="flux-home.html#contact">Partner with FCU</a>
+      </div>
+      <div class="row">
+        <button class="ghost" type="button" id="again">Main lagi dengan kartu acak</button>
+        <button class="ghost" type="button" data-go="lens">Ganti peran</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+/* =========================================================
+   PENGATURAN
+   - SHEETS_URL: isi dengan URL Web App Google Apps Script supaya
+     data form masuk ke Google Sheets. Selama kosong, data hanya
+     disimpan di browser (untuk uji coba).
+   - Gambar kartu: isi "img" (mis. "aset/play/card-01.webp").
+     Selama kosong, kartu memakai ilustrasi dummy (emoji + warna).
+   ========================================================= */
+const SHEETS_URL = '';
+
+const SIGNALS = {
+  vis:{name:'The Visionary',emo:'🔭',acc:'#C9A3FF',bg:'#3B1A7A',ac:'#9B6BFF',ac2:'#24104E',img:'',
+    tag:'Ide datang duluan, detail nyusul belakangan.',
+    desc:{creator:'Kamu lihat gambaran besarnya sebelum orang lain sadar ada gambar. Moodboard kamu lebih rapi dari jadwal hidupmu, dan satu obrolan random bisa jadi konsep satu kampanye.',
+          brand:'Brand kamu hidup dari visi. Kamu butuh kreator yang bisa menerjemahkan ide besar jadi dunia visual yang bikin orang berhenti scroll.',
+          community:'Di komunitas, kamu yang pertama bilang "gimana kalau kita bikin…" — dan semua orang ikut kebawa.'},
+    power:['Art direction & worldbuilding','Konsep kampanye dari nol','Membaca arah tren visual'],match:['story','tink']},
+  story:{name:'The Storyteller',emo:'🎞️',acc:'#FFB3E6',bg:'#6B1450',ac:'#FF7AD9',ac2:'#3A0A2C',img:'',
+    tag:'Semua hal bisa jadi cerita di tanganmu.',
+    desc:{creator:'Dari obrolan warung sampai drama grup chat, kamu selalu nemu sudut ceritanya. Kamu tahu kapan harus potong, kapan harus diam, dan kapan penonton harus nangis.',
+          brand:'Brand kamu punya cerita yang layak didengar. Kolaborasi terbaikmu: film pendek, dokumenter, dan konten yang bikin orang merasa dekat.',
+          community:'Kamu penjaga cerita komunitas — yang ingat asal-usul, yang bikin semua orang merasa jadi bagian dari sesuatu.'},
+    power:['Scriptwriting & narasi','Editing yang punya rasa','Bikin penonton peduli'],match:['vis','sound']},
+  sound:{name:'The Sound Alchemist',emo:'🎧',acc:'#9BE4FF',bg:'#123E6B',ac:'#3CC8FF',ac2:'#0A2240',img:'',
+    tag:'Hidupmu punya soundtrack, dan kamu DJ-nya.',
+    desc:{creator:'Kamu dengar hal yang orang lain lewatkan: ritme hujan, suara pasar, jeda di tengah lagu. Buat kamu, mood selalu dimulai dari bunyi.',
+          brand:'Identitas brand kamu bisa punya suara. Sonic branding, musik original, dan pengalaman audio adalah lahan main terbaikmu.',
+          community:'Kamu yang bikin suasana hidup — playlist di tiap acara, dan orang yang selalu tahu gigs seru minggu ini.'},
+    power:['Sound design & musik','Membangun mood','Ritme editing yang pas'],match:['story','hype']},
+  hype:{name:'The Hype Maker',emo:'📣',acc:'#FFC79B',bg:'#7A2E12',ac:'#FF9C5B',ac2:'#431808',img:'',
+    tag:'Tahu tren sebelum jadi tren.',
+    desc:{creator:'Kamu punya radar budaya yang tajam dan nggak malu tampil. Konten kamu jalan cepat, dan grup chat selalu tahu dari kamu duluan.',
+          brand:'Brand kamu butuh gaung. Kampanye sosial, kolaborasi kreator, dan momen viral adalah bahan bakarnya.',
+          community:'Kamu toa-nya komunitas: yang ngajak, yang nge-hype, yang bikin acara kecil terasa besar.'},
+    power:['Konten sosial yang cepat','Membaca budaya pop','Bikin orang ikut gerak'],match:['conn','sound']},
+  tink:{name:'The Tinkerer',emo:'🛠️',acc:'#A6FFE9',bg:'#0F5A52',ac:'#3CFFD2',ac2:'#083530',img:'',
+    tag:'Ada tools baru? Kamu yang ngoprek duluan.',
+    desc:{creator:'Kamu belajar dengan membongkar. AI, kamera, software baru — semuanya kamu coba sampai paham, lalu kamu pakai buat hal yang belum pernah orang lihat.',
+          brand:'Brand kamu siap bereksperimen. Produksi berbasis AI, format baru, dan teknologi imersif cocok buat kamu.',
+          community:'Kamu yang dicari kalau ada yang error. Kamu juga yang ngajarin orang lain tanpa diminta.'},
+    power:['AI & workflow produksi','Eksperimen teknis','Problem solving kreatif'],match:['vis','conn']},
+  conn:{name:'The Connector',emo:'🤝',acc:'#FFE899',bg:'#6B5410',ac:'#FFD84D',ac2:'#3A2D06',img:'',
+    tag:'Kolaborasi adalah bahan bakarmu.',
+    desc:{creator:'Karya terbaikmu lahir bareng orang lain. Kamu gampang akrab, tahu siapa jago apa, dan bisa mempertemukan orang yang tepat di waktu yang tepat.',
+          brand:'Brand kamu tumbuh lewat komunitas. Aktivasi lokal, kolaborasi lintas kreator, dan event adalah panggungmu.',
+          community:'Kamu lem komunitas. Tanpa kamu, semua orang cuma kenalan; dengan kamu, mereka jadi kru.'},
+    power:['Kolaborasi & networking','Aktivasi komunitas','Menyatukan banyak talenta'],match:['hype','tink']}
+};
+const ORDER=['vis','story','sound','hype','tink','conn'];
+
+/* 18 kartu: p = signal utama (+3), s = signal kedua (+1) */
+const CARDS = [
+  {t:'Begadang ngedit sampai subuh?',tag:'Creative ritual',q:'"Satu render lagi, abis itu tidur."',e:'🌙',p:'story',s:'tink',bg:'#2A1466',ac:'#7B3CFF',ac2:'#150A36'},
+  {t:'Bikin moodboard dulu sebelum mulai?',tag:'Creative ritual',q:'"Tab Pinterest ke-37."',e:'🧩',p:'vis',s:'story',bg:'#FF7AD9',ac:'#FFD84D',ac2:'#B0287F'},
+  {t:'Nonton film di bioskop sendirian?',tag:'Solo moment',q:'"Kursi paling tengah, tanpa distraksi."',e:'🍿',p:'story',s:'vis',bg:'#B3122E',ac:'#FF9C5B',ac2:'#5E0616'},
+  {t:'Langsung nyoba tools AI yang baru rilis?',tag:'Tech drop',q:'"Release notes = bacaan pagi."',e:'🤖',p:'tink',s:'vis',bg:'#0F5A52',ac:'#3CFFD2',ac2:'#083530'},
+  {t:'Bikin playlist buat tiap mood?',tag:'Daily soundtrack',q:'"Galau, semangat, fokus — ada semua."',e:'🎧',p:'sound',s:'story',bg:'#123E6B',ac:'#3CC8FF',ac2:'#0A2240'},
+  {t:'Datang ke gigs band lokal?',tag:'Street moment',q:'"Paling depan, paling kencang nyanyi."',e:'🎸',p:'sound',s:'conn',bg:'#5B2BFF',ac:'#FF2FB9',ac2:'#2A1180'},
+  {t:'Ngonten di tempat umum tanpa malu?',tag:'Content mode',q:'"Tripod di tengah trotoar? Gas."',e:'📱',p:'hype',s:'tink',bg:'#FF9C5B',ac:'#FFE899',ac2:'#B8541C'},
+  {t:'Jadi yang pertama share tren baru?',tag:'Group chat',q:'"Grup chat tahu dari kamu duluan."',e:'🔥',p:'hype',s:'conn',bg:'#E0245E',ac:'#FFD84D',ac2:'#7A0F31'},
+  {t:'Ngobrol random sama abang warung?',tag:'Street moment',q:'"Pulang-pulang bawa cerita baru."',e:'🍜',p:'conn',s:'story',bg:'#C8471B',ac:'#FFC79B',ac2:'#6B2208'},
+  {t:'Nongkrong di warkop sampai tutup?',tag:'Warkop talk',q:'"Kopi ketiga, obrolan makin dalam."',e:'☕',p:'conn',s:'hype',bg:'#5A3A1C',ac:'#FFD84D',ac2:'#2E1C0A'},
+  {t:'Ikut workshop kreatif di akhir pekan?',tag:'Weekend plan',q:'"Sabtu pagi, tangan penuh cat."',e:'🎨',p:'tink',s:'conn',bg:'#8FD14F',ac:'#FF7AD9',ac2:'#3F6B14'},
+  {t:'Foto langit senja dari jendela KRL?',tag:'Commuter life',q:'"Kereta penuh, tapi langitnya bagus."',e:'🚆',p:'vis',s:'hype',bg:'#FF6F61',ac:'#FFD84D',ac2:'#6B1F4A'},
+  {t:'Ide paling bagus muncul pas mandi?',tag:'Brain spark',q:'"Sabun di tangan, ide di kepala."',e:'🚿',p:'vis',s:'sound',bg:'#3CC8FF',ac:'#FFFFFF',ac2:'#0F5A8A'},
+  {t:'Ngoprek setting kamera sendiri?',tag:'Tech drop',q:'"Manual mode, selalu."',e:'📷',p:'tink',s:'sound',bg:'#1E2A44',ac:'#9B6BFF',ac2:'#0E1424'},
+  {t:'Bikin project bareng teman tanpa dibayar?',tag:'Passion project',q:'"Dibayar pakai pengalaman & gorengan."',e:'🎬',p:'conn',s:'vis',bg:'#FF2FB9',ac:'#7B3CFF',ac2:'#8A0F5F'},
+  {t:'Rekam suara hujan atau suasana jalan?',tag:'Field record',q:'"Folder voice note isinya suara hujan."',e:'🌧️',p:'sound',s:'tink',bg:'#2E4B7A',ac:'#9BE4FF',ac2:'#152744'},
+  {t:'Nyimak cerita horor di grup chat tengah malam?',tag:'Group chat',q:'"Takut, tapi tetap baca sampai habis."',e:'👻',p:'story',s:'hype',bg:'#1A0838',ac:'#3CFFD2',ac2:'#0A0418'},
+  {t:'Karaoke all-out di acara 17-an?',tag:'Local ritual',q:'"Mic direbut, lagu dangdut diputar."',e:'🎤',p:'hype',s:'sound',bg:'#D4202C',ac:'#FFFFFF',ac2:'#6B0A12'}
+];
+CARDS.forEach((c,i)=>c.id=i);
+const TOTAL=CARDS.length;
+
+/* ---------- penyimpanan ringan di browser ---------- */
+const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},
+             set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+
+/* ---------- elemen kartu ---------- */
+function cardEl(c,{num,extra}={}){
+  const el=document.createElement('div');
+  el.className='card'+(extra?' '+extra:'');
+  el.style.setProperty('--bg',c.bg);el.style.setProperty('--ac',c.ac);el.style.setProperty('--ac2',c.ac2);
+  el.innerHTML=`<div class="art">${c.img?`<img src="${c.img}" alt="" draggable="false">`:`<span class="dots"></span><span class="emo" aria-hidden="true">${c.e}</span><i class="dummy">DUMMY</i>`}</div>
+    ${num?`<span class="no">${num}</span>`:''}
+    <div class="info"><span class="tag">${c.tag}</span><h3>${c.t}</h3>${c.q?`<p>${c.q}</p>`:''}</div>
+    <b class="stamp yes">LOCK</b><b class="stamp nope">SKIP</b>`;
+  return el;
+}
+function signalCard(key){
+  const s=SIGNALS[key];
+  return cardEl({t:s.name,tag:'Creative signal',q:s.tag,e:s.emo,bg:s.bg,ac:s.ac,ac2:s.ac2,img:s.img});
+}
+
+/* ---------- navigasi antar layar ---------- */
+const $=s=>document.querySelector(s);
+function go(name){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('on',s.id==='s-'+name));
+  document.body.dataset.screen=name;
+  scrollTo({top:0,behavior:'instant'});
+  if(name==='tutor') setupDemo();
+}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b){go(b.dataset.go)}});
+
+/* ---------- INTRO: kipas kartu + marquee ---------- */
+(function(){
+  const fan=$('#fan');
+  [7,12,1].forEach((i,k)=>{fan.insertBefore(cardEl(CARDS[i],{num:String(i+1).padStart(2,'0')}),fan.querySelector('.unlock'))});
+  const words=['Creative ritual','Street moment','Group chat','Tech drop','Warkop talk','Local ritual','Brain spark','Field record'];
+  const html=words.map(w=>`<span>${w}</span><i>✦</i>`).join('');
+  $('#mq').innerHTML=html+html;
+})();
+
+/* ---------- PILIH PERAN ---------- */
+let lens=store.get('fcu-lens','creator');
+document.querySelectorAll('[data-lens]').forEach(b=>b.addEventListener('click',()=>{lens=b.dataset.lens;store.set('fcu-lens',lens);go('tutor')}));
+
+/* ---------- geser kartu (dipakai di tutorial & game) ---------- */
+function makeDraggable(el,{onSwipe,snapBack}){
+  let x0=0,y0=0,dx=0,dy=0,t0=0,active=false;
+  const yes=el.querySelector('.stamp.yes'),no=el.querySelector('.stamp.nope');
+  el.addEventListener('pointerdown',e=>{active=true;x0=e.clientX;y0=e.clientY;dx=dy=0;t0=performance.now();el.setPointerCapture(e.pointerId);el.classList.add('drag')});
+  el.addEventListener('pointermove',e=>{if(!active)return;dx=e.clientX-x0;dy=e.clientY-y0;
+    el.style.transform=`translate(${dx}px,${dy*.4}px) rotate(${dx/14}deg)`;
+    yes.style.opacity=Math.max(0,Math.min(1,dx/90));no.style.opacity=Math.max(0,Math.min(1,-dx/90))});
+  const end=()=>{if(!active)return;active=false;el.classList.remove('drag');
+    const v=Math.abs(dx)/Math.max(1,performance.now()-t0);
+    if(Math.abs(dx)>110||(v>.6&&Math.abs(dx)>40)){onSwipe(dx>0?1:-1)}
+    else{el.style.transform='';yes.style.opacity=0;no.style.opacity=0}};
+  el.addEventListener('pointerup',end);el.addEventListener('pointercancel',end);
+}
+function flyOut(el,dir,cb){
+  el.style.transition='transform .45s cubic-bezier(.3,.6,.3,1),opacity .45s';
+  el.style.transform=`translate(${dir*140}%,-6%) rotate(${dir*24}deg)`;el.style.opacity='0';
+  el.querySelector(dir>0?'.stamp.yes':'.stamp.nope').style.opacity=1;
+  setTimeout(cb,420);
+}
+
+/* ---------- TUTORIAL ---------- */
+function setupDemo(){
+  const slot=$('#demo-slot');slot.innerHTML='';
+  const el=cardEl({t:'Hidupin grup chat yang sepi?',tag:'Warm-up',q:'"Coba geser aku."',e:'💬',bg:'#FF9C5B',ac:'#FF2FB9',ac2:'#7A2E12'},{num:'00 / 18'});
+  el.id='demo';el.insertAdjacentHTML('beforeend','<span class="try">COBA GESER</span>');
+  slot.appendChild(el);
+  makeDraggable(el,{onSwipe:dir=>flyOut(el,dir,()=>setupDemo())});
+}
+$('#deal').addEventListener('click',()=>{startGame();go('game')});
+
+/* ---------- GAME ---------- */
+let deck=[],pos=0,history=[],liked=[];
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a}
+function startGame(random=true){deck=random?shuffle(CARDS.slice()):CARDS.slice();pos=0;history=[];liked=[];render()}
+function render(){
+  const st=$('#stack');st.innerHTML='';
+  for(let k=Math.min(pos+2,TOTAL-1);k>=pos;k--){
+    const d=k-pos,el=cardEl(deck[k],{num:`${String(k+1).padStart(2,'0')} / ${TOTAL}`});
+    el.style.transform=`translateY(${d*-10}px) scale(${1-d*.04}) rotate(${d?(k%2?4:-4)*d:0}deg)`;el.style.opacity=d===2?.7:1;el.style.zIndex=10-d;
+    if(d===0){el.classList.add('top');makeDraggable(el,{onSwipe:answer})}
+    else el.setAttribute('aria-hidden','true');
+    st.appendChild(el);
+  }
+  $('#count').textContent=`Your deck · ${String(Math.min(pos+1,TOTAL)).padStart(2,'0')} / ${TOTAL}`;
+  $('#bar').style.width=(pos/TOTAL*100)+'%';
+  $('#undo').disabled=!history.length;
+}
+let busy=false;
+function answer(dir){
+  if(busy||pos>=TOTAL)return;busy=true;
+  const top=$('#stack .card.top');
+  flyOut(top,dir,()=>{
+    history.push(dir);if(dir>0)liked.push(deck[pos]);pos++;busy=false;
+    if(pos>=TOTAL){$('#bar').style.width='100%';finish()}else render();
+  });
+}
+$('#yes').addEventListener('click',()=>answer(1));
+$('#nope').addEventListener('click',()=>answer(-1));
+$('#undo').addEventListener('click',()=>{if(!history.length||busy)return;const d=history.pop();pos--;if(d>0)liked.pop();render()});
+$('#restart').addEventListener('click',()=>startGame());
+addEventListener('keydown',e=>{
+  if(document.body.dataset.screen!=='game')return;
+  if(e.key==='ArrowRight'){e.preventDefault();answer(1)}
+  else if(e.key==='ArrowLeft'){e.preventDefault();answer(-1)}
+  else if(e.key==='Backspace'||e.key.toLowerCase()==='z'){$('#undo').click()}
+});
+
+/* ---------- HITUNG HASIL ---------- */
+function compute(){
+  const sc={};ORDER.forEach(k=>sc[k]=0);
+  const first={};
+  liked.forEach((c,i)=>{sc[c.p]+=3;sc[c.s]+=1;if(first[c.p]==null)first[c.p]=i});
+  const rank=ORDER.slice().sort((a,b)=>sc[b]-sc[a]||(first[a]??99)-(first[b]??99));
+  if(!liked.length) return {main:ORDER[Math.random()*6|0],bonus:null,sc};
+  return {main:rank[0],bonus:sc[rank[1]]>0?rank[1]:null,sc};
+}
+
+function finish(){
+  go('reveal');
+  const res=compute();
+  setTimeout(()=>showResult(res),2600);
+}
+
+let current=null;
+function showResult({main,bonus}){
+  current={main,bonus};
+  const s=SIGNALS[main];
+  const unlocked=new Set(store.get('fcu-signals',[]));unlocked.add(main);store.set('fcu-signals',[...unlocked]);
+  $('#s-result').style.setProperty('--acc',s.acc);
+  $('#r-eyebrow').textContent={creator:'Your creative signal',brand:'Your brand signal',community:'Your community signal'}[lens];
+  $('#r-name').textContent=s.name;
+  $('#r-bonus').textContent=bonus?SIGNALS[bonus].name:'Full signal — satu frekuensi';
+  $('#r-tag').textContent=s.tag;
+  $('#r-desc').textContent=liked.length?s.desc[lens]:'Kamu pemilih banget — belum ada satu momen pun yang kamu lock. Sinyalmu kami tebak dari frekuensi yang tersisa. Coba main lagi, pakai feeling!';
+  const rc=$('#r-card');rc.innerHTML='';rc.appendChild(signalCard(main));
+
+  // koleksi
+  $('#c-count').textContent=`${unlocked.size} / 6 signals unlocked`;
+  $('#c-grid').innerHTML=ORDER.map(k=>{const x=SIGNALS[k];const on=unlocked.has(k);
+    return `<div class="mini ${on?'':'locked'} ${k===main?'me':''}" style="--bg:${x.bg}" title="${on?x.name:'Terkunci'}">${x.emo}<small>${on?x.name.replace('The ',''):'???'}</small></div>`}).join('');
+
+  // kartu yang disukai
+  const lk=$('#liked');lk.innerHTML='';
+  if(liked.length) liked.forEach(c=>lk.appendChild(cardEl(c,{num:`${String(c.id+1).padStart(2,'0')}`})));
+  else lk.innerHTML='<p class="empty">Belum ada kartu yang kamu lock kali ini.</p>';
+
+  // decoded
+  $('#decode').innerHTML=s.power.map((p,i)=>`<div><small>SUPERPOWER 0${i+1}</small><p>${p}</p></div>`).join('');
+  $('#d-match').innerHTML=`Paling klop kolaborasi dengan <b>${SIGNALS[s.match[0]].name}</b> dan <b>${SIGNALS[s.match[1]].name}</b>.`;
+
+  $('#f-lens').value=lens;
+  go('result');
+  buildStory();
+}
+
+/* ---------- FORM KONTAK ---------- */
+$('#lead').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const f=e.target,err=$('#f-err');err.textContent='';
+  if(f.website.value)return; // bot
+  const email=f.email.value.trim();
+  if(!f.name.value.trim())return err.textContent='Nama belum diisi.';
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))return err.textContent='Format email belum benar.';
+  if(!f.consent.checked)return err.textContent='Centang persetujuan dulu ya.';
+  const data={time:new Date().toISOString(),name:f.name.value.trim(),email,instagram:f.instagram.value.trim(),lens:f.lens.value,
+    signal:current?SIGNALS[current.main].name:'',bonus:current&&current.bonus?SIGNALS[current.bonus].name:'',liked:liked.length,page:location.href};
+  const btn=f.querySelector('button[type=submit]');btn.disabled=true;btn.textContent='Mengirim…';
+  try{
+    if(SHEETS_URL){await fetch(SHEETS_URL,{method:'POST',mode:'no-cors',body:new URLSearchParams(data)})}
+    else{const all=store.get('fcu-leads',[]);all.push(data);store.set('fcu-leads',all);console.info('[FCU] SHEETS_URL belum diisi — data disimpan di browser saja:',data)}
+    f.style.display='none';$('#f-ok').style.display='block';
+  }catch(x){err.textContent='Gagal mengirim. Coba lagi sebentar ya.';btn.disabled=false;btn.textContent='Kirim ke email saya'}
+});
+
+/* ---------- KARTU STORY (canvas 1080×1920) ---------- */
+let storyBlob=null;
+const logo=new Image();logo.src='aset/FCU-Logo.webp';
+function rr(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath()}
+function wrap(ctx,text,x,y,maxW,lh){const words=text.split(' ');let line='';for(const w of words){const t=line?line+' '+w:w;if(ctx.measureText(t).width>maxW&&line){ctx.fillText(line,x,y);line=w;y+=lh}else line=t}ctx.fillText(line,x,y);return y}
+async function buildStory(useLogo=true){
+  if(!current)return;
+  try{await document.fonts.ready}catch(e){}
+  const s=SIGNALS[current.main],W=1080,H=1920;
+  const cv=document.createElement('canvas');cv.width=W;cv.height=H;const c=cv.getContext('2d');
+  // latar
+  let g=c.createLinearGradient(0,0,0,H);g.addColorStop(0,'#1B0A3A');g.addColorStop(1,'#0A0418');c.fillStyle=g;c.fillRect(0,0,W,H);
+  [[200,300,'rgba(123,60,255,.45)'],[900,700,'rgba(255,47,185,.35)'],[500,1700,'rgba(60,200,255,.18)']].forEach(([x,y,col])=>{const r=c.createRadialGradient(x,y,0,x,y,600);r.addColorStop(0,col);r.addColorStop(1,'transparent');c.fillStyle=r;c.fillRect(0,0,W,H)});
+  for(let i=0;i<160;i++){c.globalAlpha=Math.random()*.8+.2;c.fillStyle='#fff';c.beginPath();c.arc(Math.random()*W,Math.random()*H,Math.random()*2.2+.4,0,7);c.fill()}
+  c.globalAlpha=1;
+  // header
+  c.textAlign='center';c.fillStyle='#FF7AD9';c.font='700 34px Orbitron, sans-serif';
+  c.fillText('MY CREATIVE SIGNAL',W/2,190);
+  // kartu
+  const cx=150,cy=260,cw=780,ch=1040;
+  c.save();c.shadowColor='rgba(255,47,185,.9)';c.shadowBlur=60;rr(c,cx,cy,cw,ch,56);c.fillStyle=s.bg;c.fill();c.restore();
+  c.save();rr(c,cx,cy,cw,ch,56);c.clip();
+  c.fillStyle=s.ac;c.beginPath();c.arc(cx+cw*.78,cy+ch*.18,cw*.42,0,7);c.fill();
+  c.fillStyle=s.ac2;c.beginPath();c.ellipse(cx+cw/2,cy+ch*1.02,cw*.8,ch*.34,0,0,7);c.fill();
+  let drew=false;
+  if(s.img){try{const im=new Image();im.src=s.img;await im.decode();const r=Math.max(cw/im.width,ch/im.height);c.drawImage(im,cx+(cw-im.width*r)/2,cy+(ch-im.height*r)/2,im.width*r,im.height*r);drew=true}catch(e){}}
+  if(!drew){c.font='340px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif';c.textBaseline='middle';c.fillText(s.emo,W/2,cy+ch*.4);c.textBaseline='alphabetic'}
+  c.restore();
+  c.lineWidth=6;const bg2=c.createLinearGradient(cx,cy,cx+cw,cy+ch);bg2.addColorStop(0,'#FF7AD9');bg2.addColorStop(.5,'#7B3CFF');bg2.addColorStop(1,'#FF2FB9');c.strokeStyle=bg2;rr(c,cx,cy,cw,ch,56);c.stroke();
+  // panel nama
+  c.save();rr(c,cx+36,cy+ch-300,cw-72,264,36);c.fillStyle='rgba(20,8,44,.78)';c.fill();c.strokeStyle='rgba(255,255,255,.18)';c.lineWidth=2;c.stroke();c.restore();
+  c.textAlign='left';c.fillStyle='#FF7AD9';c.font='700 26px Orbitron, sans-serif';c.fillText('CREATIVE SIGNAL',cx+80,cy+ch-230);
+  c.fillStyle='#fff';c.font='900 70px Orbitron, sans-serif';wrap(c,s.name.toUpperCase(),cx+80,cy+ch-150,cw-160,76);
+  // teks bawah
+  c.textAlign='center';c.fillStyle='#E9DCFF';c.font='600 44px "Exo 2", sans-serif';
+  let y=wrap(c,s.tag,W/2,1420,860,58);
+  c.fillStyle='#B9A6DF';c.font='500 34px "Exo 2", sans-serif';
+  c.fillText('Bonus energy: '+(current.bonus?SIGNALS[current.bonus].name:'Full signal'),W/2,y+80);
+  if(useLogo)try{await logo.decode();const lw=260,lh=lw*logo.height/logo.width;c.drawImage(logo,W/2-lw/2,1600,lw,lh)}catch(e){}
+  c.fillStyle='#FF7AD9';c.font='700 26px Orbitron, sans-serif';c.fillText('PLAY · AFGARINSA22.GITHUB.IO/FCU',W/2,1860);
+  // file:// membuat canvas 'tainted' oleh gambar logo -> ulangi tanpa logo
+  try{cv.toBlob(b=>{storyBlob=b;$('#story-img').src=URL.createObjectURL(b)},'image/png')}
+  catch(e){if(useLogo)buildStory(false)}
+}
+function download(){if(!storyBlob)return;const a=document.createElement('a');a.href=URL.createObjectURL(storyBlob);a.download=`fcu-signal-${current.main}.png`;a.click()}
+$('#dl-btn').addEventListener('click',download);
+$('#share-btn').addEventListener('click',async()=>{
+  if(!storyBlob)return;
+  const file=new File([storyBlob],`fcu-signal-${current.main}.png`,{type:'image/png'});
+  if(navigator.canShare&&navigator.canShare({files:[file]})){
+    try{await navigator.share({files:[file],title:'My Creative Signal',text:`Aku ${SIGNALS[current.main].name}! Kamu tipe kreator yang mana? ${location.href}`})}catch(e){}
+  }else download();
+});
+$('#again').addEventListener('click',()=>{startGame();go('game')});
+
+/* ---------- bintang latar ---------- */
+(function(){
+  const cv=$('#stars'),ctx=cv.getContext('2d');let W,H,st=[];
+  const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function size(){const d=Math.min(devicePixelRatio||1,2);W=cv.width=innerWidth*d;H=cv.height=innerHeight*d;
+    st=Array.from({length:Math.round(innerWidth*innerHeight/6000)},()=>({x:Math.random()*W,y:Math.random()*H,r:(Math.random()*1.3+.3)*d,p:Math.random()*6.3,s:.5+Math.random()*1.5}))}
+  function draw(t){ctx.clearRect(0,0,W,H);for(const s of st){ctx.globalAlpha=still?.6:.25+.75*(.5+.5*Math.sin(t/1000*s.s+s.p));ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,7);ctx.fill()}
+    if(!still)requestAnimationFrame(draw)}
+  size();addEventListener('resize',size);requestAnimationFrame(draw);
+})();
+
+/* ---------- menu mobile ---------- */
+const nav=$('#nav'),mb=nav.querySelector('.menu-btn');
+mb.addEventListener('click',()=>{const o=nav.classList.toggle('open');mb.setAttribute('aria-expanded',o)});
+</script>
+</body>
+</html>
