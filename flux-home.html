@@ -541,7 +541,7 @@ h1{margin:.4rem 0 0;font:900 clamp(2.2rem,6.2vw,5.4rem)/1 var(--display);letter-
     <li><a href="#portfolio">Portfolio</a></li>
     <li><a href="#jagoan">Jagoan Flux</a></li>
     <li><a href="#services">Services</a></li>
-    <li><a href="play.html">Play</a></li>
+    <li><a href="play.html">Games</a></li>
   </ul>
   <a class="cut" href="play.html">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="5"/><ellipse cx="12" cy="12" rx="11" ry="3.5" transform="rotate(-20 12 12)"/></svg>
@@ -1190,6 +1190,15 @@ function heroSilhouette(c,i){
   }
   addEventListener('scroll',spy,{passive:true});spy();
 })();
+
+/* tombol Home & logo: kembali ke paling atas.
+   (hero memakai position:sticky, jadi lompatan anchor #home biasa tidak bekerja) */
+document.querySelectorAll('a[href="#home"]').forEach(a=>a.addEventListener('click',e=>{
+  e.preventDefault();
+  scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+  history.replaceState(null,'',location.pathname);
+  document.getElementById('nav').classList.remove('open');
+}));
 
 /* menu mobile */
 const nav=document.getElementById('nav'),mb=nav.querySelector('.menu-btn');
