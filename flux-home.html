@@ -223,7 +223,7 @@ h1{margin:.4rem 0 0;font:900 clamp(2.2rem,6.2vw,5.4rem)/1 var(--display);letter-
 /* =========================================================
    OUR SERVICES — section dipin, kartu gambar bertumpuk saat di-scroll
    ========================================================= */
-.next.services{display:block;padding:0;text-align:left;height:calc(var(--n,5) * 85vh + 30vh)}
+.services{position:relative;z-index:10;display:block;padding:0;text-align:left;height:calc(var(--n,5) * 85vh + 30vh);background:linear-gradient(180deg,var(--void),#12062A 30%,#12062A 70%,var(--void))}
 .svc-sticky{position:sticky;top:0;height:100vh;height:100dvh;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:clamp(1.5rem,5vw,6rem);padding:calc(var(--nav-h) + 1rem) clamp(1.25rem,6vw,7rem) 2rem;overflow:hidden}
 .svc-text{max-width:30rem;justify-self:center;text-align:center;display:flex;flex-direction:column;align-items:center}
 .services .svc-title{margin:0;display:flex;flex-direction:column;align-items:center;font:900 clamp(2.6rem,5.6vw,5rem)/.9 var(--display);letter-spacing:.02em;text-transform:uppercase;
@@ -262,7 +262,7 @@ h1{margin:.4rem 0 0;font:900 clamp(2.2rem,6.2vw,5.4rem)/1 var(--display);letter-
   translate:0 var(--wig,0px);transition:translate .1s linear}
 
 @media (max-width:820px){
-  .next.services{height:calc(var(--n,5) * 75vh + 30vh)}
+  .services{height:calc(var(--n,5) * 75vh + 30vh)}
   .svc-sticky{grid-template-columns:1fr;grid-template-rows:auto 1fr;gap:1rem;padding-top:calc(var(--nav-h) + .5rem);align-items:start}
   .services .svc-desc{margin:.8rem 0 1rem;font-size:.9rem}
   .svc-index{margin-top:1rem}
@@ -503,10 +503,17 @@ h1{margin:.4rem 0 0;font:900 clamp(2.2rem,6.2vw,5.4rem)/1 var(--display);letter-
   .hero-p,.hero-fig,.hero-info,.stats i b{transition:none}
 }
 
+/* awards sekarang section pertama setelah hero: memakai tepi sobek */
+.next.awards{display:block;min-height:0;text-align:left;overflow:visible;overflow-x:clip;
+  background:
+    radial-gradient(40% 30% at 15% 30%,rgba(123,60,255,.22),transparent 70%),
+    radial-gradient(35% 30% at 90% 60%,rgba(255,47,185,.16),transparent 70%),
+    linear-gradient(180deg,var(--deep) 0,var(--deep) 140px,var(--void) 36rem)}
+
 /* =========================================================
    RESPONSIVE
    ========================================================= */
-@media (max-width:1480px){
+@media (max-width:1180px){
   .links{display:none}
   .menu-btn{display:block}
   .nav > .cut{display:none}
@@ -530,15 +537,13 @@ h1{margin:.4rem 0 0;font:900 clamp(2.2rem,6.2vw,5.4rem)/1 var(--display);letter-
   <button class="menu-btn" type="button" aria-expanded="false" aria-controls="links">MENU</button>
   <ul class="links" id="links">
     <li><a href="#home" aria-current="page">Home</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#events">Events</a></li>
-    <li><a href="#hub">Creative Hub</a></li>
-    <li><a href="#partners">Partners</a></li>
-    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#awards">Awards</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#jagoan">Jagoan Flux</a></li>
+    <li><a href="#services">Services</a></li>
     <li><a href="play.html">Play</a></li>
-    <li><a href="#contact">Contact</a></li>
   </ul>
-  <a class="cut" href="#join">
+  <a class="cut" href="play.html">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="5"/><ellipse cx="12" cy="12" rx="11" ry="3.5" transform="rotate(-20 12 12)"/></svg>
     Join the universe
   </a>
@@ -564,15 +569,20 @@ h1{margin:.4rem 0 0;font:900 clamp(2.2rem,6.2vw,5.4rem)/1 var(--display);letter-
     <div class="content">
       <h1 class="sr">Flux Creative Universe</h1>
       <img class="hero-logo" src="aset/FCU-Logo.webp" alt="" width="534" height="369" decoding="async">
-      <a class="cut big" href="#services">Explore our universe
+      <a class="cut big" href="#awards">Explore our universe
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
       </a>
     </div>
 
-    <a class="scroll" href="#services"><i aria-hidden="true"></i>SCROLL</a>
+    <a class="scroll" href="#awards"><i aria-hidden="true"></i>SCROLL</a>
   </section>
 
-  <section class="next services" id="services">
+
+  <!-- AWARDS & MURI =====================================================
+       DATA MASIH DUMMY — ganti teks bertanda [ ... ], tahun 20XX, dan angka.
+       Logo/sertifikat MURI: isi <div class="face"> dengan <img src="aset/muri.webp" alt="Rekor MURI">
+       Setelah data asli masuk, hapus <span class="dummy-tag">. -->
+  <section class="next awards" id="awards" aria-labelledby="aw-title">
     <div class="tear" aria-hidden="true">
       <svg viewBox="0 0 1440 140" preserveAspectRatio="none">
         <defs>
@@ -590,53 +600,6 @@ h1{margin:.4rem 0 0;font:900 clamp(2.2rem,6.2vw,5.4rem)/1 var(--display);letter-
         <path class="glow"/><path class="paper"/><path class="speck"/><path class="fill"/>
       </svg>
     </div>
-
-    <!-- OUR SERVICES: teks kiri diam, kartu kanan berganti saat di-scroll.
-         Tambah/kurangi kartu cukup dengan menambah/menghapus <article class="svc-card">.
-         Ganti gambar dummy: isi <div class="svc-img"> dengan <img src="aset/service-1.webp" alt=""> -->
-    <div class="svc-sticky">
-      <div class="svc-text">
-        <h2 class="svc-title"><span class="svc-our">Our</span>Services</h2>
-        <p class="svc-desc">From concept to final cut, we craft AI-powered films, campaigns, and experiences that move people, built to shine across every screen and every touchpoint.</p>
-        <a class="cut svc-all" href="#services">All services
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
-        <ol class="svc-index" aria-label="Daftar layanan"></ol>
-      </div>
-
-      <div class="svc-stage">
-        <svg class="svc-squiggle" viewBox="0 0 300 400" aria-hidden="true"><path pathLength="1" d="M20 210 C 60 80, 130 80, 120 200 S 150 330, 200 230 S 250 60, 290 150"/></svg>
-        <div class="svc-cards">
-          <article class="svc-card" data-name="AI Film Production">
-            <div class="svc-img" style="--a:#7B3CFF;--b:#FF2FB9;--c:#12062A"><span>DUMMY 01</span></div>
-            <span class="svc-num">01</span><h3>AI Film<br>Production</h3><a href="#services" class="svc-go" aria-label="AI Film Production">→</a>
-          </article>
-          <article class="svc-card" data-name="Brand Campaigns">
-            <div class="svc-img" style="--a:#FF7AD9;--b:#5B2BFF;--c:#1B0A3A"><span>DUMMY 02</span></div>
-            <span class="svc-num">02</span><h3>Brand<br>Campaigns</h3><a href="#services" class="svc-go" aria-label="Brand Campaigns">→</a>
-          </article>
-          <article class="svc-card" data-name="Music Videos">
-            <div class="svc-img" style="--a:#3CC8FF;--b:#B13CFF;--c:#0A0418"><span>DUMMY 03</span></div>
-            <span class="svc-num">03</span><h3>Music<br>Videos</h3><a href="#services" class="svc-go" aria-label="Music Videos">→</a>
-          </article>
-          <article class="svc-card" data-name="Social Content">
-            <div class="svc-img" style="--a:#FF9C5B;--b:#FF2FB9;--c:#1B0A3A"><span>DUMMY 04</span></div>
-            <span class="svc-num">04</span><h3>Social<br>Content</h3><a href="#services" class="svc-go" aria-label="Social Content">→</a>
-          </article>
-          <article class="svc-card" data-name="Creative Events">
-            <div class="svc-img" style="--a:#9B6BFF;--b:#3CFFD2;--c:#12062A"><span>DUMMY 05</span></div>
-            <span class="svc-num">05</span><h3>Creative<br>Events</h3><a href="#services" class="svc-go" aria-label="Creative Events">→</a>
-          </article>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- AWARDS & MURI =====================================================
-       DATA MASIH DUMMY — ganti teks bertanda [ ... ], tahun 20XX, dan angka.
-       Logo/sertifikat MURI: isi <div class="face"> dengan <img src="aset/muri.webp" alt="Rekor MURI">
-       Setelah data asli masuk, hapus <span class="dummy-tag">. -->
-  <section class="awards" id="awards" aria-labelledby="aw-title">
     <div class="aw-in">
       <div class="aw-head rv">
         <div>
@@ -709,7 +672,7 @@ h1{margin:.4rem 0 0;font:900 clamp(2.2rem,6.2vw,5.4rem)/1 var(--display);letter-
   <!-- PORTFOLIO FLUX ====================================================
        Isi karya diatur di JavaScript bagian "PORTFOLIO — DATA" (cari: const WORK).
        Satu kategori = satu baris yang bisa digeser. -->
-  <section class="work" id="gallery" aria-labelledby="work-title">
+  <section class="work" id="portfolio" aria-labelledby="work-title">
     <div class="work-head">
       <div>
         <p class="aw-eyebrow">Portfolio <span class="dummy-tag">DATA DUMMY</span></p>
@@ -724,7 +687,7 @@ h1{margin:.4rem 0 0;font:900 clamp(2.2rem,6.2vw,5.4rem)/1 var(--display);letter-
   <!-- JAGOAN FLUX =======================================================
        Data diatur di JavaScript bagian "JAGOAN FLUX — DATA" (cari: const SQUAD).
        Foto kostum: simpan PNG transparan (potret badan penuh) di aset, lalu isi "img". -->
-  <section class="squad" id="about" aria-labelledby="squad-title">
+  <section class="squad" id="jagoan" aria-labelledby="squad-title">
     <div class="squad-in">
       <div class="squad-head">
         <div>
@@ -734,6 +697,50 @@ h1{margin:.4rem 0 0;font:900 clamp(2.2rem,6.2vw,5.4rem)/1 var(--display);letter-
         <p class="aw-lead">Lima jagoan di balik semesta FCU. Arahkan kursor (atau geser di HP) untuk kenalan dengan kekuatan super masing-masing.</p>
       </div>
       <div class="squad-row" id="squad-row"></div>
+    </div>
+  </section>
+
+  <!-- OUR SERVICES -->
+  <section class="services" id="services" aria-label="Our Services">
+
+    <!-- OUR SERVICES: teks kiri diam, kartu kanan berganti saat di-scroll.
+         Tambah/kurangi kartu cukup dengan menambah/menghapus <article class="svc-card">.
+         Ganti gambar dummy: isi <div class="svc-img"> dengan <img src="aset/service-1.webp" alt=""> -->
+    <div class="svc-sticky">
+      <div class="svc-text">
+        <h2 class="svc-title"><span class="svc-our">Our</span>Services</h2>
+        <p class="svc-desc">From concept to final cut, we craft AI-powered films, campaigns, and experiences that move people, built to shine across every screen and every touchpoint.</p>
+        <a class="cut svc-all" href="#services">All services
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <ol class="svc-index" aria-label="Daftar layanan"></ol>
+      </div>
+
+      <div class="svc-stage">
+        <svg class="svc-squiggle" viewBox="0 0 300 400" aria-hidden="true"><path pathLength="1" d="M20 210 C 60 80, 130 80, 120 200 S 150 330, 200 230 S 250 60, 290 150"/></svg>
+        <div class="svc-cards">
+          <article class="svc-card" data-name="AI Film Production">
+            <div class="svc-img" style="--a:#7B3CFF;--b:#FF2FB9;--c:#12062A"><span>DUMMY 01</span></div>
+            <span class="svc-num">01</span><h3>AI Film<br>Production</h3><a href="#services" class="svc-go" aria-label="AI Film Production">→</a>
+          </article>
+          <article class="svc-card" data-name="Brand Campaigns">
+            <div class="svc-img" style="--a:#FF7AD9;--b:#5B2BFF;--c:#1B0A3A"><span>DUMMY 02</span></div>
+            <span class="svc-num">02</span><h3>Brand<br>Campaigns</h3><a href="#services" class="svc-go" aria-label="Brand Campaigns">→</a>
+          </article>
+          <article class="svc-card" data-name="Music Videos">
+            <div class="svc-img" style="--a:#3CC8FF;--b:#B13CFF;--c:#0A0418"><span>DUMMY 03</span></div>
+            <span class="svc-num">03</span><h3>Music<br>Videos</h3><a href="#services" class="svc-go" aria-label="Music Videos">→</a>
+          </article>
+          <article class="svc-card" data-name="Social Content">
+            <div class="svc-img" style="--a:#FF9C5B;--b:#FF2FB9;--c:#1B0A3A"><span>DUMMY 04</span></div>
+            <span class="svc-num">04</span><h3>Social<br>Content</h3><a href="#services" class="svc-go" aria-label="Social Content">→</a>
+          </article>
+          <article class="svc-card" data-name="Creative Events">
+            <div class="svc-img" style="--a:#9B6BFF;--b:#3CFFD2;--c:#12062A"><span>DUMMY 05</span></div>
+            <span class="svc-num">05</span><h3>Creative<br>Events</h3><a href="#services" class="svc-go" aria-label="Creative Events">→</a>
+          </article>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1170,6 +1177,18 @@ function heroSilhouette(c,i){
     el.addEventListener('click',()=>{if(matchMedia('(hover: none)').matches){row.querySelectorAll('.hero-p').forEach(p=>p!==el&&p.classList.remove('open'));el.classList.toggle('open')}});
     row.appendChild(el);
   });
+})();
+
+/* menu aktif mengikuti section yang sedang dilihat */
+(function(){
+  const links=[...document.querySelectorAll('.links a[href^="#"]')];
+  const secs=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  function spy(){
+    const y=innerHeight*.35;let cur=secs[0];
+    secs.forEach(s=>{if(s.getBoundingClientRect().top<=y)cur=s});
+    links.forEach(a=>{if(a.getAttribute('href')==='#'+cur.id)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
+  }
+  addEventListener('scroll',spy,{passive:true});spy();
 })();
 
 /* menu mobile */
