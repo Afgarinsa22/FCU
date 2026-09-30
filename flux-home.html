@@ -610,6 +610,60 @@ h1{margin:.4rem 0 0;font:900 clamp(2.2rem,6.2vw,5.4rem)/1 var(--display);letter-
 .muri-photo .ph span{font:400 1.4rem/1.1 "Anton","Impact",sans-serif;letter-spacing:.06em;color:#EFE7F3}
 .muri-photo .ph small{display:block;margin-top:.4rem;font:500 .7rem/1.3 var(--body);letter-spacing:0;color:#B9ADC4}
 .muri-photo::after{content:"REKOR MURI";position:absolute;left:0;right:0;bottom:.9rem;text-align:center;font:400 1.3rem/1 "Permanent Marker",cursive;color:#FF2FB9}
+
+/* =========================================================
+   MURI STAGE — judul miring besar, piagam 3D bercahaya
+   ========================================================= */
+.muri-stage{position:relative;margin-top:clamp(4rem,8vw,6rem);padding:clamp(2.5rem,5vw,4rem) 1rem clamp(2rem,4vw,3rem);text-align:center;isolation:isolate;
+  --rx:4deg;--ry:-14deg}
+.ms-beam{position:absolute;z-index:-1;left:50%;top:6%;bottom:14%;width:min(34rem,70%);translate:-50% 0;
+  background:radial-gradient(50% 55% at 50% 50%,rgba(155,107,255,.55),rgba(255,47,185,.18) 55%,transparent 75%);filter:blur(10px)}
+.ms-beam::before,.ms-beam::after{content:"";position:absolute;top:0;bottom:0;width:22%;background:linear-gradient(180deg,transparent,rgba(155,107,255,.6),transparent);filter:blur(18px)}
+.ms-beam::before{left:6%}.ms-beam::after{right:6%}
+.ms-horizon{position:absolute;z-index:-1;left:-10%;right:-10%;bottom:12%;height:40%;border-radius:50% 50% 0 0/100% 100% 0 0;
+  background:radial-gradient(60% 100% at 50% 0%,rgba(255,122,217,.35),rgba(123,60,255,.18) 40%,transparent 70%);
+  box-shadow:0 -2px 30px rgba(255,122,217,.35) inset}
+.ms-kicker{position:relative;z-index:1;margin:0;display:inline-block;transform:skewX(-12deg) rotate(-3deg);
+  font:400 clamp(1.3rem,3vw,2.4rem)/1 var(--cond);letter-spacing:.02em;text-transform:uppercase;
+  background:linear-gradient(180deg,#C9B8FF,#7B3CFF);-webkit-background-clip:text;background-clip:text;color:transparent}
+.ms-title{position:relative;z-index:1;margin:.1rem 0 0;transform:skewX(-12deg) rotate(-3deg);
+  font:400 clamp(3.8rem,11vw,9.5rem)/.85 var(--cond);text-transform:uppercase;letter-spacing:.005em;
+  background:linear-gradient(180deg,#FFFFFF 0%,#F4E9FF 40%,#C9A8FF 70%,#7B3CFF 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(4px 4px 0 var(--hot)) drop-shadow(0 0 24px rgba(155,107,255,.55))}
+/* piagam 3D, menutupi bagian bawah judul seperti referensi */
+.ms-frame-wrap{position:relative;z-index:2;margin:clamp(-3.2rem,-5vw,-1.6rem) auto 0;width:clamp(15rem,34vw,26rem);perspective:1100px}
+.ms-frame{margin:0;padding:clamp(10px,1.4vw,16px);transform:rotateY(var(--ry)) rotateX(var(--rx)) rotateZ(-2deg);transform-style:preserve-3d;
+  background:linear-gradient(135deg,#2a1d12,#6b4a1f 30%,#1b120a 55%,#8a6428 80%,#2a1d12);
+  box-shadow:0 0 0 2px #0d0806,0 0 60px rgba(155,107,255,.75),0 0 120px rgba(255,47,185,.35),30px 40px 60px rgba(0,0,0,.6);
+  transition:transform .6s cubic-bezier(.2,.8,.2,1);animation:msfloat 6s ease-in-out infinite}
+@keyframes msfloat{50%{translate:0 -10px}}
+.ms-frame::before{content:"";position:absolute;inset:clamp(4px,.6vw,7px);border:2px solid rgba(255,216,120,.7);pointer-events:none}
+.ms-frame img,.ms-frame .ph{display:block;width:100%;aspect-ratio:3/4;object-fit:cover;background:#f3eee4}
+.ms-frame .ph{display:grid;place-items:center;text-align:center;background:repeating-linear-gradient(45deg,#1a1020 0 14px,#211529 14px 28px);border:2px dashed rgba(239,231,243,.35)}
+.ms-frame .ph span{font:400 1.3rem/1.1 var(--cond);letter-spacing:.06em;color:var(--paper)}
+.ms-frame .ph small{display:block;margin-top:.4rem;font:500 .7rem/1.3 var(--body);letter-spacing:0;color:#B9ADC4}
+/* kilap kaca bingkai */
+.ms-frame::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.18) 45%,transparent 55%)}
+/* baris angka views */
+.ms-bar{position:relative;z-index:3;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:.6rem clamp(1rem,2.5vw,2rem);
+  margin:clamp(-1.5rem,-2vw,-1rem) auto 0;padding:1rem 1.2rem;transform:skewX(-10deg)}
+.ms-side{font:400 clamp(1rem,1.6vw,1.35rem)/1 var(--cond);text-transform:uppercase;color:#C9B8FF;text-align:right}
+.ms-side:last-child{text-align:left}
+.ms-star{color:var(--paper);font-size:1.6rem;text-shadow:0 0 12px var(--hot)}
+.ms-views{font:400 clamp(2.2rem,5.6vw,4.6rem)/1 var(--cond);text-transform:uppercase;color:var(--paper);white-space:nowrap;
+  text-shadow:3px 3px 0 var(--hot),0 0 24px rgba(155,107,255,.6)}
+.ms-views b{font-weight:400;background:linear-gradient(180deg,#fff,#E3C9FF);-webkit-background-clip:text;background-clip:text}
+.ms-meta{position:relative;z-index:3;display:flex;flex-wrap:wrap;justify-content:center;gap:.6rem;margin-top:1rem}
+.ms-meta span{font:400 .85rem/1.2 var(--cond);letter-spacing:.08em;text-transform:uppercase;padding:.5rem .8rem;background:var(--paper);color:var(--ink);rotate:-1.5deg}
+.ms-meta span:nth-child(2){background:var(--hot);rotate:1deg;max-width:34rem}
+.ms-meta span:nth-child(3){background:var(--vio);color:#fff;rotate:-.5deg}
+@media (max-width:700px){
+  .ms-side,.ms-star{display:none}
+  .ms-title{white-space:nowrap;font-size:clamp(2.4rem,12.5vw,3.4rem)}
+  .ms-kicker{font-size:1.05rem}
+  .ms-frame-wrap{width:70vw;margin-top:-.9rem}
+}
+@media (prefers-reduced-motion:reduce){ .ms-frame{animation:none;transition:none} }
 /* awards sekarang section pertama setelah hero: memakai tepi sobek */
 .next.awards{display:block;min-height:0;text-align:left;overflow:visible;overflow-x:clip;
   background:
@@ -730,16 +784,30 @@ h1{margin:.4rem 0 0;font:900 clamp(2.2rem,6.2vw,5.4rem)/1 var(--display);letter-
         <div class="aw-stat rv" style="--d:.2s"><b data-count="150" data-suffix="+">0</b><span>Project kreatif</span></div>
       </div>
 
-      <div class="muri rv">
-        <!-- FOTO MURI: ganti isi figure dengan <img src="aset/muri.webp" alt="Penyerahan sertifikat Rekor MURI"> -->
-        <figure class="muri-photo">
-          <div class="ph"><span>FOTO MURI<small>ganti dengan aset/muri.webp</small></span></div>
-        </figure>
-        <div>
-          <span class="label">Museum Rekor-Dunia Indonesia</span>
-          <h3>[Judul rekor MURI]</h3>
-          <p>[Ceritakan singkat pencapaiannya: apa yang dibuat, berapa banyak orang yang terlibat, dan kenapa ini jadi rekor pertama di Indonesia.]</p>
-          <div class="chips"><span>Tahun 20XX</span><span>No. rekor XXXX</span><span>[Kategori]</span></div>
+      <!-- MURI STAGE ======================================================
+           Foto: ganti <div class="ph">…</div> dengan <img src="aset/muri.webp" alt="Piagam Rekor MURI Flux Creative Universe">
+           Angka views: ubah data-count di bawah. -->
+      <div class="muri-stage rv" id="muri-stage">
+        <div class="ms-beam" aria-hidden="true"></div>
+        <div class="ms-horizon" aria-hidden="true"></div>
+        <p class="ms-kicker">In 2025, we've just been awarded</p>
+        <h3 class="ms-title" aria-label="The MURI Awards"><span>The</span> <span>MURI</span> <span>Awards</span></h3>
+        <div class="ms-frame-wrap">
+          <figure class="ms-frame">
+            <div class="ph"><span>FOTO PIAGAM MURI<small>ganti dengan aset/muri.webp</small></span></div>
+          </figure>
+        </div>
+        <div class="ms-bar">
+          <span class="ms-side">Breaking<br>Records</span>
+          <span class="ms-star" aria-hidden="true">✦</span>
+          <span class="ms-views"><b data-count="2301520698" data-format="id" data-suffix="+">0</b> Views</span>
+          <span class="ms-star" aria-hidden="true">✦</span>
+          <span class="ms-side">Videos<br>Viral</span>
+        </div>
+        <div class="ms-meta">
+          <span>Museum Rekor-Dunia Indonesia</span>
+          <span>Agensi kreatif yang memproduksi konten digital dengan kecerdasan buatan terbanyak</span>
+          <span>Jakarta · 4 Desember 2023</span>
         </div>
       </div>
 
@@ -1133,10 +1201,11 @@ h1{margin:.4rem 0 0;font:900 clamp(2.2rem,6.2vw,5.4rem)/1 var(--display);letter-
 (function(){
   const els=document.querySelectorAll('.rv');
   const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fmt=(b,n)=>b.dataset.format==='id'?n.toLocaleString('id-ID'):String(n);
   function count(b){const to=+b.dataset.count,suf=b.dataset.suffix||'';
-    if(still){b.textContent=to+suf;return}
+    if(still){b.textContent=fmt(b,to)+suf;return}
     const t0=performance.now(),dur=1400;
-    (function step(t){const k=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-k,3);b.textContent=Math.round(to*e)+(k===1?suf:'');if(k<1)requestAnimationFrame(step)})(t0);}
+    (function step(t){const k=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-k,3);b.textContent=fmt(b,Math.round(to*e))+(k===1?suf:'');if(k<1)requestAnimationFrame(step)})(t0);}
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;
     e.target.classList.add('in');e.target.querySelectorAll('[data-count]').forEach(count);io.unobserve(e.target)}),{threshold:.2});
   els.forEach(el=>io.observe(el));
@@ -1316,6 +1385,14 @@ document.querySelectorAll('a[href="#home"]').forEach(a=>a.addEventListener('clic
   history.replaceState(null,'',location.pathname);
   document.getElementById('nav').classList.remove('open');
 }));
+
+/* piagam MURI miring mengikuti posisi mouse */
+(function(){
+  const st=document.getElementById('muri-stage'); if(!st||matchMedia('(prefers-reduced-motion: reduce)').matches||matchMedia('(hover: none)').matches) return;
+  st.addEventListener('pointermove',e=>{const r=st.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+    st.style.setProperty('--ry',(-14+x*16).toFixed(1)+'deg');st.style.setProperty('--rx',(4-y*10).toFixed(1)+'deg')});
+  st.addEventListener('pointerleave',()=>{st.style.removeProperty('--ry');st.style.removeProperty('--rx')});
+})();
 
 /* menu mobile */
 const nav=document.getElementById('nav'),mb=nav.querySelector('.menu-btn');
