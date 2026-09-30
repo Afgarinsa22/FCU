@@ -967,6 +967,21 @@ body.gal-open{overflow:hidden}
   .sqd-ghost{display:none}
   .sqd-nav{left:0;right:0;bottom:0;justify-content:center;padding:.8rem;background:linear-gradient(0deg,#0A0418 60%,transparent)}
 }
+
+/* panah di kiri & kanan karakter */
+.sqd-figwrap{grid-row:1;grid-column:1}
+.sqd-data{grid-row:1;grid-column:2}
+.sqd-arrows{grid-row:1;grid-column:1;z-index:2;align-self:stretch;position:relative;display:flex;align-items:center;justify-content:space-between;pointer-events:none;padding:0 .5rem}
+.sqd-arrows button{pointer-events:auto;width:3.4rem;height:3.4rem;border-radius:50%;cursor:pointer;color:#fff;font-size:1.1rem;
+  background:rgba(24,8,52,.65);border:1px solid color-mix(in srgb,var(--c) 70%,transparent);backdrop-filter:blur(8px);transition:background .2s,box-shadow .2s,transform .2s}
+.sqd-arrows button:hover{background:color-mix(in srgb,var(--c) 35%,transparent);box-shadow:0 0 18px var(--c);transform:scale(1.08)}
+.sqd-arrows span{position:absolute;left:50%;bottom:1.2rem;translate:-50% 0;font:700 .7rem/1 var(--display);letter-spacing:.16em;color:var(--ice);
+  padding:.4rem .7rem;border-radius:999px;background:rgba(10,4,24,.6)}
+@media (max-width:800px){
+  .sqd-data{grid-row:2;grid-column:1}
+  .sqd-arrows{height:46vh}
+  .sqd-arrows button{width:2.8rem;height:2.8rem}
+}
 @media (prefers-reduced-motion:reduce){ .sqd,.sqd-figwrap,.sqd-data{transition:none} }
 /* awards sekarang section pertama setelah hero: memakai tepi sobek */
 .next.awards{display:block;min-height:0;text-align:left;overflow:visible;overflow-x:clip;
@@ -1241,14 +1256,14 @@ body.gal-open{overflow:hidden}
     <div class="sqd-bg" aria-hidden="true"><div class="sqd-ghost l" id="sqd-gl"></div><div class="sqd-ghost r" id="sqd-gr"></div></div>
     <div class="sqd-in">
       <div class="sqd-figwrap" id="sqd-figwrap"><div class="sqd-fig" id="sqd-fig"></div></div>
+      <div class="sqd-arrows">
+        <button type="button" id="sqd-prev" aria-label="Jagoan sebelumnya">←</button>
+        <span id="sqd-count">01 / 05</span>
+        <button type="button" id="sqd-next" aria-label="Jagoan berikutnya">→</button>
+      </div>
       <div class="sqd-data" id="sqd-data"></div>
     </div>
     <button type="button" class="sqd-x" id="sqd-x" aria-label="Kembali ke semua jagoan">✕ <span>Semua jagoan</span></button>
-    <div class="sqd-nav">
-      <button type="button" id="sqd-prev" aria-label="Jagoan sebelumnya">←</button>
-      <span id="sqd-count">01 / 05</span>
-      <button type="button" id="sqd-next" aria-label="Jagoan berikutnya">→</button>
-    </div>
   </div>
 
   <!-- GALERI per kategori (pop-up) -->
