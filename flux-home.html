@@ -857,6 +857,50 @@ body.gal-open{overflow:hidden}
   .grunge .aw-card:nth-child(n){translate:0 0}
   .grunge .aw-card .tier{right:-10px}
 }
+
+/* =========================================================
+   JAGOAN FLUX — panggung putar 360°
+   ========================================================= */
+.sq-stage{position:relative;height:clamp(26rem,48vw,38rem);margin-top:1rem;perspective:1600px;perspective-origin:50% 30%;touch-action:pan-y;cursor:grab;outline:none;user-select:none}
+.sq-stage.drag{cursor:grabbing}
+.sq-stage:focus-visible{outline:2px solid var(--pink);outline-offset:6px;border-radius:1rem}
+.sq-floor{position:absolute;left:50%;bottom:4%;width:min(100%,70rem);height:30%;translate:-50% 0;border-radius:50%;
+  background:radial-gradient(50% 50% at 50% 50%,rgba(155,107,255,.35),rgba(255,47,185,.12) 45%,transparent 70%);
+  box-shadow:inset 0 0 0 1px rgba(255,122,217,.25),0 0 60px rgba(155,107,255,.25)}
+.sq-floor::after{content:"";position:absolute;inset:18%;border-radius:50%;border:1px dashed rgba(255,122,217,.3)}
+.sq-ring{position:absolute;inset:0;transform-style:preserve-3d}
+.sq-hero{--c:#9B6BFF;position:absolute;left:50%;bottom:10%;width:clamp(10rem,17vw,15rem);transform-origin:50% 100%;will-change:transform;cursor:pointer}
+.sq-fig{position:relative;width:100%;aspect-ratio:1/2}
+.sq-fig svg,.sq-fig img{width:100%;height:100%;display:block;object-fit:contain;object-position:bottom;pointer-events:none;filter:drop-shadow(0 0 18px color-mix(in srgb,var(--c) 55%,transparent))}
+.sq-glow{position:absolute;left:50%;bottom:-6%;width:120%;height:14%;translate:-50% 0;border-radius:50%;background:radial-gradient(closest-side,var(--c),transparent);opacity:.55;filter:blur(4px)}
+.sq-name{position:absolute;left:50%;top:-2.4rem;translate:-50% 0;white-space:nowrap;font:900 clamp(.8rem,1.2vw,1rem)/1 var(--display);letter-spacing:.14em;text-transform:uppercase;color:#fff;
+  text-shadow:0 0 12px var(--c);opacity:0;transition:opacity .4s}
+.sq-hero.on .sq-name{opacity:1}
+.sq-hero.on .sq-glow{opacity:1;filter:blur(2px)}
+.sq-dm{position:absolute;right:0;top:0;font:700 .5rem/1 var(--display);letter-spacing:.18em;color:rgba(255,255,255,.6);border:1px dashed rgba(255,255,255,.4);padding:.25rem .4rem;border-radius:.25rem;font-style:normal}
+.sq-nav{position:absolute;z-index:200;top:45%;width:3.2rem;height:3.2rem;border-radius:50%;cursor:pointer;color:#fff;font-size:1.1rem;
+  background:rgba(24,8,52,.7);border:1px solid rgba(255,122,217,.4);backdrop-filter:blur(8px);transition:background .2s,box-shadow .2s}
+.sq-nav:hover{background:rgba(255,47,185,.25);box-shadow:0 0 18px rgba(255,47,185,.5)}
+.sq-nav.sq-l{left:0}.sq-nav.sq-r{right:0}
+.sq-info{--c:#9B6BFF;max-width:38rem;margin:1.5rem auto 0;text-align:center}
+.sq-info .n{font:700 .7rem/1 var(--display);letter-spacing:.2em;color:var(--c)}
+.sq-info h3{margin:.5rem 0 .4rem;font:900 clamp(2rem,4.4vw,3.4rem)/1 var(--display);text-transform:uppercase;color:#fff;text-shadow:0 0 22px var(--c)}
+.sq-info .real{margin:0;color:var(--ice)}
+.sq-info .real b{color:var(--c)}
+.sq-info .q{margin:.7rem 0 0;font-style:italic;color:var(--muted)}
+.sq-info .stats{display:grid;gap:.5rem;max-width:26rem;margin:1.2rem auto 0;text-align:left}
+.sq-info .stats div{display:grid;grid-template-columns:7rem 1fr;align-items:center;gap:.8rem;font:700 .58rem/1 var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.sq-info .stats i{display:block;height:6px;border-radius:6px;background:rgba(255,255,255,.1);overflow:hidden}
+.sq-info .stats i b{display:block;height:100%;width:var(--v);border-radius:inherit;background:linear-gradient(90deg,var(--c),#fff);box-shadow:0 0 8px var(--c);animation:bar .9s cubic-bezier(.2,.8,.2,1)}
+@keyframes bar{from{width:0}}
+.sq-dots{display:flex;justify-content:center;gap:.5rem;margin-top:1.4rem}
+.sq-dots button{width:.6rem;height:.6rem;padding:0;border-radius:1rem;border:0;cursor:pointer;background:rgba(233,220,255,.25);transition:width .3s,background .3s}
+.sq-dots button[aria-current="true"]{width:1.8rem;background:var(--pink);box-shadow:0 0 10px var(--magenta)}
+@media (max-width:700px){
+  .sq-stage{height:24rem}
+  .sq-hero{width:9.5rem}
+  .sq-nav{top:auto;bottom:0;width:2.6rem;height:2.6rem}
+}
 /* awards sekarang section pertama setelah hero: memakai tepi sobek */
 .next.awards{display:block;min-height:0;text-align:left;overflow:visible;overflow-x:clip;
   background:
@@ -1063,9 +1107,17 @@ body.gal-open{overflow:hidden}
           <p class="aw-eyebrow">Meet the squad <span class="dummy-tag">DATA DUMMY</span></p>
           <h2 class="aw-title" id="squad-title"><span class="our">Jagoan</span><em>Flux</em></h2>
         </div>
-        <p class="aw-lead">Lima jagoan di balik semesta FCU. Arahkan kursor (atau geser di HP) untuk kenalan dengan kekuatan super masing-masing.</p>
+        <p class="aw-lead">Lima jagoan di balik semesta FCU. Geser panggungnya untuk memutar dan kenalan dengan kekuatan super masing-masing.</p>
       </div>
-      <div class="squad-row" id="squad-row"></div>
+      <!-- panggung putar 360°: karakter berdiri melingkar -->
+      <div class="sq-stage" id="sq-stage" tabindex="0" aria-roledescription="carousel" aria-label="Jagoan Flux, geser atau pakai panah untuk memutar">
+        <div class="sq-floor" aria-hidden="true"></div>
+        <div class="sq-ring" id="sq-ring"></div>
+        <button type="button" class="sq-nav sq-l" id="sq-prev" aria-label="Jagoan sebelumnya">←</button>
+        <button type="button" class="sq-nav sq-r" id="sq-next" aria-label="Jagoan berikutnya">→</button>
+      </div>
+      <div class="sq-info" id="sq-info" aria-live="polite"></div>
+      <div class="sq-dots" id="sq-dots"></div>
     </div>
   </section>
 
@@ -1574,25 +1626,64 @@ function heroSilhouette(c,i){
 }
 
 (function(){
-  const row=document.getElementById('squad-row'); if(!row) return;
+  const stage=document.getElementById('sq-stage'), ring=document.getElementById('sq-ring'); if(!stage) return;
+  const info=document.getElementById('sq-info'), dots=document.getElementById('sq-dots');
   const esc=t=>String(t||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-  SQUAD.forEach((h,i)=>{
-    const el=document.createElement('article');
-    el.className='hero-p';el.tabIndex=0;el.style.setProperty('--c',h.c);
-    el.setAttribute('aria-label',`${h.alias} — ${h.role}`);
-    el.innerHTML=`<span class="hero-num">0${i+1}</span>${h.img?'':'<i class="hero-dm">DUMMY</i>'}
-      <div class="hero-fig">${h.img?`<img src="${esc(h.img)}" alt="${esc(h.alias)}" loading="lazy">`:heroSilhouette(h.c,i)}</div>
-      <span class="hero-v" aria-hidden="true">${esc(h.alias)}</span>
-      <div class="hero-info">
-        <p class="alias">${esc(h.alias)}</p>
-        <p class="real">${esc(h.name)}</p><span class="role">${esc(h.role)}</span>
-        <p class="quote">${esc(h.quote)}</p>
-        <div class="stats">${h.stats.map(([k,v])=>`<div>${esc(k)}<i><b style="--v:${v}%"></b></i></div>`).join('')}</div>
-      </div>`;
-    // di layar sentuh: tap untuk membuka
-    el.addEventListener('click',()=>{if(matchMedia('(hover: none)').matches){row.querySelectorAll('.hero-p').forEach(p=>p!==el&&p.classList.remove('open'));el.classList.toggle('open')}});
-    row.appendChild(el);
+  const n=SQUAD.length, step=360/n, still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const els=SQUAD.map((h,i)=>{
+    const el=document.createElement('div');el.className='sq-hero';el.style.setProperty('--c',h.c);
+    el.innerHTML=`<div class="sq-fig">${h.img?`<img src="${esc(h.img)}" alt="${esc(h.alias)}" draggable="false">`:heroSilhouette(h.c,i)}</div>
+      <span class="sq-glow" aria-hidden="true"></span><span class="sq-name">${esc(h.alias)}</span>${h.img?'':'<i class="sq-dm">DUMMY</i>'}`;
+    el.addEventListener('click',()=>{if(!moved)goTo(i)});
+    ring.appendChild(el);
+    const d=document.createElement('button');d.type='button';d.setAttribute('aria-label',h.alias);d.onclick=()=>goTo(i);dots.appendChild(d);
+    return el;
   });
+  let rot=0,target=0,raf=0,active=-1;
+  function layout(){
+    const W=stage.clientWidth, R=Math.min(W*.42,560), Rz=R*.55;
+    els.forEach((el,i)=>{
+      const a=(i*step+rot)*Math.PI/180, x=Math.sin(a)*R, z=Math.cos(a)*Rz, f=(Math.cos(a)+1)/2; // f: 1 depan, 0 belakang
+      el.style.transform=`translate(-50%,0) translate3d(${x.toFixed(1)}px,${(-f*10).toFixed(1)}px,${z.toFixed(1)}px) scale(${(.55+.45*f).toFixed(3)})`;
+      el.style.zIndex=Math.round(f*100);
+      el.style.opacity=(.25+.75*f).toFixed(2);
+      el.style.filter=`brightness(${(.35+.65*f).toFixed(2)}) saturate(${(.4+.6*f).toFixed(2)})`;
+    });
+  }
+  function current(){return ((Math.round(-rot/step)%n)+n)%n}
+  function showInfo(){
+    const i=current(); if(i===active) return; active=i;
+    const h=SQUAD[i];
+    els.forEach((el,k)=>el.classList.toggle('on',k===i));
+    [...dots.children].forEach((d,k)=>d.setAttribute('aria-current',k===i));
+    info.style.setProperty('--c',h.c);
+    info.innerHTML=`<span class="n">0${i+1} / 0${n}</span><h3>${esc(h.alias)}</h3>
+      <p class="real">${esc(h.name)} · <b>${esc(h.role)}</b></p><p class="q">${esc(h.quote)}</p>
+      <div class="stats">${h.stats.map(([k,v])=>`<div>${esc(k)}<i><b style="--v:${v}%"></b></i></div>`).join('')}</div>`;
+  }
+  function tick(){
+    rot+=(target-rot)*(still?1:.12);
+    if(Math.abs(target-rot)<.05) rot=target;
+    layout();showInfo();
+    raf=rot!==target?requestAnimationFrame(tick):0;
+  }
+  function animate(){if(!raf)raf=requestAnimationFrame(tick)}
+  function goTo(i){ // ambil jalur terpendek
+    let d=(-i*step)-target; d=((d%360)+540)%360-180; target+=d; animate();
+  }
+  function snap(){target=Math.round(target/step)*step;animate()}
+  document.getElementById('sq-prev').onclick=()=>{target+=step;animate()};
+  document.getElementById('sq-next').onclick=()=>{target-=step;animate()};
+  stage.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'){target+=step;animate();e.preventDefault()}if(e.key==='ArrowRight'){target-=step;animate();e.preventDefault()}});
+  // seret untuk memutar 360°
+  let down=false,x0=0,t0=0,moved=false,lastX=0,vel=0;
+  stage.addEventListener('pointerdown',e=>{if(e.target.closest('.sq-nav'))return;down=true;moved=false;x0=lastX=e.clientX;t0=target;vel=0;stage.setPointerCapture(e.pointerId);stage.classList.add('drag')});
+  stage.addEventListener('pointermove',e=>{if(!down)return;const dx=e.clientX-x0;if(Math.abs(dx)>5)moved=true;
+    vel=e.clientX-lastX;lastX=e.clientX;target=t0+dx*.35;rot=target;layout();showInfo()});
+  const end=()=>{if(!down)return;down=false;stage.classList.remove('drag');target+=vel*4;snap();setTimeout(()=>moved=false,0)};
+  stage.addEventListener('pointerup',end);stage.addEventListener('pointercancel',end);
+  addEventListener('resize',layout);
+  layout();showInfo();
 })();
 
 /* menu aktif mengikuti section yang sedang dilihat */
