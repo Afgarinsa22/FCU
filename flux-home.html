@@ -822,6 +822,17 @@ body.gal-open{overflow:hidden}
 /* selotip pindah ke pojok supaya tidak menabrak label */
 .work.grunge .pf-tape{left:auto;right:-18px;top:14px;translate:0 0;rotate:40deg;width:5rem}
 .work.grunge .pf-frame:nth-child(even) .pf-tape{left:-18px;right:auto;rotate:-40deg}
+
+/* garis neon di latar portfolio */
+.pf-neon{position:absolute;z-index:0;left:0;right:0;top:clamp(14rem,20vw,17rem);width:100%;height:clamp(26rem,44vw,38rem);pointer-events:none;overflow:visible}
+.pf-neon path{fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 2.4s cubic-bezier(.5,0,.2,1)}
+.pf-neon .n1{stroke:#FF2FB9;stroke-width:14;filter:drop-shadow(0 0 8px rgba(255,47,185,.95)) drop-shadow(0 0 22px rgba(255,47,185,.6))}
+.pf-neon .n2{stroke:#9B6BFF;stroke-width:9;opacity:.9;filter:drop-shadow(0 0 8px rgba(155,107,255,.95)) drop-shadow(0 0 20px rgba(155,107,255,.55));transition-delay:.5s}
+.pf-neon .n3{stroke:#FF7AD9;stroke-width:8;opacity:.85;filter:drop-shadow(0 0 8px rgba(255,122,217,.9));transition-delay:.9s}
+.pf-neon.in path{stroke-dashoffset:0}
+.pf-neon path{vector-effect:non-scaling-stroke}
+@media (max-width:800px){ .pf-neon{top:22rem;height:24rem} .pf-neon .n1{stroke-width:9} }
+@media (prefers-reduced-motion:reduce){ .pf-neon path{stroke-dashoffset:0;transition:none} }
 @media (max-width:800px){
   .work.grunge .pf-fan{height:auto;padding-top:4rem}
   .work.grunge .pf-frame,.work.grunge .pf-frame:hover{transform:rotate(var(--mz,0deg))}
@@ -1035,6 +1046,12 @@ body.gal-open{overflow:hidden}
       </div>
       <p class="work-lead">Empat panggung karya kami. Pilih satu frame untuk membuka galerinya, lalu klik karya untuk memutarnya.</p>
     </div>
+    <!-- garis neon meliuk di belakang frame -->
+    <svg class="pf-neon" viewBox="0 0 1440 620" preserveAspectRatio="none" aria-hidden="true">
+      <path class="n1" pathLength="1" d="M-40 420 C 120 260, 230 250, 260 360 S 330 560, 430 470 S 560 120, 690 210 S 800 520, 930 430 S 1080 140, 1200 250 S 1330 470, 1480 300"/>
+      <path class="n2" pathLength="1" d="M-40 170 C 90 90, 190 140, 210 230 S 290 330, 380 250 S 470 60, 560 120"/>
+      <path class="n3" pathLength="1" d="M1000 560 C 1080 470, 1160 470, 1190 540 S 1300 640, 1370 520 S 1440 420, 1500 470"/>
+    </svg>
     <!-- 4 frame kategori, disusun seperti kipas kartu -->
     <div class="pf-fan" id="pf-fan" role="list" aria-label="Kategori portfolio"></div>
     <p class="pf-hint">Arahkan kursor ke frame · klik untuk membuka galeri</p>
@@ -1611,6 +1628,10 @@ document.querySelectorAll('a[href="#home"]').forEach(a=>a.addEventListener('clic
     st.style.setProperty('--ry',(-14+x*16).toFixed(1)+'deg');st.style.setProperty('--rx',(4-y*10).toFixed(1)+'deg')});
   st.addEventListener('pointerleave',()=>{st.style.removeProperty('--ry');st.style.removeProperty('--rx')});
 })();
+
+/* garis neon portfolio tergambar saat terlihat */
+(function(){const n=document.querySelector('.pf-neon');if(!n)return;
+  new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){n.classList.add('in');o.disconnect()}}),{threshold:.2}).observe(n)})();
 
 /* menu mobile */
 const nav=document.getElementById('nav'),mb=nav.querySelector('.menu-btn');
