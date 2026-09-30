@@ -6,7 +6,7 @@
 <title>Flux Creative Universe</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Exo+2:wght@400;500;600&family=Yellowtail&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Exo+2:wght@400;500;600&family=Yellowtail&family=Anton&family=Permanent+Marker&display=swap" rel="stylesheet">
 <style>
 /* =========================================================
    TOKEN — warna & font seluruh halaman
@@ -503,6 +503,100 @@ h1{margin:.4rem 0 0;font:900 clamp(2.2rem,6.2vw,5.4rem)/1 var(--display);letter-
   .hero-p,.hero-fig,.hero-info,.stats i b{transition:none}
 }
 
+/* =========================================================
+   GRUNGE — section Awards (hitam + pink/ungu FCU)
+   Semua aturan di-scope ke .grunge supaya section lain tidak ikut berubah.
+   ========================================================= */
+.next.awards.grunge,.grunge{--ink:#0B0710;--paper:#EFE7F3;--hot:#FF2FB9;--vio:#9B6BFF;--cond:"Anton","Impact","Arial Narrow",sans-serif;--marker:"Permanent Marker","Comic Sans MS",cursive;
+  background:var(--ink);padding-bottom:clamp(7rem,12vw,10rem);overflow-x:clip}
+/* noise + goresan */
+.grunge::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.35;mix-blend-mode:screen;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .55 -.18'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.grunge::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.18;
+  background:
+    linear-gradient(97deg,transparent 48%,rgba(255,255,255,.5) 48.1%,transparent 48.3%) 0 0/420px 300px,
+    linear-gradient(84deg,transparent 30%,rgba(255,255,255,.35) 30.05%,transparent 30.2%) 60px 40px/560px 380px,
+    radial-gradient(circle,rgba(255,255,255,.6) 1px,transparent 1.5px) 0 0/37px 53px}
+.grunge .aw-in{position:relative;z-index:1}
+/* tepi sobek atas (dari hero): kertas putih + isi hitam */
+.grunge .tear svg{overflow:hidden}
+.tear .grn{fill:none}
+.grunge .tear .grn{fill:#fff;filter:url(#grnoise);opacity:.35;mix-blend-mode:screen}
+.grunge .tear .paper{fill:var(--paper)}
+.grunge .tear .fill{fill:var(--ink)}
+.grunge .tear .glow{opacity:.25}
+.grunge .tear .speck{stroke:#fff;opacity:.5}
+/* huruf raksasa pudar di latar */
+.gr-bgtext{position:absolute;z-index:0;left:50%;top:clamp(6rem,10vw,9rem);translate:-50% 0;white-space:nowrap;pointer-events:none;
+  font:400 clamp(9rem,26vw,24rem)/.8 var(--cond);letter-spacing:.02em;color:transparent;-webkit-text-stroke:2px rgba(255,255,255,.07);rotate:-4deg}
+/* judul */
+.grunge .aw-eyebrow{color:var(--paper);font-family:var(--cond);font-weight:400;font-size:.95rem;letter-spacing:.14em}
+.grunge .aw-title{font:400 clamp(3.4rem,8.5vw,7.5rem)/.86 var(--cond);letter-spacing:.005em}
+.grunge .aw-title .our{display:inline-block;margin:0 0 .45rem;padding:.15em .45em .2em;rotate:-3deg;
+  font:400 clamp(1.4rem,2.6vw,2.2rem)/1 var(--marker);color:var(--ink);background:var(--hot);text-shadow:none;
+  box-shadow:4px 4px 0 var(--vio);clip-path:polygon(1% 6%,99% 0,100% 90%,2% 100%)}
+.grunge .aw-title em{display:block;background:none;filter:none;color:var(--paper);-webkit-text-fill-color:currentColor;
+  text-shadow:3px 3px 0 var(--hot),6px 6px 0 rgba(155,107,255,.55)}
+.grunge .aw-lead{color:#CFC4D8;font-size:1rem;border-left:4px solid var(--hot);padding-left:1rem}
+.grunge .dummy-tag{font-family:var(--body)}
+
+/* bingkai "polaroid" dengan baut di pojok */
+.grunge .aw-stat,.grunge .aw-card{position:relative;border-radius:.2rem;background:var(--ink);backdrop-filter:none;
+  border:10px solid var(--paper);box-shadow:0 0 0 1px rgba(0,0,0,.6),8px 10px 0 rgba(0,0,0,.55);
+  transition:rotate .35s cubic-bezier(.2,.8,.2,1),translate .35s,box-shadow .35s}
+.grunge .aw-stat::before,.grunge .aw-card::before{content:"";position:absolute;inset:-10px;pointer-events:none;
+  --sc:radial-gradient(circle,#3a3240 0 2px,#9a92a2 2.4px 3.2px,transparent 3.6px);
+  background:var(--sc) 1px 1px/8px 8px no-repeat,var(--sc) right 1px top 1px/8px 8px no-repeat,
+             var(--sc) 1px bottom 1px/8px 8px no-repeat,var(--sc) right 1px bottom 1px/8px 8px no-repeat}
+.grunge .aw-stats{gap:1.4rem}
+.grunge .aw-stat:nth-child(1){rotate:-1.5deg}.grunge .aw-stat:nth-child(2){rotate:1deg;translate:0 8px}.grunge .aw-stat:nth-child(3){rotate:-.6deg}
+.grunge .aw-stat b{font:400 clamp(2.6rem,5vw,4rem)/1 var(--cond);color:var(--paper);text-shadow:3px 3px 0 var(--hot)}
+.grunge .aw-stat span{font:400 .95rem/1.2 var(--cond);letter-spacing:.1em;color:var(--hot)}
+
+/* panel MURI: kertas hitam dengan selotip */
+.grunge .muri{border-radius:.3rem;background:#120A18;border:2px solid rgba(239,231,243,.8);box-shadow:10px 12px 0 var(--hot);rotate:-.4deg}
+.grunge .muri::after{display:none}
+.grunge .muri::before{content:"";position:absolute;z-index:3;top:-16px;left:8%;width:9rem;height:2rem;rotate:-6deg;
+  background:rgba(255,47,185,.75);box-shadow:calc(min(76rem,100vw) * .62) 10px 0 rgba(155,107,255,.75);
+  clip-path:polygon(0 12%,4% 0,8% 14%,92% 4%,96% 16%,100% 6%,100% 88%,96% 100%,90% 86%,6% 96%,2% 84%,0 100%)}
+.grunge .muri .label{color:var(--hot);font:400 1rem/1 var(--cond);letter-spacing:.14em}
+.grunge .muri h3{font:400 clamp(2rem,4vw,3.4rem)/.95 var(--cond);color:var(--paper);letter-spacing:.01em}
+.grunge .muri p{color:#CFC4D8}
+.grunge .muri .chips span{border-radius:0;border:0;background:var(--paper);color:var(--ink);font:400 .9rem/1 var(--cond);letter-spacing:.08em;padding:.5rem .8rem;rotate:-2deg}
+.grunge .muri .chips span:nth-child(2){background:var(--hot);rotate:1.5deg}
+.grunge .muri .chips span:nth-child(3){background:var(--vio);color:#fff;rotate:-1deg}
+.grunge .medal .face{box-shadow:inset 0 0 30px rgba(0,0,0,.7),inset 0 0 0 3px var(--paper)}
+.grunge .medal .face strong{font-family:var(--cond);font-weight:400;letter-spacing:.04em;background:none;-webkit-background-clip:initial;background-clip:initial;color:var(--paper);text-shadow:3px 3px 0 var(--hot)}
+.grunge .medal .face small,.grunge .medal .face i{color:var(--hot)}
+
+/* kartu award: foto miring + label harga */
+.grunge .aw-grid{gap:2rem 1.6rem}
+.grunge .aw-card{min-height:15rem;padding:1.4rem 1.3rem 1.3rem}
+.grunge .aw-card:nth-child(3n+1){rotate:-2deg}
+.grunge .aw-card:nth-child(3n+2){rotate:1.5deg;translate:0 14px}
+.grunge .aw-card:nth-child(3n){rotate:-.8deg}
+.grunge .aw-card:hover{rotate:0deg;translate:0 -6px;border-color:var(--paper);box-shadow:0 0 0 1px rgba(0,0,0,.6),12px 14px 0 var(--hot)}
+.grunge .aw-card .yr{border-radius:0;background:transparent;border:2px solid var(--paper);color:var(--paper);font:400 1rem/1 var(--cond);letter-spacing:.1em;padding:.35rem .55rem}
+.grunge .aw-card svg{color:var(--hot);filter:none;width:2.4rem;height:2.4rem}
+.grunge .aw-card .tier{position:absolute;right:-18px;bottom:26%;z-index:2;rotate:-6deg;padding:.45rem .8rem;background:var(--hot);color:var(--ink);
+  font:400 1rem/1 var(--cond);letter-spacing:.08em;box-shadow:3px 3px 0 var(--ink)}
+.grunge .aw-card:nth-child(even) .tier{background:var(--vio);color:#fff}
+.grunge .aw-card h4{font:400 clamp(1.6rem,2.2vw,2.1rem)/1 var(--cond);letter-spacing:.01em;text-transform:uppercase;color:var(--paper)}
+.grunge .aw-card p{color:#B9ADC4;font-size:.85rem}
+
+/* tepi sobek bawah → section berikutnya */
+.gr-edge{position:absolute;z-index:2;left:0;right:0;bottom:-1px;width:100%;height:clamp(40px,6vw,80px);pointer-events:none}
+.gr-edge .p{fill:var(--paper)}
+.gr-edge .f{fill:var(--void)}
+
+@media (max-width:900px){
+  .grunge .aw-card .tier{right:-10px}
+  .grunge .muri::before{box-shadow:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .grunge .aw-stat,.grunge .aw-card{transition:none}
+}
+
 /* awards sekarang section pertama setelah hero: memakai tepi sobek */
 .next.awards{display:block;min-height:0;text-align:left;overflow:visible;overflow-x:clip;
   background:
@@ -583,7 +677,7 @@ h1{margin:.4rem 0 0;font:900 clamp(2.2rem,6.2vw,5.4rem)/1 var(--display);letter-
        DATA MASIH DUMMY — ganti teks bertanda [ ... ], tahun 20XX, dan angka.
        Logo/sertifikat MURI: isi <div class="face"> dengan <img src="aset/muri.webp" alt="Rekor MURI">
        Setelah data asli masuk, hapus <span class="dummy-tag">. -->
-  <section class="next awards" id="awards" aria-labelledby="aw-title">
+  <section class="next awards grunge" id="awards" aria-labelledby="aw-title">
     <div class="tear" aria-hidden="true">
       <svg viewBox="0 0 1440 140" preserveAspectRatio="none">
         <defs>
@@ -596,11 +690,18 @@ h1{margin:.4rem 0 0;font:900 clamp(2.2rem,6.2vw,5.4rem)/1 var(--display);letter-
             <feTurbulence type="fractalNoise" baseFrequency=".6 .2" numOctaves="2" seed="21"/>
             <feDisplacementMap in="SourceGraphic" scale="5" xChannelSelector="R" yChannelSelector="G"/>
           </filter>
+          <!-- noise grunge untuk isi sobekan -->
+          <filter id="grnoise" x="0" y="0" width="100%" height="100%">
+            <feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="3" stitchTiles="stitch"/>
+            <feColorMatrix values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .55 -.18"/>
+            <feComposite in2="SourceGraphic" operator="in"/>
+          </filter>
         </defs>
         <!-- glow neon, lapisan kertas terang (tepi sobek), lalu isi ungu -->
-        <path class="glow"/><path class="paper"/><path class="speck"/><path class="fill"/>
+        <path class="glow"/><path class="paper"/><path class="speck"/><path class="fill"/><path class="grn"/>
       </svg>
     </div>
+    <div class="gr-bgtext" aria-hidden="true">AWARDS</div>
     <div class="aw-in">
       <div class="aw-head rv">
         <div>
@@ -669,6 +770,7 @@ h1{margin:.4rem 0 0;font:900 clamp(2.2rem,6.2vw,5.4rem)/1 var(--display);letter-
         </article>
       </div>
     </div>
+    <svg class="gr-edge" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true"><path class="p" d="M0,28.7 L0,28.7 L15,30.2 L30,33.6 L42,18.5 L51,43.5 L67,21.0 L76,21.3 L90,28.3 L107,30.0 L119,43.9 L137,24.8 L146,37.5 L160,42.8 L171,41.5 L184,18.0 L196,18.4 L215,19.3 L223,38.3 L238,21.3 L255,19.3 L266,43.2 L287,21.9 L304,18.8 L315,37.6 L324,18.5 L341,26.4 L356,32.1 L366,41.4 L376,36.7 L398,40.7 L407,17.1 L425,23.2 L437,20.9 L448,31.7 L460,41.7 L472,22.0 L485,29.3 L506,43.5 L522,10.3 L543,35.6 L560,29.5 L582,18.1 L602,36.6 L623,25.9 L643,27.7 L659,33.5 L676,18.2 L696,36.4 L712,28.3 L731,16.8 L742,35.6 L763,19.2 L780,21.7 L797,28.4 L815,21.6 L836,40.6 L848,19.8 L868,35.9 L878,28.6 L892,33.5 L912,43.5 L920,44.6 L936,24.7 L946,35.3 L957,22.5 L972,33.6 L993,35.2 L1004,16.3 L1014,23.6 L1029,33.2 L1049,50.0 L1067,19.6 L1087,26.6 L1107,42.4 L1117,36.2 L1135,22.0 L1157,31.0 L1178,40.0 L1192,31.4 L1200,44.7 L1211,25.4 L1221,30.5 L1239,42.5 L1248,22.2 L1266,33.9 L1282,24.7 L1302,21.8 L1318,32.0 L1333,42.3 L1348,27.2 L1363,36.1 L1377,42.8 L1391,19.6 L1412,29.3 L1429,47.5 L1437,21.4 L1440,30.0 L1440,90 L0,90 Z"/><path class="f" d="M0,37.9 L0,37.9 L15,41.8 L30,40.6 L42,31.1 L51,50.6 L67,31.6 L76,29.6 L90,36.1 L107,40.8 L119,53.9 L137,34.2 L146,47.2 L160,53.6 L171,48.9 L184,25.9 L196,30.1 L215,31.0 L223,49.1 L238,35.0 L255,30.8 L266,56.9 L287,30.0 L304,31.5 L315,50.9 L324,32.6 L341,35.3 L356,40.9 L366,55.7 L376,44.7 L398,55.7 L407,31.1 L425,30.4 L437,29.1 L448,44.2 L460,50.0 L472,28.9 L485,42.8 L506,53.2 L522,23.4 L543,42.8 L560,39.1 L582,30.3 L602,42.8 L623,33.7 L643,39.8 L659,47.7 L676,33.0 L696,43.4 L712,38.9 L731,29.7 L742,46.1 L763,31.4 L780,29.4 L797,35.0 L815,28.5 L836,47.0 L848,30.8 L868,46.5 L878,39.7 L892,40.8 L912,51.2 L920,52.4 L936,38.2 L946,50.2 L957,36.9 L972,40.5 L993,41.7 L1004,30.9 L1014,33.8 L1029,46.1 L1049,59.0 L1067,29.8 L1087,37.2 L1107,52.3 L1117,47.6 L1135,28.1 L1157,43.3 L1178,53.6 L1192,39.0 L1200,54.7 L1211,38.0 L1221,40.1 L1239,50.2 L1248,29.7 L1266,44.5 L1282,30.9 L1302,35.9 L1318,45.3 L1333,54.7 L1348,41.0 L1363,47.8 L1377,52.4 L1391,31.0 L1412,39.9 L1429,62.3 L1437,34.7 L1440,38.3 L1440,90 L0,90 Z"/></svg>
   </section>
   <!-- PORTFOLIO FLUX ====================================================
        Isi karya diatur di JavaScript bagian "PORTFOLIO — DATA" (cari: const WORK).
@@ -853,7 +955,7 @@ h1{margin:.4rem 0 0;font:900 clamp(2.2rem,6.2vw,5.4rem)/1 var(--display);letter-
 (function(){
   const tear=document.querySelector('.tear'); if(!tear) return;
   const sec=tear.parentElement;
-  const [glow,paper,speck,fill]=tear.querySelectorAll('path');
+  const [glow,paper,speck,fill]=tear.querySelectorAll('path'), grn=tear.querySelector('.grn');
   const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // value-noise 1D yang halus (deterministik)
@@ -886,6 +988,7 @@ h1{margin:.4rem 0 0;font:900 clamp(2.2rem,6.2vw,5.4rem)/1 var(--display);letter-
     glow.setAttribute('d',dt); speck.setAttribute('d',dt);
     paper.setAttribute('d',dt+'L1440,170L0,170Z');
     fill.setAttribute('d',db+'L1440,240L0,240Z');
+    if(grn) grn.setAttribute('d',db+'L1440,240L0,240Z');
   }
   function measure(){const r=sec.getBoundingClientRect();
     target=Math.max(0,Math.min(1.4,(innerHeight-r.top)/innerHeight));}
