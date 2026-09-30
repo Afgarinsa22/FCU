@@ -825,7 +825,7 @@ body.gal-open{overflow:hidden}
 
 /* garis neon di latar portfolio */
 .pf-neon{position:absolute;z-index:0;left:0;right:0;top:clamp(14rem,20vw,17rem);width:100%;height:clamp(26rem,44vw,38rem);pointer-events:none;overflow:visible}
-.pf-neon path{fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 2.4s cubic-bezier(.5,0,.2,1)}
+.pf-neon path{fill:none;stroke-linecap:round;stroke-linejoin:round}
 .pf-neon .n1{stroke:#FF2FB9;stroke-width:12;filter:drop-shadow(0 0 8px rgba(255,47,185,.95)) drop-shadow(0 0 22px rgba(255,47,185,.6))}
 .pf-neon.in path{stroke-dashoffset:0}
 .pf-neon path{vector-effect:non-scaling-stroke}
@@ -1625,8 +1625,7 @@ document.querySelectorAll('a[href="#home"]').forEach(a=>a.addEventListener('clic
   st.addEventListener('pointerleave',()=>{st.style.removeProperty('--ry');st.style.removeProperty('--rx')});
 })();
 
-/* garis neon portfolio: satu garis pink yang terus meliuk (bentuk berubah
-   pelan mengikuti waktu + scroll), tergambar saat pertama terlihat */
+/* garis neon portfolio: satu garis pink meliuk, bentuknya tetap */
 (function(){
   const svg=document.querySelector('.pf-neon'); if(!svg) return;
   const path=svg.querySelector('.n1'), still=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1646,12 +1645,9 @@ document.querySelectorAll('a[href="#home"]').forEach(a=>a.addEventListener('clic
     }
     path.setAttribute('d',d);
   }
-  function loop(now){shape((now-t0)/1000);raf=requestAnimationFrame(loop)}
-  function run(){const go=!still&&inView&&!document.hidden;if(go&&!raf)raf=requestAnimationFrame(loop);if(!go&&raf){cancelAnimationFrame(raf);raf=0}}
+  // bentuk tetap (tidak bergerak); cukup digambar sekali
   shape(0);
-  addEventListener('scroll',()=>{sc=scrollY},{passive:true});
-  new IntersectionObserver(es=>{inView=es[0].isIntersecting;if(inView)svg.classList.add('in');run()},{threshold:.05}).observe(svg);
-  document.addEventListener('visibilitychange',run);
+  new IntersectionObserver((es,o)=>{if(es[0].isIntersecting){svg.classList.add('in');o.disconnect()}},{threshold:.05}).observe(svg);
 })();
 
 /* menu mobile */
