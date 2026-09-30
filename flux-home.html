@@ -901,6 +901,14 @@ body.gal-open{overflow:hidden}
   .sq-hero{width:9.5rem}
   .sq-nav{top:auto;bottom:0;width:2.6rem;height:2.6rem}
 }
+
+/* garis neon di belakang kartu award (diam) */
+.grunge .aw-grid{position:relative}
+.aw-neon{position:absolute;z-index:0;left:-14%;right:-14%;top:-8%;bottom:-8%;width:128%;height:116%;pointer-events:none;overflow:visible}
+.aw-neon path{fill:none;stroke:#FF2FB9;stroke-width:12;stroke-linecap:round;vector-effect:non-scaling-stroke;
+  filter:drop-shadow(0 0 8px rgba(255,47,185,.95)) drop-shadow(0 0 22px rgba(255,47,185,.6))}
+.grunge .aw-card{z-index:1}
+@media (max-width:700px){ .aw-neon path{stroke-width:8} }
 /* awards sekarang section pertama setelah hero: memakai tepi sobek */
 .next.awards{display:block;min-height:0;text-align:left;overflow:visible;overflow-x:clip;
   background:
@@ -1073,6 +1081,9 @@ body.gal-open{overflow:hidden}
           <h4>Nama Award</h4>
           <p>Kategori · Penyelenggara</p>
         </article>
+        <svg class="aw-neon" viewBox="0 0 1000 700" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M-80 520 C 40 380, 150 300, 250 360 S 380 560, 500 470 S 610 150, 740 220 S 860 480, 960 380 S 1060 160, 1100 200"/>
+        </svg>
       </div>
     </div>
   </section>
