@@ -909,6 +909,65 @@ body.gal-open{overflow:hidden}
   filter:drop-shadow(0 0 8px rgba(255,47,185,.95)) drop-shadow(0 0 22px rgba(255,47,185,.6))}
 .grunge .aw-card{z-index:1}
 @media (max-width:700px){ .aw-neon path{stroke-width:8} }
+
+/* =========================================================
+   DETAIL JAGOAN (zoom-in)
+   ========================================================= */
+.sq-tip{margin:1rem 0 0;text-align:center;font:700 .6rem/1 var(--display);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.sqd{--c:#9B6BFF;position:fixed;inset:0;z-index:28;overflow:hidden;user-select:none;touch-action:pan-y;
+  background:radial-gradient(60% 70% at 30% 55%,color-mix(in srgb,var(--c) 38%,#0A0418),#0A0418 75%);
+  opacity:0;transition:opacity .45s,background .6s}
+.sqd[hidden]{display:none}
+.sqd.on{opacity:1}
+.sqd.out{opacity:0}
+/* jagoan lain, blur di belakang */
+.sqd-bg{position:absolute;inset:0;pointer-events:none}
+.sqd-ghost{position:absolute;bottom:-4%;height:92%;aspect-ratio:1/2;filter:blur(14px) brightness(.55);opacity:.7;transition:opacity .4s}
+.sqd-ghost.l{left:-8%}.sqd-ghost.r{right:28%;opacity:.35}
+.sqd-ghost svg,.sqd-ghost img{width:100%;height:100%;object-fit:contain;object-position:bottom}
+.sqd-in{position:relative;z-index:1;height:100%;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);align-items:end;
+  gap:clamp(1rem,4vw,4rem);padding:calc(var(--nav-h) + 1rem) clamp(1.25rem,6vw,7rem) 0}
+.sqd-figwrap{position:relative;height:calc(100vh - var(--nav-h) - 1rem);height:calc(100dvh - var(--nav-h) - 1rem);transform-origin:50% 100%;
+  transition:transform .75s cubic-bezier(.2,.8,.2,1),filter .6s,opacity .35s}
+.sqd-fig{height:100%;display:flex;justify-content:center;align-items:flex-end}
+.sqd-fig svg,.sqd-fig img{height:100%;width:auto;max-width:100%;object-fit:contain;object-position:bottom;filter:drop-shadow(0 0 40px color-mix(in srgb,var(--c) 60%,transparent))}
+.sqd-data{align-self:center;padding-bottom:4rem;max-width:32rem;transition:opacity .35s,transform .45s cubic-bezier(.2,.8,.2,1)}
+.sqd-data .k{margin:0;font:700 .65rem/1 var(--display);letter-spacing:.24em;text-transform:uppercase;color:var(--c)}
+.sqd-data h3{margin:.6rem 0 0;font:900 clamp(2.4rem,5.4vw,4.8rem)/.92 var(--display);text-transform:uppercase;color:#fff;text-shadow:0 0 26px var(--c)}
+.sqd-data .bar{display:block;width:4rem;height:3px;margin:1rem 0;background:var(--c);box-shadow:0 0 12px var(--c)}
+.sqd-data .bio{margin:0 0 1.2rem;color:var(--ice);line-height:1.6}
+.sqd-data dl{display:grid;grid-template-columns:auto 1fr;gap:.45rem 1.4rem;margin:0;font-size:.88rem}
+.sqd-data dt{font:700 .58rem/1.6 var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.sqd-data dd{margin:0;color:#fff}
+.sqd-data .q{margin:1.2rem 0 0;font-style:italic;color:var(--muted)}
+.sqd-data .stats{display:grid;gap:.5rem;margin-top:1.2rem}
+.sqd-data .stats div{display:grid;grid-template-columns:7rem 1fr;align-items:center;gap:.8rem;font:700 .58rem/1 var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.sqd-data .stats i{display:block;height:6px;border-radius:6px;background:rgba(255,255,255,.1);overflow:hidden}
+.sqd-data .stats i b{display:block;height:100%;width:var(--v);border-radius:inherit;background:linear-gradient(90deg,var(--c),#fff);box-shadow:0 0 8px var(--c);animation:bar .9s .2s cubic-bezier(.2,.8,.2,1) backwards}
+/* masuk pertama kali */
+.sqd:not(.on) .sqd-data{opacity:0;transform:translateX(30px)}
+.sqd.on .sqd-data{transition-delay:.25s}
+/* transisi pindah jagoan (blur + geser, seperti referensi) */
+.sqd.leave-l .sqd-figwrap{transform:translateX(-18%) scale(.92);filter:blur(12px);opacity:0}
+.sqd.leave-r .sqd-figwrap{transform:translateX(18%) scale(.92);filter:blur(12px);opacity:0}
+.sqd.enter-r .sqd-figwrap{transition:none;transform:translateX(22%) scale(1.06);filter:blur(12px);opacity:0}
+.sqd.enter-l .sqd-figwrap{transition:none;transform:translateX(-22%) scale(1.06);filter:blur(12px);opacity:0}
+.sqd.leave-l .sqd-data,.sqd.leave-r .sqd-data{opacity:0;transform:translateY(12px);transition-delay:0s}
+.sqd.enter-l .sqd-data,.sqd.enter-r .sqd-data{opacity:0;transition:none;transform:translateY(-12px)}
+.sqd-x{position:absolute;z-index:3;left:clamp(1.25rem,3vw,2.5rem);top:calc(var(--nav-h) + .5rem);display:flex;align-items:center;gap:.5rem;cursor:pointer;
+  padding:.6rem 1rem;border-radius:999px;color:#fff;font:700 .62rem/1 var(--display);letter-spacing:.14em;text-transform:uppercase;
+  background:rgba(24,8,52,.7);border:1px solid rgba(255,122,217,.4);backdrop-filter:blur(8px)}
+.sqd-nav{position:absolute;z-index:3;right:clamp(1.25rem,6vw,7rem);bottom:clamp(1rem,3vh,2rem);display:flex;align-items:center;gap:1rem;font:700 .7rem/1 var(--display);letter-spacing:.16em;color:var(--ice)}
+.sqd-nav button{width:3rem;height:3rem;border-radius:50%;cursor:pointer;color:#fff;font-size:1rem;background:rgba(24,8,52,.7);border:1px solid color-mix(in srgb,var(--c) 70%,transparent);transition:background .2s,box-shadow .2s}
+.sqd-nav button:hover{background:color-mix(in srgb,var(--c) 35%,transparent);box-shadow:0 0 18px var(--c)}
+@media (max-width:800px){
+  .sqd-in{grid-template-columns:1fr;grid-template-rows:auto 1fr;align-items:start;overflow-y:auto;padding-top:calc(var(--nav-h) + 3.5rem)}
+  .sqd-figwrap{height:46vh;order:0}
+  .sqd-data{padding-bottom:6rem}
+  .sqd-ghost{display:none}
+  .sqd-nav{left:0;right:0;bottom:0;justify-content:center;padding:.8rem;background:linear-gradient(0deg,#0A0418 60%,transparent)}
+}
+@media (prefers-reduced-motion:reduce){ .sqd,.sqd-figwrap,.sqd-data{transition:none} }
 /* awards sekarang section pertama setelah hero: memakai tepi sobek */
 .next.awards{display:block;min-height:0;text-align:left;overflow:visible;overflow-x:clip;
   background:
@@ -1129,6 +1188,7 @@ body.gal-open{overflow:hidden}
       </div>
       <div class="sq-info" id="sq-info" aria-live="polite"></div>
       <div class="sq-dots" id="sq-dots"></div>
+      <p class="sq-tip">Klik jagoan untuk melihat profil lengkapnya</p>
     </div>
   </section>
 
@@ -1175,6 +1235,21 @@ body.gal-open{overflow:hidden}
       </div>
     </div>
   </section>
+
+  <!-- DETAIL JAGOAN (zoom-in) -->
+  <div class="sqd" id="sqd" role="dialog" aria-modal="true" aria-labelledby="sqd-name" hidden>
+    <div class="sqd-bg" aria-hidden="true"><div class="sqd-ghost l" id="sqd-gl"></div><div class="sqd-ghost r" id="sqd-gr"></div></div>
+    <div class="sqd-in">
+      <div class="sqd-figwrap" id="sqd-figwrap"><div class="sqd-fig" id="sqd-fig"></div></div>
+      <div class="sqd-data" id="sqd-data"></div>
+    </div>
+    <button type="button" class="sqd-x" id="sqd-x" aria-label="Kembali ke semua jagoan">✕ <span>Semua jagoan</span></button>
+    <div class="sqd-nav">
+      <button type="button" id="sqd-prev" aria-label="Jagoan sebelumnya">←</button>
+      <span id="sqd-count">01 / 05</span>
+      <button type="button" id="sqd-next" aria-label="Jagoan berikutnya">→</button>
+    </div>
+  </div>
 
   <!-- GALERI per kategori (pop-up) -->
   <div class="pf-gal" id="pf-gal" role="dialog" aria-modal="true" aria-labelledby="pf-gal-title" hidden>
@@ -1645,7 +1720,7 @@ function heroSilhouette(c,i){
     const el=document.createElement('div');el.className='sq-hero';el.style.setProperty('--c',h.c);
     el.innerHTML=`<div class="sq-fig">${h.img?`<img src="${esc(h.img)}" alt="${esc(h.alias)}" draggable="false">`:heroSilhouette(h.c,i)}</div>
       <span class="sq-glow" aria-hidden="true"></span><span class="sq-name">${esc(h.alias)}</span>${h.img?'':'<i class="sq-dm">DUMMY</i>'}`;
-    el.addEventListener('click',()=>{if(!moved)goTo(i)});
+    el.addEventListener('click',()=>{if(moved)return;goTo(i);window.openSquadDetail&&openSquadDetail(i,el)});
     ring.appendChild(el);
     const d=document.createElement('button');d.type='button';d.setAttribute('aria-label',h.alias);d.onclick=()=>goTo(i);dots.appendChild(d);
     return el;
@@ -1687,14 +1762,95 @@ function heroSilhouette(c,i){
   document.getElementById('sq-next').onclick=()=>{target-=step;animate()};
   stage.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'){target+=step;animate();e.preventDefault()}if(e.key==='ArrowRight'){target-=step;animate();e.preventDefault()}});
   // seret untuk memutar 360°
-  let down=false,x0=0,t0=0,moved=false,lastX=0,vel=0;
-  stage.addEventListener('pointerdown',e=>{if(e.target.closest('.sq-nav'))return;down=true;moved=false;x0=lastX=e.clientX;t0=target;vel=0;stage.setPointerCapture(e.pointerId);stage.classList.add('drag')});
-  stage.addEventListener('pointermove',e=>{if(!down)return;const dx=e.clientX-x0;if(Math.abs(dx)>5)moved=true;
+  let down=false,x0=0,t0=0,moved=false,lastX=0,vel=0,pid=0;
+  stage.addEventListener('pointerdown',e=>{if(e.target.closest('.sq-nav'))return;down=true;moved=false;x0=lastX=e.clientX;t0=target;vel=0;pid=e.pointerId});
+  stage.addEventListener('pointermove',e=>{if(!down)return;const dx=e.clientX-x0;if(Math.abs(dx)>5&&!moved){moved=true;try{stage.setPointerCapture(pid)}catch(_){}stage.classList.add('drag')}if(!moved)return;
     vel=e.clientX-lastX;lastX=e.clientX;target=t0+dx*.35;rot=target;layout();showInfo()});
-  const end=()=>{if(!down)return;down=false;stage.classList.remove('drag');target+=vel*4;snap();setTimeout(()=>moved=false,0)};
+  const end=()=>{if(!down)return;down=false;stage.classList.remove('drag');if(moved){target+=vel*4;snap()}setTimeout(()=>moved=false,0)};
   stage.addEventListener('pointerup',end);stage.addEventListener('pointercancel',end);
   addEventListener('resize',layout);
   layout();showInfo();
+  window.squadGoTo=goTo;
+})();
+
+/* =========================================================
+   DETAIL JAGOAN — zoom-in dari panggung, data di kanan,
+   bisa digeser (swipe / panah / keyboard) ke jagoan lain
+   ========================================================= */
+const SQUAD_DETAIL=[
+  {power:'Membaca arah semesta kreatif',gear:'Kompas sinyal FCU',base:'Ruang kokpit utama',since:'2019',projects:'150+',bio:'Pemimpin yang selalu melihat tiga langkah ke depan. Menyatukan kreator, brand, dan komunitas dalam satu semesta.'},
+  {power:'Membekukan momen dalam satu frame',gear:'Kamera sinema & lensa anamorfik',base:'Studio produksi',since:'2020',projects:'120+',bio:'Mata di balik setiap gambar. Cahaya, komposisi, dan gerak kamera adalah bahasa ibunya.'},
+  {power:'Mengubah imajinasi jadi visual dalam hitungan menit',gear:'Render farm & model AI',base:'Lab AI',since:'2021',projects:'300+',bio:'Penyihir piksel yang jarang tidur. Kalau tools-nya belum ada, dia bikin sendiri.'},
+  {power:'Menghidupkan emosi lewat bunyi',gear:'Synth, mic lapangan & mixer',base:'Ruang suara',since:'2020',projects:'90+',bio:'Setiap karya FCU punya detak jantung, dan dialah yang menyusunnya.'},
+  {power:'Membuat tren sebelum jadi tren',gear:'Radar budaya & 7 akun medsos',base:'Pusat komando sosial',since:'2021',projects:'200+',bio:'Penjaga frekuensi viral. Tahu kapan harus bicara, di mana, dan dengan cara apa.'}
+];
+(function(){
+  const box=document.getElementById('sqd'); if(!box||typeof SQUAD==='undefined') return;
+  const figWrap=document.getElementById('sqd-figwrap'),fig=document.getElementById('sqd-fig'),data=document.getElementById('sqd-data');
+  const gl=document.getElementById('sqd-gl'),gr=document.getElementById('sqd-gr'),cnt=document.getElementById('sqd-count');
+  const n=SQUAD.length, still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const esc=t=>String(t||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const art=(h,i)=>h.img?`<img src="${esc(h.img)}" alt="${esc(h.alias)}" draggable="false">`:heroSilhouette(h.c,i);
+  let cur=0,busy=false,lastFocus=null;
+
+  function paint(i){
+    const h=SQUAD[i],d=SQUAD_DETAIL[i]||{};
+    box.style.setProperty('--c',h.c);
+    fig.innerHTML=art(h,i);
+    gl.innerHTML=art(SQUAD[(i-1+n)%n],(i-1+n)%n); gr.innerHTML=art(SQUAD[(i+1)%n],(i+1)%n);
+    cnt.textContent=`0${i+1} / 0${n}`;
+    const rows=[['Nama asli',h.name],['Jabatan',h.role],['Kekuatan super',d.power],['Senjata andalan',d.gear],['Markas',d.base],['Bergabung',d.since],['Project',d.projects]].filter(r=>r[1]);
+    data.innerHTML=`<p class="k">Jagoan Flux · 0${i+1}</p><h3 id="sqd-name">${esc(h.alias)}</h3><span class="bar" aria-hidden="true"></span>
+      ${d.bio?`<p class="bio">${esc(d.bio)}</p>`:''}
+      <dl>${rows.map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>
+      <p class="q">${esc(h.quote)}</p>
+      <div class="stats">${h.stats.map(([k,v])=>`<div>${esc(k)}<i><b style="--v:${v}%"></b></i></div>`).join('')}</div>`;
+  }
+  function open(i,fromEl){
+    if(!box.hidden) return;
+    lastFocus=document.activeElement;cur=i;paint(i);
+    box.hidden=false;document.body.classList.add('gal-open');
+    // zoom-in dari posisi karakter di panggung
+    const r=fromEl?fromEl.getBoundingClientRect():null;
+    requestAnimationFrame(()=>{
+      const t=figWrap.getBoundingClientRect();
+      if(r&&!still){
+        const sx=r.width/t.width, dx=(r.left+r.width/2)-(t.left+t.width/2), dy=(r.bottom)-(t.bottom);
+        figWrap.style.transition='none';
+        figWrap.style.transform=`translate(${dx}px,${dy}px) scale(${sx})`;figWrap.style.filter='blur(6px)';
+        requestAnimationFrame(()=>{figWrap.style.transition='';figWrap.style.transform='';figWrap.style.filter=''});
+      }
+      box.classList.add('on');
+      document.getElementById('sqd-x').focus({preventScroll:true});
+    });
+  }
+  function close(){
+    if(box.hidden) return;
+    box.classList.remove('on');box.classList.add('out');
+    setTimeout(()=>{box.hidden=true;box.classList.remove('out');document.body.classList.remove('gal-open');if(lastFocus)lastFocus.focus({preventScroll:true})},still?0:450);
+    if(window.squadGoTo) squadGoTo(cur);
+  }
+  function go(dir){
+    if(busy) return; busy=true;
+    const next=(cur+dir+n)%n;
+    if(still){cur=next;paint(cur);busy=false;return}
+    box.classList.add(dir>0?'leave-l':'leave-r');
+    setTimeout(()=>{
+      cur=next;paint(cur);
+      box.classList.remove('leave-l','leave-r');box.classList.add(dir>0?'enter-r':'enter-l');
+      requestAnimationFrame(()=>requestAnimationFrame(()=>{box.classList.remove('enter-r','enter-l');setTimeout(()=>busy=false,450)}));
+    },320);
+  }
+  window.openSquadDetail=open;
+  document.getElementById('sqd-x').onclick=close;
+  document.getElementById('sqd-prev').onclick=()=>go(-1);
+  document.getElementById('sqd-next').onclick=()=>go(1);
+  addEventListener('keydown',e=>{if(box.hidden)return;
+    if(e.key==='Escape')close(); else if(e.key==='ArrowRight')go(1); else if(e.key==='ArrowLeft')go(-1)});
+  // geser untuk pindah jagoan
+  let x0=null;
+  box.addEventListener('pointerdown',e=>{if(e.target.closest('button'))return;x0=e.clientX});
+  box.addEventListener('pointerup',e=>{if(x0===null)return;const dx=e.clientX-x0;x0=null;if(Math.abs(dx)>60)go(dx<0?1:-1)});
 })();
 
 /* menu aktif mengikuti section yang sedang dilihat */
