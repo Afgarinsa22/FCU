@@ -639,6 +639,10 @@ h1{margin:.4rem 0 0;font:900 clamp(2.2rem,6.2vw,5.4rem)/1 var(--display);letter-
 @keyframes msfloat{50%{translate:0 -10px}}
 .ms-frame::before{content:"";position:absolute;inset:clamp(4px,.6vw,7px);border:2px solid rgba(255,216,120,.7);pointer-events:none}
 .ms-frame img,.ms-frame .ph{display:block;width:100%;aspect-ratio:3/4;object-fit:cover;background:#f3eee4}
+/* foto piagam sudah punya bingkai sendiri: bingkai CSS dihilangkan, glow tetap */
+.ms-frame.has-photo{padding:0;background:none}
+.ms-frame.has-photo::before{display:none}
+.ms-frame.has-photo img{aspect-ratio:1122/1402;height:auto;background:none}
 .ms-frame .ph{display:grid;place-items:center;text-align:center;background:repeating-linear-gradient(45deg,#1a1020 0 14px,#211529 14px 28px);border:2px dashed rgba(239,231,243,.35)}
 .ms-frame .ph span{font:400 1.3rem/1.1 var(--cond);letter-spacing:.06em;color:var(--paper)}
 .ms-frame .ph small{display:block;margin-top:.4rem;font:500 .7rem/1.3 var(--body);letter-spacing:0;color:#B9ADC4}
@@ -943,8 +947,8 @@ body.gal-open{overflow:hidden}
         <p class="ms-kicker">In 2025, we've just been awarded</p>
         <h3 class="ms-title" aria-label="The MURI Awards"><span>The</span> <span>MURI</span> <span>Awards</span></h3>
         <div class="ms-frame-wrap">
-          <figure class="ms-frame">
-            <div class="ph"><span>FOTO PIAGAM MURI<small>ganti dengan aset/muri.webp</small></span></div>
+          <figure class="ms-frame has-photo">
+            <img src="aset/muri.webp" srcset="aset/muri-800.webp 748w, aset/muri.webp 1122w" sizes="(max-width:700px) 70vw, 26rem" width="1122" height="1402" alt="Piagam Rekor MURI No. 12505/R.MURI/XI/2025 untuk Flux Creative Universe" loading="lazy" decoding="async">
           </figure>
         </div>
         <div class="ms-bar">
@@ -955,9 +959,9 @@ body.gal-open{overflow:hidden}
           <span class="ms-side">Videos<br>Viral</span>
         </div>
         <div class="ms-meta">
-          <span>Museum Rekor-Dunia Indonesia</span>
-          <span>Agensi kreatif yang memproduksi konten digital dengan kecerdasan buatan terbanyak</span>
-          <span>Jakarta · 4 Desember 2023</span>
+          <span>No. 12505/R.MURI/XI/2025</span>
+          <span>Agensi kreatif yang memproduksi konten digital dengan akumulasi penonton terbanyak</span>
+          <span>Jakarta · 11 November 2025</span>
         </div>
       </div>
 
