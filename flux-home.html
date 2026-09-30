@@ -769,7 +769,7 @@ body.gal-open{overflow:hidden}
 .work.grunge .pf-hint{font:400 .95rem/1 var(--marker);letter-spacing:.02em;text-transform:none;color:var(--hot);rotate:-1.5deg;margin-top:2rem}
 
 /* kipas lebih dinamis: ukuran, kedalaman, dan melayang pelan beda-beda */
-.work.grunge .pf-fan{height:clamp(27rem,42vw,35rem)}
+.work.grunge .pf-fan{height:clamp(27rem,42vw,35rem);margin-top:clamp(3.5rem,6vw,5rem)}
 .work.grunge .pf-frame{transform:translate3d(var(--x),var(--y),var(--tz,0)) rotateZ(var(--rz)) rotateY(var(--ry)) rotateX(var(--rx)) scale(var(--s,1))}
 .work.grunge .pf-frame:hover,.work.grunge .pf-frame:focus-visible{transform:translate3d(var(--x),calc(var(--y) - 22px),160px) rotate(-1.5deg) scale(1.18)}
 .work.grunge .pf-card{animation:pfbob 6.5s ease-in-out infinite;animation-delay:calc(var(--fd,0s) * -1)}
@@ -812,8 +812,18 @@ body.gal-open{overflow:hidden}
 .pf-it:hover,.pf-it:focus-visible{rotate:0deg;box-shadow:8px 10px 0 #FF2FB9}
 .pf-it .cap b{font:400 1.1rem/1.1 "Anton","Impact",sans-serif;letter-spacing:.02em;text-transform:uppercase}
 
+
+/* label kategori besar di atas tiap frame */
+.work.grunge .pf-tag{top:auto;left:50%;bottom:calc(100% + 16px);z-index:5;translate:-50% 0;white-space:nowrap;
+  font:400 clamp(1.5rem,2.2vw,2rem)/1 var(--cond);letter-spacing:.06em;text-transform:uppercase;padding:.4rem .9rem .45rem;
+  background:var(--hot);color:var(--ink);rotate:-3deg;box-shadow:4px 4px 0 var(--ink),4px 4px 0 1px var(--paper)}
+.work.grunge .pf-frame:nth-child(even) .pf-tag{background:var(--vio);color:#fff;rotate:3deg}
+.work.grunge .pf-frame:hover .pf-tag,.work.grunge .pf-frame:focus-visible .pf-tag{box-shadow:5px 5px 0 var(--ink),0 0 24px var(--c)}
+/* selotip pindah ke pojok supaya tidak menabrak label */
+.work.grunge .pf-tape{left:auto;right:-18px;top:14px;translate:0 0;rotate:40deg;width:5rem}
+.work.grunge .pf-frame:nth-child(even) .pf-tape{left:-18px;right:auto;rotate:-40deg}
 @media (max-width:800px){
-  .work.grunge .pf-fan{height:auto}
+  .work.grunge .pf-fan{height:auto;padding-top:4rem}
   .work.grunge .pf-frame,.work.grunge .pf-frame:hover{transform:rotate(var(--mz,0deg))}
   .work.grunge .pf-frame .pf-cover{filter:none}
 }
@@ -1437,10 +1447,10 @@ const WORK=[
     f.style.setProperty('--c',c);
     f.setAttribute('aria-label',`Buka galeri ${cat.name} — ${cat.full}, ${cat.items.length} karya`);
     const cover=cat.cover||first.thumb;
-    f.innerHTML=`<span class="pf-card"><span class="pf-cover" style="--g:${grad(ci,0)}">
+    f.innerHTML=`<span class="pf-card"><i class="pf-tag">${esc(cat.name)}</i><span class="pf-cover" style="--g:${grad(ci,0)}">
         ${cover?`<img src="${esc(cover)}" alt="" loading="lazy">`:''}
         ${cat.preview?`<video src="${esc(cat.preview)}" muted loop playsinline preload="none"></video>`:''}
-        <i class="pf-tag">${esc(cat.name)}</i><i class="pf-cnt">${String(cat.items.length).padStart(2,'0')} karya</i>
+        <i class="pf-cnt">${String(cat.items.length).padStart(2,'0')} karya</i>
         <span class="pf-title"><b>${esc(cat.name)}</b><span>${esc(cat.full)}</span></span>
       </span><span class="pf-foot">Lihat galeri ›</span><i class="pf-tape" aria-hidden="true"></i></span>`;
     const pv=f.querySelector('video');
