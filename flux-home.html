@@ -1001,6 +1001,28 @@ body.gal-open{overflow:hidden}
 .aw-lb img{max-width:min(100%,90rem);max-height:80vh;border:8px solid #EFE7F3;box-shadow:12px 14px 0 #FF2FB9}
 .aw-lb p{margin:0;font:400 1.2rem/1.2 "Anton","Impact",sans-serif;letter-spacing:.04em;text-transform:uppercase;color:#EFE7F3;text-align:center}
 .aw-lb-x{position:absolute;top:1rem;right:1rem;width:2.8rem;height:2.8rem;cursor:pointer;background:#EFE7F3;color:#0B0710;border:0;font-weight:700;box-shadow:3px 3px 0 #FF2FB9}
+
+/* piala menempel di pinggir frame award (sebagian keluar frame) */
+.grunge .aw-trophy{position:absolute;z-index:4;pointer-events:none;height:clamp(9rem,15vw,13rem);width:auto;
+  top:calc(56.25% - clamp(9rem,15vw,13rem) - .5rem);
+  filter:drop-shadow(0 14px 16px rgba(0,0,0,.6)) drop-shadow(0 0 18px rgba(255,47,185,.25));
+  transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.grunge .aw-card:nth-child(odd) .aw-trophy{left:0;translate:-62% 0;rotate:-6deg}
+.grunge .aw-card:nth-child(even) .aw-trophy{right:0;translate:62% 0;rotate:6deg}
+.grunge .aw-card:nth-child(4) .aw-trophy{height:clamp(12rem,19vw,16.5rem);top:calc(56.25% - clamp(12rem,19vw,16.5rem) + 1rem);translate:55% 0}
+.grunge .aw-card:nth-child(3) .aw-trophy{height:clamp(10rem,17vw,14.5rem);top:calc(56.25% - clamp(10rem,17vw,14.5rem) - .5rem)}
+.grunge .aw-card:hover .aw-trophy{transform:translateY(-8px) scale(1.05)}
+/* label tingkat di kartu kanan pindah ke kiri supaya tidak tertutup piala */
+.grunge .aw-card.aw-photo:nth-child(even) .tier{right:auto;left:-22px;rotate:5deg}
+.grunge .aw-grid{padding:0 clamp(0rem,4vw,3rem)}
+@media (max-width:700px){
+  .grunge .aw-trophy,.grunge .aw-card:nth-child(n) .aw-trophy{height:7.5rem;top:auto;bottom:-1.5rem;translate:0 0}
+  .grunge .aw-card:nth-child(odd) .aw-trophy{left:auto;right:-.6rem}
+  .grunge .aw-card:nth-child(even) .aw-trophy{right:-.6rem}
+  .grunge .aw-card:nth-child(4) .aw-trophy{height:9.5rem}
+  .grunge .aw-card.aw-photo:nth-child(n) .tier{left:auto;right:-10px;top:.8rem;bottom:auto}
+  .grunge .aw-photo p{margin-right:5.5rem}
+}
 /* awards sekarang section pertama setelah hero: memakai tepi sobek */
 .next.awards{display:block;min-height:0;text-align:left;overflow:visible;overflow-x:clip;
   background:
@@ -1153,6 +1175,7 @@ body.gal-open{overflow:hidden}
           <button type="button" class="aw-img" data-full="aset/award-1.webp" aria-label="Perbesar gambar: Marketeers Digital Marketing Heroes 2025">
             <img src="aset/award-1-800.webp" srcset="aset/award-1-800.webp 800w, aset/award-1.webp 1600w" sizes="(max-width:700px) 90vw, 30rem" width="1600" height="900" alt="Marketeers Digital Marketing Heroes 2025" loading="lazy" decoding="async">
           </button>
+          <img class="aw-trophy" src="aset/trophy-1.webp" alt="Piala MDMH 2025 Short Video Storytelling Campaign Heroes" loading="lazy" decoding="async">
           <span class="yr">2025</span>
           <span class="tier">4 Awards</span>
           <h4>Marketeers Digital Marketing Heroes 2025</h4>
@@ -1162,6 +1185,7 @@ body.gal-open{overflow:hidden}
           <button type="button" class="aw-img" data-full="aset/award-2.webp" aria-label="Perbesar gambar: Dunia Games × Flux · 9 Awards in 1 Year">
             <img src="aset/award-2-800.webp" srcset="aset/award-2-800.webp 800w, aset/award-2.webp 1600w" sizes="(max-width:700px) 90vw, 30rem" width="1600" height="900" alt="Dunia Games × Flux · 9 Awards in 1 Year" loading="lazy" decoding="async">
           </button>
+          <img class="aw-trophy" src="aset/trophy-2.webp" alt="Piala Honor of Kings Invitational Season 4 Official Media Partner" loading="lazy" decoding="async">
           <span class="yr">2025</span>
           <span class="tier">9 Awards</span>
           <h4>Dunia Games × Flux · 9 Awards in 1 Year</h4>
@@ -1171,6 +1195,7 @@ body.gal-open{overflow:hidden}
           <button type="button" class="aw-img" data-full="aset/award-3.webp" aria-label="Perbesar gambar: Marketeers Youth Choice Award 2026">
             <img src="aset/award-3-800.webp" srcset="aset/award-3-800.webp 800w, aset/award-3.webp 1600w" sizes="(max-width:700px) 90vw, 30rem" width="1600" height="900" alt="Marketeers Youth Choice Award 2026" loading="lazy" decoding="async">
           </button>
+          <img class="aw-trophy" src="aset/trophy-3.webp" alt="Piala Marketeers Youth Choice Award 2026" loading="lazy" decoding="async">
           <span class="yr">2026</span>
           <span class="tier">Sweep</span>
           <h4>Marketeers Youth Choice Award 2026</h4>
@@ -1180,6 +1205,7 @@ body.gal-open{overflow:hidden}
           <button type="button" class="aw-img" data-full="aset/award-4.webp" aria-label="Perbesar gambar: Film Craft · "Andai Tau Duluan"">
             <img src="aset/award-4-800.webp" srcset="aset/award-4-800.webp 800w, aset/award-4.webp 1600w" sizes="(max-width:700px) 90vw, 30rem" width="1600" height="900" alt="Film Craft · "Andai Tau Duluan"" loading="lazy" decoding="async">
           </button>
+          <img class="aw-trophy" src="aset/trophy-4.webp" alt="Piala Bronze Film Craft Cinematography 2025" loading="lazy" decoding="async">
           <span class="yr">2026</span>
           <span class="tier">Bronze</span>
           <h4>Film Craft · "Andai Tau Duluan"</h4>
