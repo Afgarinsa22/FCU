@@ -1192,7 +1192,7 @@ body.gal-open{overflow:hidden}
           <p class="aw-eyebrow">Meet the squad <span class="dummy-tag">DATA DUMMY</span></p>
           <h2 class="aw-title" id="squad-title"><span class="our">Jagoan</span><em>Flux</em></h2>
         </div>
-        <p class="aw-lead">Lima jagoan di balik semesta FCU. Geser panggungnya untuk memutar dan kenalan dengan kekuatan super masing-masing.</p>
+        <p class="aw-lead">Delapan jagoan di balik semesta FCU. Geser panggungnya untuk memutar dan kenalan dengan kekuatan super masing-masing.</p>
       </div>
       <!-- panggung putar 360°: karakter berdiri melingkar -->
       <div class="sq-stage" id="sq-stage" tabindex="0" aria-roledescription="carousel" aria-label="Jagoan Flux, geser atau pakai panah untuk memutar">
@@ -1702,7 +1702,13 @@ const SQUAD=[
   {alias:'Sonic Pulse',name:'[Nama Asli]',role:'Sound & Music',c:'#FF9C5B',img:'',
    quote:'"Mood itu dimulai dari bunyi."',stats:[['Rhythm',96],['Sound Design',94],['Chill',88]]},
   {alias:'Hype Striker',name:'[Nama Asli]',role:'Social & Strategy',c:'#FF2FB9',img:'',
-   quote:'"Tren bukan dikejar, tapi diciptakan."',stats:[['Trend Radar',98],['Copywriting',90],['Network',94]]}
+   quote:'"Tren bukan dikejar, tapi diciptakan."',stats:[['Trend Radar',98],['Copywriting',90],['Network',94]]},
+  {alias:'Pixel Warden',name:'[Nama Asli]',role:'Art Director & Design',c:'#FFD84D',img:'',
+   quote:'"Detail kecil yang bikin karya terasa besar."',stats:[['Design',97],['Taste',95],['Deadline',70]]},
+  {alias:'Nova Scribe',name:'[Nama Asli]',role:'Scriptwriter & Copy',c:'#FF6B6B',img:'',
+   quote:'"Satu kalimat yang tepat bisa menggerakkan jutaan orang."',stats:[['Storytelling',98],['Wordplay',94],['Coffee',99]]},
+  {alias:'Orbit Link',name:'[Nama Asli]',role:'Producer & Partnership',c:'#7CFF6B',img:'',
+   quote:'"Semua orang hebat, tugasku menyatukan mereka."',stats:[['Network',97],['Planning',93],['Calm',88]]}
 ];
 
 /* siluet superhero dummy (dua pose bergantian) */
@@ -1797,7 +1803,10 @@ const SQUAD_DETAIL=[
   {power:'Membekukan momen dalam satu frame',gear:'Kamera sinema & lensa anamorfik',base:'Studio produksi',since:'2020',projects:'120+',bio:'Mata di balik setiap gambar. Cahaya, komposisi, dan gerak kamera adalah bahasa ibunya.'},
   {power:'Mengubah imajinasi jadi visual dalam hitungan menit',gear:'Render farm & model AI',base:'Lab AI',since:'2021',projects:'300+',bio:'Penyihir piksel yang jarang tidur. Kalau tools-nya belum ada, dia bikin sendiri.'},
   {power:'Menghidupkan emosi lewat bunyi',gear:'Synth, mic lapangan & mixer',base:'Ruang suara',since:'2020',projects:'90+',bio:'Setiap karya FCU punya detak jantung, dan dialah yang menyusunnya.'},
-  {power:'Membuat tren sebelum jadi tren',gear:'Radar budaya & 7 akun medsos',base:'Pusat komando sosial',since:'2021',projects:'200+',bio:'Penjaga frekuensi viral. Tahu kapan harus bicara, di mana, dan dengan cara apa.'}
+  {power:'Membuat tren sebelum jadi tren',gear:'Radar budaya & 7 akun medsos',base:'Pusat komando sosial',since:'2021',projects:'200+',bio:'Penjaga frekuensi viral. Tahu kapan harus bicara, di mana, dan dengan cara apa.'},
+  {power:'Melihat komposisi yang orang lain lewatkan',gear:'Pena digital & palet warna FCU',base:'Studio desain',since:'2020',projects:'180+',bio:'Penjaga rasa visual semesta FCU. Setiap warna, huruf, dan jarak punya alasan.'},
+  {power:'Mengubah ide mentah jadi cerita yang nempel',gear:'Notes app & naskah tanpa akhir',base:'Ruang menulis',since:'2021',projects:'140+',bio:'Arsitek kata di balik setiap kampanye. Bisa bikin orang tertawa dan terharu dalam satu paragraf.'},
+  {power:'Menyatukan tim, klien, dan jadwal jadi satu orbit',gear:'Kalender ajaib & jaringan tanpa batas',base:'Ruang produksi',since:'2020',projects:'160+',bio:'Penjaga agar semua roda berputar. Tanpa dia, semesta FCU kehilangan gravitasinya.'}
 ];
 (function(){
   const box=document.getElementById('sqd'); if(!box||typeof SQUAD==='undefined') return;
