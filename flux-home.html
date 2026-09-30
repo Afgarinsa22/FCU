@@ -664,6 +664,93 @@ h1{margin:.4rem 0 0;font:900 clamp(2.2rem,6.2vw,5.4rem)/1 var(--display);letter-
   .ms-frame-wrap{width:70vw;margin-top:-.9rem}
 }
 @media (prefers-reduced-motion:reduce){ .ms-frame{animation:none;transition:none} }
+
+/* =========================================================
+   PORTFOLIO — kipas frame kategori + galeri pop-up
+   ========================================================= */
+.pf-fan{position:relative;max-width:76rem;height:clamp(24rem,38vw,32rem);margin:clamp(2rem,4vw,3rem) auto 0;perspective:1400px;perspective-origin:50% 40%}
+.pf-frame{--x:0px;--y:0px;--rz:0deg;--ry:0deg;--rx:0deg;--c:#9B6BFF;
+  position:absolute;left:50%;top:50%;width:clamp(12rem,19vw,16.5rem);aspect-ratio:4/5;margin:0;padding:0;border:0;cursor:pointer;background:none;
+  translate:-50% -50%;transform:translate3d(var(--x),var(--y),0) rotateZ(var(--rz)) rotateY(var(--ry)) rotateX(var(--rx));
+  transform-style:preserve-3d;transition:transform .7s cubic-bezier(.2,.8,.2,1),filter .5s;z-index:var(--z,1);outline:none}
+.pf-card,.pf-cover,.pf-title,.pf-title b,.pf-title span{display:block}
+.pf-tag,.pf-cnt{font-style:normal}
+.pf-foot{display:flex}
+.pf-card{position:absolute;inset:0;padding:10px 10px 3.1rem;border-radius:1.1rem;background:#F3EEF7;
+  box-shadow:0 1px 0 rgba(255,255,255,.6) inset,0 30px 50px rgba(0,0,0,.55),0 8px 16px rgba(0,0,0,.35);transition:box-shadow .5s}
+.pf-cover{position:relative;width:100%;height:100%;border-radius:.75rem;overflow:hidden;background:var(--g)}
+.pf-cover img,.pf-cover video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pf-cover::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,4,24,0) 40%,rgba(10,4,24,.75));opacity:0;transition:opacity .5s}
+.pf-tag{position:absolute;left:.8rem;top:.8rem;z-index:2;font:700 .55rem/1 var(--display);letter-spacing:.16em;padding:.4rem .55rem;border-radius:999px;background:rgba(255,255,255,.88);color:#1B0A3A}
+.pf-cnt{position:absolute;right:.8rem;top:.8rem;z-index:2;font:700 .55rem/1 var(--display);letter-spacing:.14em;padding:.4rem .55rem;border-radius:999px;background:rgba(10,4,24,.55);color:#fff}
+.pf-foot{position:absolute;left:0;right:0;bottom:0;height:3.1rem;display:flex;align-items:center;justify-content:center;gap:.4rem;
+  font:600 .72rem/1 var(--body);letter-spacing:.06em;color:#3a2a4a}
+/* judul kategori yang muncul saat hover */
+.pf-title{position:absolute;z-index:3;left:1.1rem;right:1.1rem;bottom:4.1rem;text-align:left;opacity:0;translate:0 14px;transition:opacity .4s .05s,translate .5s cubic-bezier(.2,.8,.2,1)}
+.pf-title b{display:block;font:900 clamp(2rem,3.4vw,2.9rem)/.9 var(--display);text-transform:uppercase;color:#fff;text-shadow:0 0 20px var(--c)}
+.pf-title span{display:block;margin-top:.35rem;font:600 .72rem/1.2 var(--body);letter-spacing:.08em;color:#E9DCFF}
+/* keadaan redup (belum di-hover) */
+.pf-frame .pf-cover{filter:saturate(.35) brightness(.72);transition:filter .5s}
+.pf-fan:hover .pf-frame:not(:hover):not(:focus-visible){filter:brightness(.55) blur(.4px)}
+/* hidup saat di-hover */
+.pf-frame:hover,.pf-frame:focus-visible{--rz:0deg !important;--ry:0deg !important;--rx:0deg !important;--z:10 !important;
+  transform:translate3d(var(--x),calc(var(--y) - 18px),120px) scale(1.16)}
+.pf-frame:hover .pf-cover,.pf-frame:focus-visible .pf-cover{filter:none}
+.pf-frame:hover .pf-cover::after,.pf-frame:focus-visible .pf-cover::after{opacity:1}
+.pf-frame:hover .pf-title,.pf-frame:focus-visible .pf-title{opacity:1;translate:0 0}
+.pf-frame:hover .pf-card,.pf-frame:focus-visible .pf-card{box-shadow:0 0 0 2px var(--c),0 0 50px color-mix(in srgb,var(--c) 70%,transparent),0 40px 70px rgba(0,0,0,.6)}
+.pf-frame:hover .pf-foot,.pf-frame:focus-visible .pf-foot{color:#1B0A3A}
+.pf-hint{margin:1rem auto 0;text-align:center;font:700 .6rem/1 var(--display);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+
+/* galeri pop-up */
+.pf-gal{position:fixed;inset:0;z-index:55;display:grid;place-items:center;padding:clamp(.75rem,3vw,2.5rem);background:rgba(6,2,16,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.pf-gal[hidden]{display:none}
+.pf-gal.on .pf-gal-in{animation:galin .5s cubic-bezier(.2,.8,.2,1)}
+@keyframes galin{from{opacity:0;transform:translateY(30px) scale(.96) rotateX(8deg)}}
+.pf-gal-in{position:relative;width:min(100%,72rem);max-height:100%;overflow:auto;border-radius:1.6rem;padding:clamp(1.2rem,3vw,2.2rem);
+  background:linear-gradient(180deg,#1B0A3A,#0E0520);border:1px solid rgba(255,122,217,.3);box-shadow:0 0 60px rgba(255,47,185,.25),0 40px 80px rgba(0,0,0,.6)}
+.pf-gal-head{position:sticky;top:calc(-1 * clamp(1.2rem,3vw,2.2rem));z-index:2;display:flex;flex-wrap:wrap;align-items:flex-end;gap:1rem 2rem;
+  margin:calc(-1 * clamp(1.2rem,3vw,2.2rem)) calc(-1 * clamp(1.2rem,3vw,2.2rem)) 1.4rem;padding:clamp(1.2rem,3vw,2.2rem) clamp(1.2rem,3vw,2.2rem) 1rem;
+  background:linear-gradient(180deg,#1B0A3A 80%,rgba(27,10,58,0))}
+.pf-gal-head .aw-eyebrow{margin:0 0 .4rem}
+.pf-gal-head h3{margin:0;font:900 clamp(2.2rem,5vw,3.6rem)/.9 var(--display);text-transform:uppercase;color:#fff;text-shadow:0 0 22px var(--gc,#FF2FB9)}
+.pf-gal-tabs{display:flex;flex-wrap:wrap;gap:.4rem;margin-left:auto}
+.pf-gal-tabs button{cursor:pointer;font:700 .62rem/1 var(--display);letter-spacing:.14em;text-transform:uppercase;padding:.65rem .9rem;border-radius:999px;border:1px solid rgba(255,122,217,.3);background:none;color:var(--ice)}
+.pf-gal-tabs button[aria-pressed="true"]{background:rgba(255,47,185,.2);border-color:var(--pink);color:#fff}
+.pf-gal-x{width:2.6rem;height:2.6rem;border-radius:50%;cursor:pointer;color:#fff;font-size:1rem;background:rgba(24,8,52,.8);border:1px solid rgba(255,122,217,.4)}
+.pf-gal-grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fill,minmax(var(--min,16rem),1fr))}
+.pf-gal-grid[data-shape="v"]{--min:11rem}
+.pf-it{position:relative;border:0;padding:0;cursor:pointer;border-radius:.9rem;overflow:hidden;aspect-ratio:var(--ar,16/9);background:var(--g);
+  opacity:0;transform:translateY(16px);animation:itin .5s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:var(--d,0s);
+  transition:transform .35s,box-shadow .35s}
+.pf-gal-grid[data-shape="v"] .pf-it{--ar:9/16}
+@keyframes itin{to{opacity:1;transform:none}}
+.pf-it:hover,.pf-it:focus-visible{transform:translateY(-4px) scale(1.02);box-shadow:0 0 0 2px var(--pink),0 0 26px rgba(255,47,185,.5);outline:none}
+.pf-it img,.pf-it video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pf-it::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(10,4,24,.85))}
+.pf-it .play{position:absolute;z-index:1;left:50%;top:45%;translate:-50% -50%;width:3rem;height:3rem;border-radius:50%;display:grid;place-items:center;
+  background:rgba(10,4,24,.5);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.35);color:#fff;font-size:.85rem;transition:background .3s}
+.pf-it:hover .play{background:linear-gradient(135deg,var(--violet),var(--magenta))}
+.pf-it .cap{position:absolute;z-index:1;left:.8rem;right:.8rem;bottom:.7rem;text-align:left}
+.pf-it .cap b{display:block;font:700 .92rem/1.2 var(--body);color:#fff}
+.pf-it .cap span{font-size:.72rem;color:var(--muted)}
+.pf-it .dm{position:absolute;z-index:1;right:.6rem;top:.6rem;font:700 .5rem/1 var(--display);letter-spacing:.18em;color:rgba(255,255,255,.7);border:1px dashed rgba(255,255,255,.45);padding:.25rem .4rem;border-radius:.25rem}
+body.gal-open{overflow:hidden}
+
+@media (max-width:800px){
+  .pf-fan{height:auto;display:flex;gap:1rem;overflow-x:auto;scroll-snap-type:x mandatory;padding:2rem 1.25rem 2.5rem;perspective:none;scrollbar-width:none}
+  .pf-fan::-webkit-scrollbar{display:none}
+  .pf-frame{position:relative;left:auto;top:auto;translate:none;flex:none;width:68vw;scroll-snap-align:center;transform:rotate(var(--mz,0deg))}
+  .pf-frame:hover,.pf-frame:focus-visible{transform:rotate(0) scale(1.03)}
+  .pf-frame .pf-cover{filter:none}
+  .pf-title{opacity:1;translate:0 0}
+  .pf-cover::after{opacity:1}
+  .pf-fan:hover .pf-frame:not(:hover){filter:none}
+  .pf-gal-tabs{order:3;margin-left:0;width:100%}
+}
+@media (prefers-reduced-motion:reduce){
+  .pf-frame,.pf-it,.pf-gal.on .pf-gal-in{transition:none;animation:none;opacity:1;transform:none}
+}
 /* awards sekarang section pertama setelah hero: memakai tepi sobek */
 .next.awards{display:block;min-height:0;text-align:left;overflow:visible;overflow-x:clip;
   background:
@@ -860,10 +947,11 @@ h1{margin:.4rem 0 0;font:900 clamp(2.2rem,6.2vw,5.4rem)/1 var(--display);letter-
         <p class="aw-eyebrow">Portfolio <span class="dummy-tag">DATA DUMMY</span></p>
         <h2 class="work-title" id="work-title"><span class="our">Flux</span><em>Portfolio</em></h2>
       </div>
-      <p class="work-lead">Arahkan kursor ke karya untuk melihatnya lebih dekat, geser tiap baris untuk karya lainnya, klik untuk memutar.</p>
+      <p class="work-lead">Empat panggung karya kami. Pilih satu frame untuk membuka galerinya, lalu klik karya untuk memutarnya.</p>
     </div>
-    <nav class="work-tabs" id="work-tabs" aria-label="Kategori portfolio"></nav>
-    <div id="work-rows"></div>
+    <!-- 4 frame kategori, disusun seperti kipas kartu -->
+    <div class="pf-fan" id="pf-fan" role="list" aria-label="Kategori portfolio"></div>
+    <p class="pf-hint">Arahkan kursor ke frame · klik untuk membuka galeri</p>
   </section>
 
   <!-- JAGOAN FLUX =======================================================
@@ -925,6 +1013,18 @@ h1{margin:.4rem 0 0;font:900 clamp(2.2rem,6.2vw,5.4rem)/1 var(--display);letter-
       </div>
     </div>
   </section>
+
+  <!-- GALERI per kategori (pop-up) -->
+  <div class="pf-gal" id="pf-gal" role="dialog" aria-modal="true" aria-labelledby="pf-gal-title" hidden>
+    <div class="pf-gal-in">
+      <header class="pf-gal-head">
+        <div><p class="aw-eyebrow" id="pf-gal-full">Kategori</p><h3 id="pf-gal-title">TVC</h3></div>
+        <nav class="pf-gal-tabs" id="pf-gal-tabs" aria-label="Pindah kategori"></nav>
+        <button type="button" class="pf-gal-x" id="pf-gal-x" aria-label="Tutup galeri">✕</button>
+      </header>
+      <div class="pf-gal-grid" id="pf-gal-grid"></div>
+    </div>
+  </div>
 
   <div class="wbox" id="wbox" role="dialog" aria-modal="true" aria-label="Pemutar karya">
     <div class="wbox-in" id="wbox-in">
@@ -1235,70 +1335,102 @@ const WORK=[
 ];
 
 /* =========================================================
-   PORTFOLIO — tampilan, geser, hover, pemutar
+   PORTFOLIO — kipas 4 frame kategori + galeri pop-up + pemutar
+   Posisi kipas per frame: x, y (px), rz (miring), ry (putar 3D)
    ========================================================= */
 (function(){
-  const rows=document.getElementById('work-rows'),tabs=document.getElementById('work-tabs'); if(!rows) return;
+  const fan=document.getElementById('pf-fan'); if(!fan) return;
   const PAL=[['#7B3CFF','#FF2FB9'],['#3CC8FF','#7B3CFF'],['#FF9C5B','#FF2FB9'],['#3CFFD2','#5B2BFF'],['#FFD84D','#FF7AD9'],['#FF2FB9','#1B0A3A']];
+  const COL={tvc:'#9B6BFF',dvc:'#3CC8FF',ugc:'#FF2FB9',sosmed:'#FF9C5B'};
+  const POSE=[{x:-330,y:10,rz:-9,ry:22,rx:4},{x:-110,y:-14,rz:-3,ry:10,rx:2},{x:110,y:-8,rz:4,ry:-10,rx:2},{x:330,y:16,rz:10,ry:-22,rx:4}];
   const esc=t=>String(t||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const grad=(ci,i)=>{const [a,b]=PAL[(i+ci)%PAL.length];return `radial-gradient(70% 60% at 30% 25%,${a},transparent 70%),radial-gradient(60% 60% at 80% 80%,${b},transparent 70%),#12062A`};
+
+  function place(){
+    const k=Math.min(1,fan.clientWidth/1100);
+    [...fan.children].forEach((f,i)=>{const p=POSE[i%POSE.length];
+      f.style.setProperty('--x',(p.x*k)+'px');f.style.setProperty('--y',p.y+'px');
+      f.style.setProperty('--rz',p.rz+'deg');f.style.setProperty('--ry',p.ry+'deg');f.style.setProperty('--rx',p.rx+'deg');
+      f.style.setProperty('--z',i===1||i===2?3:2);f.style.setProperty('--mz',(p.rz/3)+'deg')});
+  }
+
   WORK.forEach((cat,ci)=>{
-    tabs.insertAdjacentHTML('beforeend',`<a href="#w-${cat.key}">${esc(cat.name)}</a>`);
-    const row=document.createElement('div');row.className='wrow';row.id='w-'+cat.key;
-    row.innerHTML=`<div class="wrow-bar"><h3>${esc(cat.name)} <small>${esc(cat.full)}</small></h3><span class="cnt">${String(cat.items.length).padStart(2,'0')} karya</span>
-      <button type="button" class="wprev" aria-label="Sebelumnya">←</button><button type="button" class="wnext" aria-label="Berikutnya">→</button></div>
-      <div class="wtrack" data-shape="${cat.shape}" role="list"></div>`;
-    const track=row.querySelector('.wtrack');
-    cat.items.forEach((it,i)=>{
-      const [a,b]=PAL[(i+ci)%PAL.length];
-      const g=`radial-gradient(70% 60% at 30% 25%,${a},transparent 70%),radial-gradient(60% 60% at 80% 80%,${b},transparent 70%),#12062A`;
-      const btn=document.createElement('button');btn.type='button';btn.className='witem';btn.setAttribute('role','listitem');
-      btn.style.setProperty('--y',[0,18,-10,24,6][i%5]+'px');   // posisi naik-turun ala "melayang"
-      btn.innerHTML=`<span class="wtag"><i>${esc(cat.name)}</i>${esc(it.client)}</span>
-        <span class="wthumb" style="--g:${g}">
-          ${it.thumb?`<img src="${esc(it.thumb)}" alt="" loading="lazy" draggable="false">`:'<i class="dm">DUMMY</i>'}
-          ${it.preview?`<video src="${esc(it.preview)}" muted loop playsinline preload="none"></video>`:''}
-          <span class="play" aria-hidden="true">▶</span>
-          <span class="wcap"><b>${esc(it.title)}</b><span>${esc(it.client)}</span></span>
-        </span>`;
-      btn.setAttribute('aria-label',`${cat.name}: ${it.title} — ${it.client}`);
-      const pv=btn.querySelector('video');
-      if(pv){btn.addEventListener('mouseenter',()=>pv.play().catch(()=>{}));btn.addEventListener('mouseleave',()=>{pv.pause();pv.currentTime=0})}
-      btn.addEventListener('click',e=>{if(track.dataset.moved==='1'){e.preventDefault();return}openBox(cat,it,g)});
-      track.appendChild(btn);
-    });
-    rows.appendChild(row);
-
-    // tombol panah
-    const prev=row.querySelector('.wprev'),next=row.querySelector('.wnext');
-    const step=()=>track.clientWidth*.8;
-    prev.onclick=()=>track.scrollBy({left:-step()});next.onclick=()=>track.scrollBy({left:step()});
-    const upd=()=>{prev.disabled=track.scrollLeft<4;next.disabled=track.scrollLeft+track.clientWidth>=track.scrollWidth-4};
-    track.addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd();
-
-    // seret pakai mouse
-    let down=false,x0=0,s0=0;
-    track.addEventListener('pointerdown',e=>{if(e.pointerType!=='mouse')return;down=true;x0=e.clientX;s0=track.scrollLeft;track.dataset.moved='0'});
-    addEventListener('pointermove',e=>{if(!down)return;const dx=e.clientX-x0;if(Math.abs(dx)>6){track.dataset.moved='1';track.classList.add('dragging')}track.scrollLeft=s0-dx});
-    addEventListener('pointerup',()=>{if(!down)return;down=false;track.classList.remove('dragging');setTimeout(()=>track.dataset.moved='0',0)});
+    const c=COL[cat.key]||'#9B6BFF', first=cat.items[0]||{};
+    const f=document.createElement('button');f.type='button';f.className='pf-frame';f.id='w-'+cat.key;f.setAttribute('role','listitem');
+    f.style.setProperty('--c',c);
+    f.setAttribute('aria-label',`Buka galeri ${cat.name} — ${cat.full}, ${cat.items.length} karya`);
+    const cover=cat.cover||first.thumb;
+    f.innerHTML=`<span class="pf-card"><span class="pf-cover" style="--g:${grad(ci,0)}">
+        ${cover?`<img src="${esc(cover)}" alt="" loading="lazy">`:''}
+        ${cat.preview?`<video src="${esc(cat.preview)}" muted loop playsinline preload="none"></video>`:''}
+        <i class="pf-tag">${esc(cat.name)}</i><i class="pf-cnt">${String(cat.items.length).padStart(2,'0')} karya</i>
+        <span class="pf-title"><b>${esc(cat.name)}</b><span>${esc(cat.full)}</span></span>
+      </span><span class="pf-foot">Lihat galeri ›</span></span>`;
+    const pv=f.querySelector('video');
+    if(pv){f.addEventListener('mouseenter',()=>pv.play().catch(()=>{}));f.addEventListener('mouseleave',()=>pv.pause())}
+    f.addEventListener('click',()=>openGal(cat.key));
+    fan.appendChild(f);
   });
+  place(); addEventListener('resize',place);
 
-  // pemutar video
+  /* ---------- galeri ---------- */
+  const gal=document.getElementById('pf-gal'),grid=document.getElementById('pf-gal-grid'),tabs=document.getElementById('pf-gal-tabs');
+  let lastFocus=null,curKey=null;
+  tabs.innerHTML=WORK.map(c=>`<button type="button" data-k="${c.key}">${esc(c.name)}</button>`).join('');
+  tabs.addEventListener('click',e=>{const b=e.target.closest('[data-k]');if(b)fill(b.dataset.k)});
+  function fill(key){
+    const ci=WORK.findIndex(c=>c.key===key),cat=WORK[ci]; if(!cat) return; curKey=key;
+    document.getElementById('pf-gal-title').textContent=cat.name;
+    document.getElementById('pf-gal-full').textContent=`${cat.full} · ${cat.items.length} karya`;
+    gal.style.setProperty('--gc',COL[key]||'#FF2FB9');
+    tabs.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.k===key));
+    grid.dataset.shape=cat.shape;grid.innerHTML='';
+    cat.items.forEach((it,i)=>{
+      const g=grad(ci,i),b=document.createElement('button');b.type='button';b.className='pf-it';
+      b.style.setProperty('--g',g);b.style.setProperty('--d',(i*.05)+'s');
+      b.setAttribute('aria-label',`Putar ${it.title} — ${it.client}`);
+      b.innerHTML=`${it.thumb?`<img src="${esc(it.thumb)}" alt="" loading="lazy">`:'<i class="dm">DUMMY</i>'}
+        ${it.preview?`<video src="${esc(it.preview)}" muted loop playsinline preload="none"></video>`:''}
+        <span class="play" aria-hidden="true">▶</span><span class="cap"><b>${esc(it.title)}</b><span>${esc(it.client)}</span></span>`;
+      const pv=b.querySelector('video');
+      if(pv){b.addEventListener('mouseenter',()=>pv.play().catch(()=>{}));b.addEventListener('mouseleave',()=>{pv.pause();pv.currentTime=0})}
+      b.addEventListener('click',()=>openBox(cat,it,g));
+      grid.appendChild(b);
+    });
+  }
+  function openGal(key){
+    lastFocus=document.activeElement;fill(key);
+    gal.hidden=false;requestAnimationFrame(()=>gal.classList.add('on'));
+    document.body.classList.add('gal-open');document.getElementById('pf-gal-x').focus();
+  }
+  function closeGal(){gal.classList.remove('on');gal.hidden=true;document.body.classList.remove('gal-open');if(lastFocus)lastFocus.focus()}
+  document.getElementById('pf-gal-x').onclick=closeGal;
+  gal.addEventListener('click',e=>{if(e.target===gal)closeGal()});
+
+  /* ---------- pemutar video ---------- */
   const box=document.getElementById('wbox'),inner=document.getElementById('wbox-in'),frame=document.getElementById('wbox-frame'),meta=document.getElementById('wbox-meta');
-  let last=null;
+  let lastBox=null;
   function openBox(cat,it,g){
-    last=document.activeElement;
-    inner.classList.toggle('v',cat.shape==='v');
-    frame.style.setProperty('--g',g);
+    lastBox=document.activeElement;
+    inner.classList.toggle('v',cat.shape==='v');frame.style.setProperty('--g',g);
     if(it.youtube) frame.innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(it.youtube)}?autoplay=1&rel=0" allow="autoplay; encrypted-media; fullscreen" allowfullscreen title="${esc(it.title)}"></iframe>`;
     else if(it.video) frame.innerHTML=`<video src="${esc(it.video)}" controls autoplay playsinline></video>`;
     else frame.innerHTML=`<div class="none">Video belum dipasang.<br>Isi "video" atau "youtube" untuk karya ini.</div>`;
     meta.innerHTML=`<b>${esc(it.title)}</b><span>${esc(cat.name)} · ${esc(it.client)}</span>`;
     box.classList.add('on');document.getElementById('wbox-close').focus();
   }
-  function closeBox(){box.classList.remove('on');frame.innerHTML='';if(last)last.focus()}
+  function closeBox(){box.classList.remove('on');frame.innerHTML='';if(lastBox)lastBox.focus()}
   document.getElementById('wbox-close').onclick=closeBox;
   box.addEventListener('click',e=>{if(e.target===box)closeBox()});
-  addEventListener('keydown',e=>{if(e.key==='Escape'&&box.classList.contains('on'))closeBox()});
+  addEventListener('keydown',e=>{if(e.key!=='Escape')return;
+    if(box.classList.contains('on'))closeBox(); else if(!gal.hidden)closeGal()});
+
+  /* ---------- menu UGC Viral / 360 Campaign: scroll ke portfolio lalu buka galerinya ---------- */
+  function fromHash(h){const m=/^#w-(\w+)$/.exec(h||'');if(!m||!WORK.some(c=>c.key===m[1]))return false;
+    document.getElementById('portfolio').scrollIntoView({behavior:'smooth'});setTimeout(()=>openGal(m[1]),650);return true}
+  document.querySelectorAll('a[href^="#w-"]').forEach(a=>a.addEventListener('click',e=>{
+    if(fromHash(a.getAttribute('href'))){e.preventDefault();document.getElementById('nav').classList.remove('open')}}));
+  if(location.hash) setTimeout(()=>fromHash(location.hash),400);
 })();
 
 /* =========================================================
@@ -1365,7 +1497,7 @@ function heroSilhouette(c,i){
 
 /* menu aktif mengikuti section yang sedang dilihat */
 (function(){
-  const links=[...document.querySelectorAll('.links a[href^="#"]')];
+  const links=[...document.querySelectorAll('.links a[href^="#"]:not([href^="#w-"])')];
   function spy(){
     // pilih section yang posisinya paling dekat di atas garis 35% layar
     const secs=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
