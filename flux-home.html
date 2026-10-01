@@ -1104,6 +1104,13 @@ body.gal-open{overflow:hidden}
 .sqd-arrows button:hover{background:var(--c);transform:none;box-shadow:4px 4px 0 #EFE7F3}
 .sqd-arrows span{border-radius:0;background:#EFE7F3;color:#0B0710;font:400 .95rem/1 "Anton","Impact",sans-serif;letter-spacing:.08em}
 .sqd-x{border-radius:0;background:#EFE7F3;color:#0B0710;border:0;box-shadow:3px 3px 0 var(--c);font:400 .95rem/1 "Anton","Impact",sans-serif;letter-spacing:.08em}
+/* investor: poster tunggal */
+.inv-poster{position:relative;margin:clamp(1.5rem,4vw,3rem) auto 0;max-width:1180px;padding:clamp(6px,.8vw,12px);background:#EFE7F3;transform:rotate(-1deg);box-shadow:10px 10px 0 var(--hot),0 30px 60px rgba(0,0,0,.6)}
+.inv-poster::before,.inv-poster::after{content:"";position:absolute;top:-14px;width:110px;height:28px;background:color-mix(in srgb,var(--hot) 80%,transparent);clip-path:polygon(3% 0,97% 6%,100% 92%,0 100%)}
+.inv-poster::before{left:8%;transform:rotate(-6deg)}
+.inv-poster::after{right:8%;transform:rotate(5deg);background:color-mix(in srgb,var(--vio) 85%,transparent)}
+.inv-poster img{display:block;width:100%;height:auto}
+@media (max-width:700px){.inv-poster{transform:rotate(-.6deg);box-shadow:6px 6px 0 var(--hot),0 20px 40px rgba(0,0,0,.6)}.inv-poster::before,.inv-poster::after{width:70px;height:20px;top:-10px}}
 /* awards sekarang section pertama setelah hero: memakai tepi sobek */
 .next.awards{display:block;min-height:0;text-align:left;overflow:visible;overflow-x:clip;
   background:
@@ -1309,62 +1316,15 @@ body.gal-open{overflow:hidden}
     <div class="inv-in">
       <div class="aw-head rv">
         <div>
-          <p class="aw-eyebrow">Backed by believers <span class="dummy-tag">DATA DUMMY</span></p>
+          <p class="aw-eyebrow">Backed by believers</p>
           <h2 class="aw-title" id="inv-title"><span class="our">Our</span><em>Investors</em></h2>
         </div>
         <p class="aw-lead">Mereka yang percaya pada semesta kreatif FCU sejak awal — dan ikut mendorong kami membangun masa depan konten Indonesia berbasis AI.</p>
       </div>
 
-      <div class="inv-stats">
-        <div class="aw-stat rv"><b data-count="8">0</b><span>Investor &amp; partner</span></div>
-        <div class="aw-stat rv" style="--d:.1s"><b data-count="3">0</b><span>Putaran pendanaan</span></div>
-        <div class="aw-stat rv" style="--d:.2s"><b data-count="5" data-suffix="x">0</b><span>Pertumbuhan sejak 2023</span></div>
-      </div>
-
-      <ul class="inv-grid" aria-label="Daftar investor">
-        <li class="inv-logo rv" style="--d:0.00s">
-          <!-- ganti dengan <img src="aset/investor-1.webp" alt="Nama Investor"> -->
-          <span class="ph">LOGO 01</span><b>Nama Investor</b><small>Lead Investor</small>
-        </li>
-        <li class="inv-logo rv" style="--d:0.05s">
-          <!-- ganti dengan <img src="aset/investor-2.webp" alt="Nama Investor"> -->
-          <span class="ph">LOGO 02</span><b>Nama Investor</b><small>Venture Capital</small>
-        </li>
-        <li class="inv-logo rv" style="--d:0.10s">
-          <!-- ganti dengan <img src="aset/investor-3.webp" alt="Nama Investor"> -->
-          <span class="ph">LOGO 03</span><b>Nama Investor</b><small>Angel Investor</small>
-        </li>
-        <li class="inv-logo rv" style="--d:0.15s">
-          <!-- ganti dengan <img src="aset/investor-4.webp" alt="Nama Investor"> -->
-          <span class="ph">LOGO 04</span><b>Nama Investor</b><small>Strategic Partner</small>
-        </li>
-        <li class="inv-logo rv" style="--d:0.20s">
-          <!-- ganti dengan <img src="aset/investor-5.webp" alt="Nama Investor"> -->
-          <span class="ph">LOGO 05</span><b>Nama Investor</b><small>Venture Capital</small>
-        </li>
-        <li class="inv-logo rv" style="--d:0.25s">
-          <!-- ganti dengan <img src="aset/investor-6.webp" alt="Nama Investor"> -->
-          <span class="ph">LOGO 06</span><b>Nama Investor</b><small>Corporate VC</small>
-        </li>
-        <li class="inv-logo rv" style="--d:0.30s">
-          <!-- ganti dengan <img src="aset/investor-7.webp" alt="Nama Investor"> -->
-          <span class="ph">LOGO 07</span><b>Nama Investor</b><small>Angel Investor</small>
-        </li>
-        <li class="inv-logo rv" style="--d:0.35s">
-          <!-- ganti dengan <img src="aset/investor-8.webp" alt="Nama Investor"> -->
-          <span class="ph">LOGO 08</span><b>Nama Investor</b><small>Strategic Partner</small>
-        </li>
-      </ul>
-
-      <figure class="inv-quote rv">
-        <blockquote>"[Kutipan dari lead investor tentang alasan mereka percaya pada Flux Creative Universe.]"</blockquote>
-        <figcaption><b>[Nama]</b> · [Jabatan], [Nama Firma]</figcaption>
+      <figure class="inv-poster rv">
+        <img src="aset/investors-1000.webp" srcset="aset/investors-1000.webp 1000w, aset/investors.webp 2000w" sizes="(max-width:1200px) 94vw, 1180px" width="2000" height="1125" loading="lazy" decoding="async" alt="Poster para investor Flux Creative Universe">
       </figure>
-
-      <div class="inv-cta rv">
-        <p>Tertarik tumbuh bersama semesta FCU?</p>
-        <a class="cut" href="mailto:hello@flux.example">Hubungi tim investor relations →</a>
-      </div>
     </div>
   </section>
 
