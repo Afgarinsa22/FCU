@@ -480,7 +480,7 @@ input:focus,select:focus{outline:none;border-color:var(--pink);box-shadow:0 0 0 
    - SHEETS_URL: isi dengan URL Web App Google Apps Script supaya
      data form masuk ke Google Sheets. Selama kosong, data hanya
      disimpan di browser (untuk uji coba).
-   - Gambar kartu: isi "img" (mis. "aset/play/card-01.webp").
+   - Gambar kartu: isi "img" (mis. "aset/play/card-01.webp?v=2").
      Selama kosong, kartu memakai ilustrasi dummy (emoji + warna).
    ========================================================= */
 const SHEETS_URL = '';
@@ -546,8 +546,8 @@ const CARDS = [
   {t:'Nyimak cerita horor di grup chat tengah malam?',tag:'Group chat',q:'"Takut, tapi tetap baca sampai habis."',e:'👻',p:'story',s:'hype',bg:'#1A0838',ac:'#3CFFD2',ac2:'#0A0418'},
   {t:'Karaoke all-out di acara 17-an?',tag:'Local ritual',q:'"Mic direbut, lagu dangdut diputar."',e:'🎤',p:'hype',s:'sound',bg:'#D4202C',ac:'#FFFFFF',ac2:'#6B0A12'}
 ];
-CARDS.forEach((c,i)=>{c.id=i;c.img='aset/play/card-'+String(i+1).padStart(2,'0')+'.webp'});
-Object.keys(SIGNALS).forEach(k=>SIGNALS[k].img='aset/play/sig-'+k+'.webp');
+CARDS.forEach((c,i)=>{c.id=i;c.img='aset/play/card-'+String(i+1).padStart(2,'0')+'.webp?v=2'});
+Object.keys(SIGNALS).forEach(k=>SIGNALS[k].img='aset/play/sig-'+k+'.webp?v=2');
 const TOTAL=CARDS.length;
 
 /* ---------- penyimpanan ringan di browser ---------- */
