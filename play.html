@@ -544,7 +544,8 @@ const CARDS = [
   {t:'Nyimak cerita horor di grup chat tengah malam?',tag:'Group chat',q:'"Takut, tapi tetap baca sampai habis."',e:'👻',p:'story',s:'hype',bg:'#1A0838',ac:'#3CFFD2',ac2:'#0A0418'},
   {t:'Karaoke all-out di acara 17-an?',tag:'Local ritual',q:'"Mic direbut, lagu dangdut diputar."',e:'🎤',p:'hype',s:'sound',bg:'#D4202C',ac:'#FFFFFF',ac2:'#6B0A12'}
 ];
-CARDS.forEach((c,i)=>c.id=i);
+CARDS.forEach((c,i)=>{c.id=i;c.img='aset/play/card-'+String(i+1).padStart(2,'0')+'.webp'});
+Object.keys(SIGNALS).forEach(k=>SIGNALS[k].img='aset/play/sig-'+k+'.webp');
 const TOTAL=CARDS.length;
 
 /* ---------- penyimpanan ringan di browser ---------- */
