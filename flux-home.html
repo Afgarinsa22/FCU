@@ -1023,6 +1023,41 @@ body.gal-open{overflow:hidden}
   .grunge .aw-card.aw-photo:nth-child(n) .tier{left:auto;right:-10px;top:.8rem;bottom:auto}
   .grunge .aw-photo p{margin-right:5.5rem}
 }
+
+/* =========================================================
+   INVESTORS — grunge
+   ========================================================= */
+.inv{position:relative;z-index:10;padding:clamp(5rem,9vw,8rem) clamp(1.25rem,6vw,7rem)}
+.inv-in{position:relative;z-index:1;max-width:76rem;margin:0 auto}
+.inv-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.4rem;margin-top:3rem}
+.inv-grid{list-style:none;margin:clamp(3rem,6vw,4.5rem) 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.8rem 1.4rem}
+.inv-logo{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.35rem;aspect-ratio:4/3;padding:1rem;text-align:center;
+  background:var(--paper);color:var(--ink);box-shadow:7px 8px 0 rgba(0,0,0,.6);transition:rotate .35s,translate .35s,box-shadow .35s}
+.inv-logo:nth-child(4n+1){rotate:-2deg}.inv-logo:nth-child(4n+2){rotate:1.5deg;translate:0 10px}
+.inv-logo:nth-child(4n+3){rotate:-.8deg}.inv-logo:nth-child(4n){rotate:2deg;translate:0 6px}
+.inv-logo:hover{rotate:0deg;translate:0 -6px;box-shadow:9px 11px 0 var(--hot)}
+.inv-logo::before{content:"";position:absolute;top:-12px;left:50%;width:4.5rem;height:1.3rem;translate:-50% 0;rotate:-4deg;background:rgba(255,47,185,.75);
+  clip-path:polygon(0 12%,4% 0,8% 14%,92% 4%,96% 16%,100% 6%,100% 88%,96% 100%,90% 86%,6% 96%,2% 84%,0 100%)}
+.inv-logo:nth-child(even)::before{background:rgba(155,107,255,.8);rotate:5deg}
+.inv-logo .ph{font:400 1.6rem/1 var(--cond);letter-spacing:.06em;color:#3a2a4a;border:2px dashed rgba(11,7,16,.3);padding:.5rem .8rem}
+.inv-logo img{max-width:80%;max-height:55%;object-fit:contain;filter:grayscale(1) contrast(1.1);transition:filter .3s}
+.inv-logo:hover img{filter:none}
+.inv-logo b{font:400 1.1rem/1 var(--cond);letter-spacing:.04em;text-transform:uppercase}
+.inv-logo small{font:400 .95rem/1 var(--marker);color:var(--hot)}
+.inv-quote{position:relative;margin:clamp(3.5rem,7vw,5rem) auto 0;max-width:56rem;padding:clamp(1.6rem,4vw,2.6rem);background:#120A18;border:2px solid rgba(239,231,243,.85);box-shadow:10px 12px 0 var(--vio);rotate:-.6deg}
+.inv-quote::before{content:"“";position:absolute;top:-2.6rem;left:1rem;font:400 7rem/1 var(--cond);color:var(--hot)}
+.inv-quote blockquote{margin:0;font:400 clamp(1.4rem,2.6vw,2.2rem)/1.15 var(--cond);letter-spacing:.01em;text-transform:uppercase;color:var(--paper)}
+.inv-quote figcaption{margin-top:1rem;color:#CFC4D8}
+.inv-quote figcaption b{color:var(--hot)}
+.inv-cta{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:1rem 1.6rem;margin-top:3rem;text-align:center}
+.inv-cta p{margin:0;font:400 1.3rem/1.2 var(--marker);color:var(--paper);rotate:-1.5deg}
+@media (max-width:900px){ .inv-grid{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media (max-width:560px){
+  .inv-stats{gap:.5rem}
+  .inv-stats .aw-stat{padding:1rem .8rem}
+  .inv-stats .aw-stat b{font-size:1.8rem}
+  .inv-stats .aw-stat span{font-size:.62rem}
+}
 /* awards sekarang section pertama setelah hero: memakai tepi sobek */
 .next.awards{display:block;min-height:0;text-align:left;overflow:visible;overflow-x:clip;
   background:
@@ -1033,7 +1068,7 @@ body.gal-open{overflow:hidden}
 /* =========================================================
    RESPONSIVE
    ========================================================= */
-@media (max-width:1340px){
+@media (max-width:1500px){
   .links{display:none}
   .menu-btn{display:block}
   .nav > .cut{display:none}
@@ -1058,6 +1093,7 @@ body.gal-open{overflow:hidden}
   <ul class="links" id="links">
     <li><a href="#home" aria-current="page">Home</a></li>
     <li><a href="#awards">Awards</a></li>
+    <li><a href="#investors">Investors</a></li>
     <li><a href="#portfolio">Portfolio</a></li>
     <li><a href="#w-ugc">UGC Viral</a></li>
     <li><a href="#w-tvc">360 Campaign</a></li>
@@ -1220,6 +1256,72 @@ body.gal-open{overflow:hidden}
   <!-- PORTFOLIO FLUX ====================================================
        Isi karya diatur di JavaScript bagian "PORTFOLIO — DATA" (cari: const WORK).
        Satu kategori = satu baris yang bisa digeser. -->
+  <!-- INVESTORS ========================================================
+       DATA MASIH DUMMY — ganti logo, nama, kutipan & angka. -->
+  <section class="inv grunge" id="investors" aria-labelledby="inv-title">
+    <div class="gr-bgtext" aria-hidden="true">BACKED</div>
+    <div class="inv-in">
+      <div class="aw-head rv">
+        <div>
+          <p class="aw-eyebrow">Backed by believers <span class="dummy-tag">DATA DUMMY</span></p>
+          <h2 class="aw-title" id="inv-title"><span class="our">Our</span><em>Investors</em></h2>
+        </div>
+        <p class="aw-lead">Mereka yang percaya pada semesta kreatif FCU sejak awal — dan ikut mendorong kami membangun masa depan konten Indonesia berbasis AI.</p>
+      </div>
+
+      <div class="inv-stats">
+        <div class="aw-stat rv"><b data-count="8">0</b><span>Investor &amp; partner</span></div>
+        <div class="aw-stat rv" style="--d:.1s"><b data-count="3">0</b><span>Putaran pendanaan</span></div>
+        <div class="aw-stat rv" style="--d:.2s"><b data-count="5" data-suffix="x">0</b><span>Pertumbuhan sejak 2023</span></div>
+      </div>
+
+      <ul class="inv-grid" aria-label="Daftar investor">
+        <li class="inv-logo rv" style="--d:0.00s">
+          <!-- ganti dengan <img src="aset/investor-1.webp" alt="Nama Investor"> -->
+          <span class="ph">LOGO 01</span><b>Nama Investor</b><small>Lead Investor</small>
+        </li>
+        <li class="inv-logo rv" style="--d:0.05s">
+          <!-- ganti dengan <img src="aset/investor-2.webp" alt="Nama Investor"> -->
+          <span class="ph">LOGO 02</span><b>Nama Investor</b><small>Venture Capital</small>
+        </li>
+        <li class="inv-logo rv" style="--d:0.10s">
+          <!-- ganti dengan <img src="aset/investor-3.webp" alt="Nama Investor"> -->
+          <span class="ph">LOGO 03</span><b>Nama Investor</b><small>Angel Investor</small>
+        </li>
+        <li class="inv-logo rv" style="--d:0.15s">
+          <!-- ganti dengan <img src="aset/investor-4.webp" alt="Nama Investor"> -->
+          <span class="ph">LOGO 04</span><b>Nama Investor</b><small>Strategic Partner</small>
+        </li>
+        <li class="inv-logo rv" style="--d:0.20s">
+          <!-- ganti dengan <img src="aset/investor-5.webp" alt="Nama Investor"> -->
+          <span class="ph">LOGO 05</span><b>Nama Investor</b><small>Venture Capital</small>
+        </li>
+        <li class="inv-logo rv" style="--d:0.25s">
+          <!-- ganti dengan <img src="aset/investor-6.webp" alt="Nama Investor"> -->
+          <span class="ph">LOGO 06</span><b>Nama Investor</b><small>Corporate VC</small>
+        </li>
+        <li class="inv-logo rv" style="--d:0.30s">
+          <!-- ganti dengan <img src="aset/investor-7.webp" alt="Nama Investor"> -->
+          <span class="ph">LOGO 07</span><b>Nama Investor</b><small>Angel Investor</small>
+        </li>
+        <li class="inv-logo rv" style="--d:0.35s">
+          <!-- ganti dengan <img src="aset/investor-8.webp" alt="Nama Investor"> -->
+          <span class="ph">LOGO 08</span><b>Nama Investor</b><small>Strategic Partner</small>
+        </li>
+      </ul>
+
+      <figure class="inv-quote rv">
+        <blockquote>"[Kutipan dari lead investor tentang alasan mereka percaya pada Flux Creative Universe.]"</blockquote>
+        <figcaption><b>[Nama]</b> · [Jabatan], [Nama Firma]</figcaption>
+      </figure>
+
+      <div class="inv-cta rv">
+        <p>Tertarik tumbuh bersama semesta FCU?</p>
+        <a class="cut" href="mailto:hello@flux.example">Hubungi tim investor relations →</a>
+      </div>
+    </div>
+  </section>
+
   <section class="work grunge" id="portfolio" aria-labelledby="work-title">
     <div class="gr-bgtext" aria-hidden="true">WORKS</div>
     <div class="work-head">
