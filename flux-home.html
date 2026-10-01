@@ -961,7 +961,7 @@ body.gal-open{overflow:hidden}
 .sqd-nav button{width:3rem;height:3rem;border-radius:50%;cursor:pointer;color:#fff;font-size:1rem;background:rgba(24,8,52,.7);border:1px solid color-mix(in srgb,var(--c) 70%,transparent);transition:background .2s,box-shadow .2s}
 .sqd-nav button:hover{background:color-mix(in srgb,var(--c) 35%,transparent);box-shadow:0 0 18px var(--c)}
 @media (max-width:800px){
-  .sqd-in{grid-template-columns:1fr;grid-template-rows:auto 1fr;align-items:start;overflow-y:auto;padding-top:calc(var(--nav-h) + 3.5rem)}
+  .sqd-in{grid-template-columns:minmax(0,1fr);grid-template-rows:auto 1fr;align-items:start;overflow-y:auto;padding-top:calc(var(--nav-h) + 3.5rem)}
   .sqd-figwrap{height:46vh;order:0}
   .sqd-data{padding-bottom:6rem}
   .sqd-ghost{display:none}
@@ -1063,6 +1063,47 @@ body.gal-open{overflow:hidden}
   .inv-stats .aw-stat b{font-size:1.8rem}
   .inv-stats .aw-stat span{font-size:.62rem}
 }
+
+/* =========================================================
+   JAGOAN FLUX — versi grunge
+   ========================================================= */
+.squad.grunge{background:var(--ink)}
+.squad.grunge .squad-in{position:relative;z-index:1}
+.squad.grunge .sq-floor{background:radial-gradient(50% 50% at 50% 50%,rgba(255,47,185,.22),rgba(155,107,255,.1) 45%,transparent 70%);
+  box-shadow:inset 0 0 0 2px rgba(239,231,243,.5);border-radius:50%}
+.squad.grunge .sq-floor::after{border:2px dashed rgba(239,231,243,.35)}
+.squad.grunge .sq-name{font:400 clamp(1rem,1.5vw,1.3rem)/1 var(--cond);letter-spacing:.06em;padding:.3rem .6rem;background:var(--paper);color:var(--ink);text-shadow:none;rotate:-3deg;box-shadow:3px 3px 0 var(--c)}
+.squad.grunge .sq-nav{border-radius:0;background:var(--paper);color:var(--ink);border:0;font-weight:700;box-shadow:4px 4px 0 var(--hot);backdrop-filter:none}
+.squad.grunge .sq-nav:hover{background:var(--hot);color:var(--ink);box-shadow:4px 4px 0 var(--paper)}
+.squad.grunge .sq-info .n{font:400 1rem/1 var(--cond);letter-spacing:.1em;color:var(--ink);background:var(--c);padding:.25rem .55rem;display:inline-block;rotate:-2deg}
+.squad.grunge .sq-info h3{font:400 clamp(2.8rem,6vw,4.8rem)/.9 var(--cond);letter-spacing:.01em;color:var(--paper);text-shadow:4px 4px 0 var(--c),0 0 24px color-mix(in srgb,var(--c) 40%,transparent)}
+.squad.grunge .sq-info .real{color:#CFC4D8}
+.squad.grunge .sq-info .q{font:400 1.15rem/1.3 var(--marker);font-style:normal;color:var(--c);rotate:-1deg}
+.squad.grunge .sq-info .stats{padding:1rem 1.1rem;background:#120A18;border:2px solid rgba(239,231,243,.85);box-shadow:7px 8px 0 var(--c);border-radius:0;rotate:-.5deg}
+.squad.grunge .sq-info .stats div{font:400 .85rem/1 var(--cond);letter-spacing:.08em;color:var(--paper)}
+.squad.grunge .sq-info .stats i{border-radius:0;height:9px;background:rgba(239,231,243,.12)}
+.squad.grunge .sq-info .stats i b{border-radius:0;background:var(--c);box-shadow:none}
+.squad.grunge .sq-dots button{border-radius:0;background:rgba(239,231,243,.3)}
+.squad.grunge .sq-dots button[aria-current="true"]{background:var(--hot);box-shadow:3px 3px 0 var(--paper)}
+.squad.grunge .sq-tip{font:400 1rem/1 var(--marker);letter-spacing:0;text-transform:none;color:var(--hot);rotate:-1.5deg}
+
+/* detail jagoan (zoom-in) ikut grunge */
+.sqd{background:radial-gradient(60% 70% at 30% 55%,color-mix(in srgb,var(--c) 32%,#0B0710),#0B0710 75%)}
+.sqd::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.3;mix-blend-mode:screen;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .55 -.18'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.sqd-data .k{font:400 1rem/1 "Anton","Impact",sans-serif;letter-spacing:.1em;display:inline-block;padding:.3rem .6rem;background:var(--c);color:#0B0710;rotate:-2deg}
+.sqd-data h3{font:400 clamp(3rem,6.4vw,5.6rem)/.88 "Anton","Impact",sans-serif;letter-spacing:.01em;color:#EFE7F3;text-shadow:5px 5px 0 var(--c)}
+.sqd-data .bar{height:5px;width:6rem}
+.sqd-data dt{font:400 .9rem/1.5 "Anton","Impact",sans-serif;letter-spacing:.08em;color:var(--c)}
+.sqd-data .q{font:400 1.25rem/1.3 "Permanent Marker",cursive;font-style:normal;color:#EFE7F3;rotate:-1deg}
+.sqd-data .stats{padding:1rem 1.1rem;background:#120A18;border:2px solid rgba(239,231,243,.85);box-shadow:7px 8px 0 var(--c)}
+.sqd-data .stats div{font:400 .85rem/1 "Anton","Impact",sans-serif;letter-spacing:.08em;color:#EFE7F3}
+.sqd-data .stats i,.sqd-data .stats i b{border-radius:0;box-shadow:none}
+.sqd-data .stats i b{background:var(--c)}
+.sqd-arrows button{border-radius:0;background:#EFE7F3;color:#0B0710;border:0;font-weight:700;box-shadow:4px 4px 0 var(--c);backdrop-filter:none}
+.sqd-arrows button:hover{background:var(--c);transform:none;box-shadow:4px 4px 0 #EFE7F3}
+.sqd-arrows span{border-radius:0;background:#EFE7F3;color:#0B0710;font:400 .95rem/1 "Anton","Impact",sans-serif;letter-spacing:.08em}
+.sqd-x{border-radius:0;background:#EFE7F3;color:#0B0710;border:0;box-shadow:3px 3px 0 var(--c);font:400 .95rem/1 "Anton","Impact",sans-serif;letter-spacing:.08em}
 /* awards sekarang section pertama setelah hero: memakai tepi sobek */
 .next.awards{display:block;min-height:0;text-align:left;overflow:visible;overflow-x:clip;
   background:
@@ -1348,7 +1389,8 @@ body.gal-open{overflow:hidden}
   <!-- JAGOAN FLUX =======================================================
        Data diatur di JavaScript bagian "JAGOAN FLUX — DATA" (cari: const SQUAD).
        Foto kostum: simpan PNG transparan (potret badan penuh) di aset, lalu isi "img". -->
-  <section class="squad" id="jagoan" aria-labelledby="squad-title">
+  <section class="squad grunge" id="jagoan" aria-labelledby="squad-title">
+    <div class="gr-bgtext" aria-hidden="true">HEROES</div>
     <div class="squad-in">
       <div class="squad-head">
         <div>
