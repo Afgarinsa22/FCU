@@ -218,7 +218,9 @@ button{font:inherit;color:inherit}
 .coll-count{font:700 clamp(1.6rem,3vw,2.4rem)/1.1 var(--display)}
 .coll-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:.8rem}
 .mini{position:relative;aspect-ratio:3/4;border-radius:.9rem;overflow:hidden;display:grid;place-items:center;font-size:2rem;background:var(--bg);border:1px solid rgba(255,122,217,.3)}
-.mini small{position:absolute;left:0;right:0;bottom:.5rem;text-align:center;font:700 .5rem/1.2 var(--display);letter-spacing:.08em;text-transform:uppercase;padding:0 .3rem}
+.mini img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.mini::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(10,4,24,.85))}
+.mini small{z-index:1;color:#fff;position:absolute;left:0;right:0;bottom:.5rem;text-align:center;font:700 .5rem/1.2 var(--display);letter-spacing:.08em;text-transform:uppercase;padding:0 .3rem}
 .mini.locked{filter:grayscale(1) blur(3px);opacity:.35}
 .mini.me{box-shadow:0 0 0 2px var(--pink),0 0 20px rgba(255,47,185,.6)}
 
@@ -691,7 +693,7 @@ function showResult({main,bonus}){
   // koleksi
   $('#c-count').textContent=`${unlocked.size} / 6 signals unlocked`;
   $('#c-grid').innerHTML=ORDER.map(k=>{const x=SIGNALS[k];const on=unlocked.has(k);
-    return `<div class="mini ${on?'':'locked'} ${k===main?'me':''}" style="--bg:${x.bg}" title="${on?x.name:'Terkunci'}">${x.emo}<small>${on?x.name.replace('The ',''):'???'}</small></div>`}).join('');
+    return `<div class="mini ${on?'':'locked'} ${k===main?'me':''}" style="--bg:${x.bg}" title="${on?x.name:'Terkunci'}">${x.img?`<img src="${x.img}" alt="" loading="lazy">`:x.emo}<small>${on?x.name.replace('The ',''):'???'}</small></div>`}).join('');
 
   // kartu yang disukai
   const lk=$('#liked');lk.innerHTML='';
