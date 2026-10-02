@@ -429,6 +429,19 @@ h1{margin:.4rem 0 0;font:900 clamp(2.2rem,6.2vw,5.4rem)/1 var(--display);letter-
 .wbox-in.v .wbox-frame{aspect-ratio:9/16;max-height:80vh;margin:0 auto}
 .wbox-frame video,.wbox-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .wbox-frame .none{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:1.5rem;color:var(--muted);background:var(--g)}
+.wbox-in.v .wbox-frame{width:min(100%,calc(80vh * 9 / 16))}
+/* pemutar YouTube bersih: judul & kontrol YouTube dipotong, diganti kontrol sendiri */
+.yt-stage{position:absolute;inset:0;background:#000;overflow:hidden}
+.yt-crop{position:absolute;overflow:hidden}
+.yt-hit{position:absolute;inset:0;z-index:2;background:none;border:0;cursor:pointer}
+.yt-big{position:absolute;z-index:3;left:50%;top:50%;translate:-50% -50%;width:4.4rem;height:4.4rem;border:0;cursor:pointer;background:#FF2FB9;color:#0B0710;font-size:1.5rem;box-shadow:5px 5px 0 #EFE7F3;transition:opacity .2s}
+.yt-stage.playing .yt-big{opacity:0;pointer-events:none}
+.yt-bar{position:absolute;z-index:4;left:0;right:0;bottom:0;display:flex;align-items:center;gap:.6rem;padding:1.8rem .8rem .75rem;background:linear-gradient(0deg,rgba(0,0,0,.85),transparent);transition:opacity .3s}
+.yt-stage.playing:not(:hover):not(:focus-within) .yt-bar{opacity:0}
+.yt-bar button{flex:none;width:2.2rem;height:2.2rem;display:grid;place-items:center;border:0;cursor:pointer;background:#EFE7F3;color:#0B0710;font:700 .85rem/1 sans-serif;box-shadow:3px 3px 0 #FF2FB9}
+.yt-bar button svg{width:1.05rem;height:1.05rem;fill:currentColor}
+.yt-seek{flex:1;min-width:0;accent-color:#FF2FB9;cursor:pointer}
+.yt-t{flex:none;font:400 .85rem/1 "Anton","Impact",sans-serif;letter-spacing:.06em;color:#fff}
 .wbox-meta{margin-top:1rem;display:flex;flex-wrap:wrap;align-items:baseline;gap:.4rem 1rem}
 .wbox-meta b{font:900 1.1rem/1.2 var(--display);text-transform:uppercase}
 .wbox-meta span{color:var(--muted);font-size:.9rem}
@@ -1847,16 +1860,61 @@ const imgFb=it=>it.thumbFb?` data-fb="${it.thumbFb}" onload="if(this.naturalWidt
   /* ---------- pemutar video ---------- */
   const box=document.getElementById('wbox'),inner=document.getElementById('wbox-in'),frame=document.getElementById('wbox-frame'),meta=document.getElementById('wbox-meta');
   let lastBox=null;
+  /* ---------- pemutar YouTube tanpa judul/nama channel ---------- */
+  let ytP=null,ytTick=null,ytRO=null;
+  const ytApi=()=>window.YT&&YT.Player?Promise.resolve():new Promise(r=>{const prev=window.onYouTubeIframeAPIReady;
+    window.onYouTubeIframeAPIReady=()=>{prev&&prev();r()};
+    if(!document.getElementById('yt-api')){const sc=document.createElement('script');sc.id='yt-api';sc.src='https://www.youtube.com/iframe_api';document.head.appendChild(sc)}});
+  const IC={play:'<svg viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z"/></svg>',pause:'<svg viewBox="0 0 24 24"><path d="M6 4h4v16H6zm8 0h4v16h-4z"/></svg>',
+    vol:'<svg viewBox="0 0 24 24"><path d="M3 9h4l5-4v14l-5-4H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4z"/></svg>',
+    mute:'<svg viewBox="0 0 24 24"><path d="M3 9h4l5-4v14l-5-4H3zm13.6.2 1.4-1.4 2.1 2.1 2.1-2.1 1.4 1.4-2.1 2.1 2.1 2.1-1.4 1.4-2.1-2.1-2.1 2.1-1.4-1.4 2.1-2.1z"/></svg>',
+    fs:'<svg viewBox="0 0 24 24"><path d="M4 4h6v2H6v4H4zm10 0h6v6h-2V6h-4zM4 14h2v4h4v2H4zm14 0h2v6h-6v-2h4z"/></svg>'};
+  const fmt=t=>{t=Math.max(0,Math.floor(t||0));return Math.floor(t/60)+':'+String(t%60).padStart(2,'0')};
+  function mountYT(id,ar,title){
+    frame.innerHTML=`<div class="yt-stage"><div class="yt-crop"><div id="yt-el"></div></div>
+      <button class="yt-hit" type="button" aria-label="Putar atau jeda ${esc(title)}"></button>
+      <button class="yt-big" type="button" aria-label="Putar">${IC.play}</button>
+      <div class="yt-bar"><button class="yt-pp" type="button" aria-label="Putar">${IC.play}</button>
+        <input class="yt-seek" type="range" min="0" max="1000" value="0" aria-label="Posisi video">
+        <span class="yt-t">0:00</span><button class="yt-mute" type="button" aria-label="Bisukan">${IC.vol}</button>
+        <button class="yt-fs" type="button" aria-label="Layar penuh">${IC.fs}</button></div></div>`;
+    const st=frame.querySelector('.yt-stage'),crop=st.querySelector('.yt-crop'),q=c=>st.querySelector(c);
+    const fit=()=>{const w=st.clientWidth,h=st.clientHeight;if(!w||!h)return;const vw=Math.min(w,h*ar),vh=vw/ar,B=90;
+      crop.style.cssText=`left:${(w-vw)/2}px;top:${(h-vh)/2}px;width:${vw}px;height:${vh}px`;
+      const f=crop.firstElementChild;if(f)f.style.cssText=`position:absolute;left:0;top:${-B}px;width:${vw}px;height:${vh+2*B}px;border:0;pointer-events:none`};
+    fit();ytRO=new ResizeObserver(fit);ytRO.observe(st);
+    let state=-1,drag=false;
+    const toggle=()=>{if(!ytP||!ytP.getPlayerState)return;state===1?ytP.pauseVideo():ytP.playVideo()};
+    q('.yt-hit').onclick=toggle;q('.yt-big').onclick=toggle;q('.yt-pp').onclick=toggle;
+    const seek=q('.yt-seek');seek.oninput=()=>{drag=true};
+    seek.onchange=()=>{if(ytP&&ytP.getDuration)ytP.seekTo(ytP.getDuration()*seek.value/1000,true);drag=false};
+    q('.yt-mute').onclick=()=>{if(!ytP)return;const m=ytP.isMuted();m?ytP.unMute():ytP.mute();
+      q('.yt-mute').innerHTML=m?IC.vol:IC.mute;q('.yt-mute').setAttribute('aria-label',m?'Bisukan':'Nyalakan suara')};
+    const fsb=q('.yt-fs');if(!st.requestFullscreen)fsb.hidden=true;
+    fsb.onclick=()=>document.fullscreenElement?document.exitFullscreen():st.requestFullscreen().catch(()=>{});
+    const ui=d=>{state=d;st.classList.toggle('playing',d===1);const pp=q('.yt-pp');
+      pp.innerHTML=d===1?IC.pause:IC.play;pp.setAttribute('aria-label',d===1?'Jeda':'Putar');
+      q('.yt-big').innerHTML=d===0?'↻':IC.play};
+    ytTick=setInterval(()=>{if(!ytP||!ytP.getDuration)return;const d=ytP.getDuration(),c=ytP.getCurrentTime();
+      if(d&&!drag)seek.value=Math.round(c/d*1000);q('.yt-t').textContent=fmt(c)+' / '+fmt(d)},300);
+    ytApi().then(()=>{if(!frame.contains(st))return;
+      ytP=new YT.Player('yt-el',{host:'https://www.youtube-nocookie.com',videoId:id,
+        playerVars:{autoplay:1,controls:0,rel:0,playsinline:1,disablekb:1,fs:0,iv_load_policy:3,modestbranding:1},
+        events:{onReady:e=>{fit();try{e.target.playVideo()}catch(_){}},onStateChange:e=>ui(e.data)}});fit()});
+  }
+  function unmountYT(){clearInterval(ytTick);ytTick=null;if(ytRO){ytRO.disconnect();ytRO=null}
+    if(ytP){try{ytP.destroy()}catch(_){}ytP=null}if(document.fullscreenElement)document.exitFullscreen().catch(()=>{})}
   function openBox(cat,it,g){
     lastBox=document.activeElement;
     inner.classList.toggle('v',cat.shape==='v');frame.style.setProperty('--g',g);
-    if(it.youtube) frame.innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(it.youtube)}?autoplay=1&rel=0" allow="autoplay; encrypted-media; fullscreen" allowfullscreen title="${esc(it.title)}"></iframe>`;
+    unmountYT();
+    if(it.youtube) mountYT(it.youtube,cat.shape==='v'?9/16:16/9,it.title);
     else if(it.video) frame.innerHTML=`<video src="${esc(it.video)}" controls autoplay playsinline></video>`;
     else frame.innerHTML=`<div class="none">Video belum dipasang.<br>Isi "video" atau "youtube" untuk karya ini.</div>`;
     meta.innerHTML=`<b>${esc(it.title)}</b><span>${esc(cat.name)} · ${esc(it.client)}</span>`;
     box.classList.add('on');document.getElementById('wbox-close').focus();
   }
-  function closeBox(){box.classList.remove('on');frame.innerHTML='';if(lastBox)lastBox.focus()}
+  function closeBox(){unmountYT();box.classList.remove('on');frame.innerHTML='';if(lastBox)lastBox.focus()}
   document.getElementById('wbox-close').onclick=closeBox;
   box.addEventListener('click',e=>{if(e.target===box)closeBox()});
   addEventListener('keydown',e=>{if(e.key!=='Escape')return;
