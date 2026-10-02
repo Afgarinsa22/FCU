@@ -1748,7 +1748,11 @@ const WORK=[
     {title:'FITBAR',client:'FITBAR',youtube:'https://youtu.be/IsO121Dgj-o'},
     {title:'NO DROP OVT',client:'NO DROP',youtube:'https://youtu.be/vbPDcG0TCrw'}]},
   {key:'ugc',name:'UGC',full:'User Generated Content',shape:'v',items:[
-    {title:'Judul UGC 1',client:'Nama Brand'},{title:'Judul UGC 2',client:'Nama Brand'},{title:'Judul UGC 3',client:'Nama Brand'},{title:'Judul UGC 4',client:'Nama Brand'},{title:'Judul UGC 5',client:'Nama Brand'},{title:'Judul UGC 6',client:'Nama Brand'},{title:'Judul UGC 7',client:'Nama Brand'}]},
+    {title:'Seaworld 1',client:'Seaworld',youtube:'https://youtube.com/shorts/1KUKAE21Fvs'},
+    {title:'Seaworld 2',client:'Seaworld',youtube:'https://youtube.com/shorts/S6EKYzducmc'},
+    {title:'Seaworld 3',client:'Seaworld',youtube:'https://youtube.com/shorts/jhvuQt7lxbE'},
+    {title:'Seaworld 4',client:'Seaworld',youtube:'https://youtube.com/shorts/KMddgqKPFQk'},
+    {title:'Seaworld 5',client:'Seaworld',youtube:'https://youtube.com/shorts/oTI5qvnGntM'}]},
   {key:'drama',name:'Drama TikTok',full:'Serial Drama Vertikal',shape:'v',items:[
     {title:'Judul Episode 1',client:'Nama Brand'},{title:'Judul Episode 2',client:'Nama Brand'},{title:'Judul Episode 3',client:'Nama Brand'},{title:'Judul Episode 4',client:'Nama Brand'},{title:'Judul Episode 5',client:'Nama Brand'},{title:'Judul Episode 6',client:'Nama Brand'}]},
   {key:'sosmed',name:'Sosmed',full:'Social Media Content',shape:'v',items:[
@@ -1759,9 +1763,12 @@ const WORK=[
 /* youtube boleh link lengkap (youtu.be / watch?v= / shorts) atau ID saja.
    Kalau thumb kosong, sampul diambil otomatis dari YouTube. */
 const ytId=u=>{u=String(u||'').trim();const m=u.match(/(?:youtu\.be\/|[?&]v=|\/shorts\/|\/embed\/|\/live\/)([\w-]{11})/);return m?m[1]:u};
-WORK.forEach(c=>c.items.forEach(it=>{if(!it.youtube)return;it.youtube=ytId(it.youtube);
-  if(!it.thumb){it.thumb='https://i.ytimg.com/vi/'+it.youtube+'/maxresdefault.jpg';it.thumbFb='https://i.ytimg.com/vi/'+it.youtube+'/mqdefault.jpg'}}));
-const imgFb=it=>it.thumbFb?` data-fb="${it.thumbFb}" onload="if(this.naturalWidth<=120&&this.dataset.fb){this.src=this.dataset.fb;this.removeAttribute('data-fb')}" onerror="if(this.dataset.fb){this.src=this.dataset.fb;this.removeAttribute('data-fb')}"`:'';
+WORK.forEach(c=>c.items.forEach(it=>{if(!it.youtube)return;const short=/\/shorts\//.test(it.youtube);it.youtube=ytId(it.youtube);
+  if(!it.thumb){const y='https://i.ytimg.com/vi/'+it.youtube+'/';
+    const L=short?['oardefault.jpg','maxresdefault.jpg','hqdefault.jpg']:['maxresdefault.jpg','mqdefault.jpg'];
+    it.thumb=y+L[0];it.thumbFb=L.slice(1).map(f=>y+f).join('|')}}));
+window.ytFb=img=>{const l=(img.dataset.fb||'').split('|').filter(Boolean);if(!l.length)return;img.src=l.shift();if(l.length)img.dataset.fb=l.join('|');else img.removeAttribute('data-fb')};
+const imgFb=it=>it.thumbFb?` data-fb="${it.thumbFb}" onload="if(this.naturalWidth<=120)ytFb(this)" onerror="ytFb(this)"`:'';
 
 /* =========================================================
    PORTFOLIO — kipas 5 frame kategori + galeri pop-up + pemutar
