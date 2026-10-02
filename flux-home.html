@@ -1797,8 +1797,8 @@ const WORK=[
      Selama dir kosong, album memakai kotak dummy sebanyak "dummy". */
   {key:'sosmed',name:'Sosmed',full:'Social Media Content',shape:'p',type:'album',items:[
     {title:'Dilan Cokelat',client:'Digital & Social Media Management',dir:'aset/sosmed/dilan',n:9,thumb:'aset/sosmed/dilan/cover.webp'}]},
-  {key:'campaign',name:'360 Campaign',full:'Integrated 360° Campaign',shape:'h',items:[
-    {title:'Judul Campaign 1',client:'Nama Brand'},{title:'Judul Campaign 2',client:'Nama Brand'},{title:'Judul Campaign 3',client:'Nama Brand'},{title:'Judul Campaign 4',client:'Nama Brand'},{title:'Judul Campaign 5',client:'Nama Brand'}]}
+  {key:'campaign',name:'360 Campaign',full:'Integrated 360° Campaign',shape:'h',type:'album',items:[
+    {title:'Lion Parcel',client:'Berani Diandelin Campaign',dir:'aset/360/lion-parcel',n:8,thumb:'aset/360/lion-parcel/cover.webp'}]}
 ];
 /* youtube boleh link lengkap (youtu.be / watch?v= / shorts) atau ID saja.
    Kalau thumb kosong, sampul diambil otomatis dari YouTube. */
@@ -1902,7 +1902,7 @@ const unitOf=c=>c.type==='album'?'album':'karya';
     const cat=WORK[ci],al=cat.items[ai],n=al.images.length||al.dummy||0;curAlbum=al;
     document.getElementById('pf-gal-title').textContent=al.title;
     document.getElementById('pf-gal-full').textContent=`${cat.name} · ${al.client?al.client+' · ':''}${n} foto`;
-    galBack.hidden=false;grid.dataset.shape='p';grid.innerHTML='';
+    galBack.hidden=false;grid.dataset.shape=al.shape||cat.shape;grid.innerHTML='';
     for(let i=0;i<n;i++){const u=al.thumbs[i],b=document.createElement('button');b.type='button';b.className='pf-it pf-ph';
       b.style.setProperty('--g',grad(ci,i));b.style.setProperty('--d',(i*.03)+'s');b.setAttribute('aria-label',`Lihat gambar ${i+1} dari ${n}`);
       b.innerHTML=u?`<img src="${esc(u)}" alt="${esc(al.title)} ${i+1}" loading="lazy">`:'<i class="dm">DUMMY</i>';
