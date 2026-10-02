@@ -1846,7 +1846,6 @@ const unitOf=c=>c.type==='album'?'album':'karya';
         ${cover?`<img src="${esc(cover)}" alt="" loading="lazy"${cat.cover?'':imgFb(first)}>`:''}
         ${cat.preview?`<video src="${esc(cat.preview)}" muted loop playsinline preload="none"></video>`:''}
         <i class="pf-cnt">${String(cat.items.length).padStart(2,'0')} ${unitOf(cat)}</i>
-        <span class="pf-title"><b>${esc(cat.name)}</b><span>${esc(cat.full)}</span></span>
       </span><span class="pf-foot">Lihat galeri ›</span><i class="pf-tape" aria-hidden="true"></i></span>`;
     const pv=f.querySelector('video');
     if(pv){f.addEventListener('mouseenter',()=>pv.play().catch(()=>{}));f.addEventListener('mouseleave',()=>pv.pause())}
