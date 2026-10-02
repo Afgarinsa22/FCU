@@ -1743,8 +1743,10 @@ body.gal-open{overflow:hidden}
    ========================================================= */
 const WORK=[
   {key:'tvc',name:'TVC / DVC',full:'TV & Digital Video Commercial',shape:'h',items:[
-    {title:'Judul TVC 1',client:'Nama Brand'},{title:'Judul TVC 2',client:'Nama Brand'},{title:'Judul TVC 3',client:'Nama Brand'},{title:'Judul TVC 4',client:'Nama Brand'},{title:'Judul TVC 5',client:'Nama Brand'},
-    {title:'Judul DVC 1',client:'Nama Brand'},{title:'Judul DVC 2',client:'Nama Brand'},{title:'Judul DVC 3',client:'Nama Brand'},{title:'Judul DVC 4',client:'Nama Brand'},{title:'Judul DVC 5',client:'Nama Brand'}]},
+    {title:'BRI Liga 1',client:'BRI',youtube:'https://youtu.be/Exd_UoN2kn0'},
+    {title:'Master Ichitan',client:'Ichitan',youtube:'https://youtu.be/GbYrWrpNoLA'},
+    {title:'FITBAR',client:'FITBAR',youtube:'https://youtu.be/IsO121Dgj-o'},
+    {title:'NO DROP OVT',client:'NO DROP',youtube:'https://youtu.be/vbPDcG0TCrw'}]},
   {key:'ugc',name:'UGC',full:'User Generated Content',shape:'v',items:[
     {title:'Judul UGC 1',client:'Nama Brand'},{title:'Judul UGC 2',client:'Nama Brand'},{title:'Judul UGC 3',client:'Nama Brand'},{title:'Judul UGC 4',client:'Nama Brand'},{title:'Judul UGC 5',client:'Nama Brand'},{title:'Judul UGC 6',client:'Nama Brand'},{title:'Judul UGC 7',client:'Nama Brand'}]},
   {key:'drama',name:'Drama TikTok',full:'Serial Drama Vertikal',shape:'v',items:[
@@ -1754,6 +1756,12 @@ const WORK=[
   {key:'campaign',name:'360 Campaign',full:'Integrated 360° Campaign',shape:'h',items:[
     {title:'Judul Campaign 1',client:'Nama Brand'},{title:'Judul Campaign 2',client:'Nama Brand'},{title:'Judul Campaign 3',client:'Nama Brand'},{title:'Judul Campaign 4',client:'Nama Brand'},{title:'Judul Campaign 5',client:'Nama Brand'}]}
 ];
+/* youtube boleh link lengkap (youtu.be / watch?v= / shorts) atau ID saja.
+   Kalau thumb kosong, sampul diambil otomatis dari YouTube. */
+const ytId=u=>{u=String(u||'').trim();const m=u.match(/(?:youtu\.be\/|[?&]v=|\/shorts\/|\/embed\/|\/live\/)([\w-]{11})/);return m?m[1]:u};
+WORK.forEach(c=>c.items.forEach(it=>{if(!it.youtube)return;it.youtube=ytId(it.youtube);
+  if(!it.thumb){it.thumb='https://i.ytimg.com/vi/'+it.youtube+'/maxresdefault.jpg';it.thumbFb='https://i.ytimg.com/vi/'+it.youtube+'/mqdefault.jpg'}}));
+const imgFb=it=>it.thumbFb?` data-fb="${it.thumbFb}" onload="if(this.naturalWidth<=120&&this.dataset.fb){this.src=this.dataset.fb;this.removeAttribute('data-fb')}" onerror="if(this.dataset.fb){this.src=this.dataset.fb;this.removeAttribute('data-fb')}"`:'';
 
 /* =========================================================
    PORTFOLIO — kipas 5 frame kategori + galeri pop-up + pemutar
@@ -1783,7 +1791,7 @@ const WORK=[
     f.setAttribute('aria-label',`Buka galeri ${cat.name} — ${cat.full}, ${cat.items.length} karya`);
     const cover=cat.cover||first.thumb;
     f.innerHTML=`<span class="pf-card"><i class="pf-tag">${esc(cat.name)}</i><span class="pf-cover" style="--g:${grad(ci,0)}">
-        ${cover?`<img src="${esc(cover)}" alt="" loading="lazy">`:''}
+        ${cover?`<img src="${esc(cover)}" alt="" loading="lazy"${cat.cover?'':imgFb(first)}>`:''}
         ${cat.preview?`<video src="${esc(cat.preview)}" muted loop playsinline preload="none"></video>`:''}
         <i class="pf-cnt">${String(cat.items.length).padStart(2,'0')} karya</i>
         <span class="pf-title"><b>${esc(cat.name)}</b><span>${esc(cat.full)}</span></span>
@@ -1811,7 +1819,7 @@ const WORK=[
       const g=grad(ci,i),b=document.createElement('button');b.type='button';b.className='pf-it';
       b.style.setProperty('--g',g);b.style.setProperty('--d',(i*.05)+'s');
       b.setAttribute('aria-label',`Putar ${it.title} — ${it.client}`);
-      b.innerHTML=`${it.thumb?`<img src="${esc(it.thumb)}" alt="" loading="lazy">`:'<i class="dm">DUMMY</i>'}
+      b.innerHTML=`${it.thumb?`<img src="${esc(it.thumb)}" alt="" loading="lazy"${imgFb(it)}>`:'<i class="dm">DUMMY</i>'}
         ${it.preview?`<video src="${esc(it.preview)}" muted loop playsinline preload="none"></video>`:''}
         <span class="play" aria-hidden="true">▶</span><span class="cap"><b>${esc(it.title)}</b><span>${esc(it.client)}</span></span>`;
       const pv=b.querySelector('video');
