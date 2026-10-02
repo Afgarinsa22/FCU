@@ -674,7 +674,7 @@ h1{margin:.4rem 0 0;font:900 clamp(2.2rem,6.2vw,5.4rem)/1 var(--display);letter-
    ========================================================= */
 .pf-fan{position:relative;max-width:76rem;height:clamp(24rem,38vw,32rem);margin:clamp(2rem,4vw,3rem) auto 0;perspective:1400px;perspective-origin:50% 40%}
 .pf-frame{--x:0px;--y:0px;--rz:0deg;--ry:0deg;--rx:0deg;--c:#9B6BFF;
-  position:absolute;left:50%;top:50%;width:clamp(12rem,19vw,16.5rem);aspect-ratio:4/5;margin:0;padding:0;border:0;cursor:pointer;background:none;
+  position:absolute;left:50%;top:50%;width:clamp(11rem,16vw,15rem);aspect-ratio:4/5;margin:0;padding:0;border:0;cursor:pointer;background:none;
   translate:-50% -50%;transform:translate3d(var(--x),var(--y),0) rotateZ(var(--rz)) rotateY(var(--ry)) rotateX(var(--rx));
   transform-style:preserve-3d;transition:transform .7s cubic-bezier(.2,.8,.2,1),filter .5s;z-index:var(--z,1);outline:none}
 .pf-card,.pf-cover,.pf-title,.pf-title b,.pf-title span{display:block}
@@ -1149,7 +1149,7 @@ body.gal-open{overflow:hidden}
     <li><a href="#investors">Investors</a></li>
     <li><a href="#portfolio">Portfolio</a></li>
     <li><a href="#w-ugc">UGC Viral</a></li>
-    <li><a href="#w-tvc">360 Campaign</a></li>
+    <li><a href="#w-campaign">360 Campaign</a></li>
     <li><a href="#services">Services</a></li>
     <li><a href="play.html">Games</a></li>
   </ul>
@@ -1335,7 +1335,7 @@ body.gal-open{overflow:hidden}
         <p class="aw-eyebrow">Portfolio <span class="dummy-tag">DATA DUMMY</span></p>
         <h2 class="work-title" id="work-title"><span class="our">Flux</span><em>Portfolio</em></h2>
       </div>
-      <p class="work-lead">Empat panggung karya kami. Pilih satu frame untuk membuka galerinya, lalu klik karya untuk memutarnya.</p>
+      <p class="work-lead">Lima panggung karya kami. Pilih satu frame untuk membuka galerinya, lalu klik karya untuk memutarnya.</p>
     </div>
     <!-- garis neon meliuk di belakang frame -->
     <svg class="pf-neon" viewBox="0 0 1440 620" preserveAspectRatio="none" aria-hidden="true">
@@ -1742,41 +1742,38 @@ body.gal-open{overflow:hidden}
    Selama thumb kosong, kartu memakai warna dummy.
    ========================================================= */
 const WORK=[
-  {key:'tvc',name:'TVC',full:'TV Commercial',shape:'h',items:[
-    {title:'Judul TVC 1',client:'Nama Brand'},{title:'Judul TVC 2',client:'Nama Brand'},{title:'Judul TVC 3',client:'Nama Brand'},
-    {title:'Judul TVC 4',client:'Nama Brand'},{title:'Judul TVC 5',client:'Nama Brand'}]},
-  {key:'dvc',name:'DVC',full:'Digital Video Commercial',shape:'h',items:[
-    {title:'Judul DVC 1',client:'Nama Brand'},{title:'Judul DVC 2',client:'Nama Brand'},{title:'Judul DVC 3',client:'Nama Brand'},
-    {title:'Judul DVC 4',client:'Nama Brand'},{title:'Judul DVC 5',client:'Nama Brand'}]},
+  {key:'tvc',name:'TVC / DVC',full:'TV & Digital Video Commercial',shape:'h',items:[
+    {title:'Judul TVC 1',client:'Nama Brand'},{title:'Judul TVC 2',client:'Nama Brand'},{title:'Judul TVC 3',client:'Nama Brand'},{title:'Judul TVC 4',client:'Nama Brand'},{title:'Judul TVC 5',client:'Nama Brand'},
+    {title:'Judul DVC 1',client:'Nama Brand'},{title:'Judul DVC 2',client:'Nama Brand'},{title:'Judul DVC 3',client:'Nama Brand'},{title:'Judul DVC 4',client:'Nama Brand'},{title:'Judul DVC 5',client:'Nama Brand'}]},
   {key:'ugc',name:'UGC',full:'User Generated Content',shape:'v',items:[
-    {title:'Judul UGC 1',client:'Nama Brand'},{title:'Judul UGC 2',client:'Nama Brand'},{title:'Judul UGC 3',client:'Nama Brand'},
-    {title:'Judul UGC 4',client:'Nama Brand'},{title:'Judul UGC 5',client:'Nama Brand'},{title:'Judul UGC 6',client:'Nama Brand'},
-    {title:'Judul UGC 7',client:'Nama Brand'}]},
+    {title:'Judul UGC 1',client:'Nama Brand'},{title:'Judul UGC 2',client:'Nama Brand'},{title:'Judul UGC 3',client:'Nama Brand'},{title:'Judul UGC 4',client:'Nama Brand'},{title:'Judul UGC 5',client:'Nama Brand'},{title:'Judul UGC 6',client:'Nama Brand'},{title:'Judul UGC 7',client:'Nama Brand'}]},
+  {key:'drama',name:'Drama TikTok',full:'Serial Drama Vertikal',shape:'v',items:[
+    {title:'Judul Episode 1',client:'Nama Brand'},{title:'Judul Episode 2',client:'Nama Brand'},{title:'Judul Episode 3',client:'Nama Brand'},{title:'Judul Episode 4',client:'Nama Brand'},{title:'Judul Episode 5',client:'Nama Brand'},{title:'Judul Episode 6',client:'Nama Brand'}]},
   {key:'sosmed',name:'Sosmed',full:'Social Media Content',shape:'v',items:[
-    {title:'Judul Konten 1',client:'Nama Brand'},{title:'Judul Konten 2',client:'Nama Brand'},{title:'Judul Konten 3',client:'Nama Brand'},
-    {title:'Judul Konten 4',client:'Nama Brand'},{title:'Judul Konten 5',client:'Nama Brand'},{title:'Judul Konten 6',client:'Nama Brand'},
-    {title:'Judul Konten 7',client:'Nama Brand'}]}
+    {title:'Judul Konten 1',client:'Nama Brand'},{title:'Judul Konten 2',client:'Nama Brand'},{title:'Judul Konten 3',client:'Nama Brand'},{title:'Judul Konten 4',client:'Nama Brand'},{title:'Judul Konten 5',client:'Nama Brand'},{title:'Judul Konten 6',client:'Nama Brand'},{title:'Judul Konten 7',client:'Nama Brand'}]},
+  {key:'campaign',name:'360 Campaign',full:'Integrated 360° Campaign',shape:'h',items:[
+    {title:'Judul Campaign 1',client:'Nama Brand'},{title:'Judul Campaign 2',client:'Nama Brand'},{title:'Judul Campaign 3',client:'Nama Brand'},{title:'Judul Campaign 4',client:'Nama Brand'},{title:'Judul Campaign 5',client:'Nama Brand'}]}
 ];
 
 /* =========================================================
-   PORTFOLIO — kipas 4 frame kategori + galeri pop-up + pemutar
+   PORTFOLIO — kipas 5 frame kategori + galeri pop-up + pemutar
    Posisi kipas per frame: x, y (px), rz (miring), ry (putar 3D)
    ========================================================= */
 (function(){
   const fan=document.getElementById('pf-fan'); if(!fan) return;
   const PAL=[['#7B3CFF','#FF2FB9'],['#3CC8FF','#7B3CFF'],['#FF9C5B','#FF2FB9'],['#3CFFD2','#5B2BFF'],['#FFD84D','#FF7AD9'],['#FF2FB9','#1B0A3A']];
-  const COL={tvc:'#9B6BFF',dvc:'#3CC8FF',ugc:'#FF2FB9',sosmed:'#FF9C5B'};
-  const POSE=[{x:-375,y:46,rz:-15,ry:30,rx:9,s:.9,z:-60,f:0},{x:-135,y:-52,rz:7,ry:12,rx:-7,s:1.06,z:40,f:1.3},{x:105,y:38,rz:-6,ry:-18,rx:11,s:.93,z:-20,f:.6},{x:355,y:-34,rz:16,ry:-32,rx:-5,s:1,z:10,f:2}];
+  const COL={tvc:'#9B6BFF',ugc:'#FF2FB9',drama:'#FF6B6B',sosmed:'#FF9C5B',campaign:'#3CC8FF'};
+  const POSE=[{x:-440,y:40,rz:-14,ry:28,rx:8,s:.9,z:-60,f:0},{x:-222,y:-50,rz:6,ry:14,rx:-6,s:1.02,z:20,f:1.3},{x:0,y:30,rz:-4,ry:0,rx:10,s:1.06,z:50,f:.6},{x:222,y:-46,rz:7,ry:-14,rx:-6,s:.98,z:10,f:2},{x:440,y:36,rz:14,ry:-28,rx:8,s:.92,z:-50,f:1}];
   const esc=t=>String(t||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const grad=(ci,i)=>{const [a,b]=PAL[(i+ci)%PAL.length];return `radial-gradient(70% 60% at 30% 25%,${a},transparent 70%),radial-gradient(60% 60% at 80% 80%,${b},transparent 70%),#12062A`};
 
   function place(){
-    const k=Math.min(1,fan.clientWidth/1100);
+    const k=Math.min(1,fan.clientWidth/1200);
     [...fan.children].forEach((f,i)=>{const p=POSE[i%POSE.length];
       f.style.setProperty('--x',(p.x*k)+'px');f.style.setProperty('--y',p.y+'px');
       f.style.setProperty('--rz',p.rz+'deg');f.style.setProperty('--ry',p.ry+'deg');f.style.setProperty('--rx',p.rx+'deg');
       f.style.setProperty('--s',p.s);f.style.setProperty('--tz',p.z+'px');f.style.setProperty('--fd',p.f+'s');
-      f.style.setProperty('--z',[2,4,3,1][i%4]);f.style.setProperty('--mz',(p.rz/3)+'deg')});
+      f.style.setProperty('--z',[1,3,5,4,2][i%5]);f.style.setProperty('--mz',(p.rz/3)+'deg')});
   }
 
   WORK.forEach((cat,ci)=>{
