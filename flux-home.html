@@ -208,8 +208,9 @@ h1{margin:.4rem 0 0;font:900 clamp(2.2rem,6.2vw,5.4rem)/1 var(--display);letter-
 @keyframes wheel{50%{transform:translateY(.45rem);opacity:.2}}
 
 /* MONTAGE PORTFOLIO — layar penuh, materi sementara dari karya yang sudah tampil di galeri */
-.montage{position:relative;z-index:10;height:100vh;height:100dvh;min-height:34rem;overflow:hidden;isolation:isolate;background:#090610;color:#fff}
+.montage{--tear-h:clamp(64px,9vw,140px);position:relative;z-index:10;margin-top:var(--tear-h);scroll-margin-top:calc(var(--tear-h) + var(--nav-h));height:100vh;height:100dvh;min-height:34rem;isolation:isolate;background:#0B0710;color:#fff}
 .montage-stage,.montage-shot,.montage-shot img{position:absolute;inset:0;width:100%;height:100%}
+.montage-stage{overflow:hidden}
 .montage-shot{opacity:0;transition:opacity .7s ease;pointer-events:none}
 .montage-shot.is-active{opacity:1;z-index:1}
 .montage-shot img{display:block;object-fit:cover;object-position:var(--position,center);transform:scale(calc(var(--zoom,1) * 1.08));transition:transform 3.8s linear}
@@ -257,6 +258,12 @@ h1{margin:.4rem 0 0;font:900 clamp(2.2rem,6.2vw,5.4rem)/1 var(--display);letter-
 .tear .paper{fill:#E9D2FF;filter:url(#fray)}
 .tear .fill{fill:var(--deep);filter:url(#fray2)}
 .tear .speck{fill:none;stroke:#FFE4F7;stroke-width:2;stroke-dasharray:1 4 2 7 1 3 3 9;opacity:.6;vector-effect:non-scaling-stroke;filter:url(#fray)}
+.montage .tear svg{overflow:hidden}
+.montage .tear .paper{fill:#EFE7F3}
+.montage .tear .fill{fill:#0B0710}
+.montage .tear .grn{fill:#fff;filter:url(#grnoise);opacity:.35;mix-blend-mode:screen}
+.montage .tear .glow{opacity:.25}
+.montage .tear .speck{stroke:#fff;opacity:.5}
 .next h2{font:700 clamp(1.6rem,4vw,2.6rem)/1.1 var(--display);margin:0 0 .75rem}
 .next p{margin:0 auto;color:var(--muted);max-width:40ch}
 
@@ -1203,12 +1210,12 @@ body.gal-open{overflow:hidden}
 .inv-poster::after{right:8%;transform:rotate(5deg);background:color-mix(in srgb,var(--vio) 85%,transparent)}
 .inv-poster img{display:block;width:100%;height:auto}
 @media (max-width:700px){.inv-poster{transform:rotate(-.6deg);box-shadow:6px 6px 0 var(--hot),0 20px 40px rgba(0,0,0,.6)}.inv-poster::before,.inv-poster::after{width:70px;height:20px;top:-10px}}
-/* awards memakai tepi sobek setelah montage */
-.next.awards{display:block;min-height:0;text-align:left;overflow:visible;overflow-x:clip;
+/* awards mengikuti langsung setelah montage */
+.next.awards{display:block;min-height:0;margin-top:0;text-align:left;overflow:visible;overflow-x:clip;
   background:
     radial-gradient(40% 30% at 15% 30%,rgba(123,60,255,.22),transparent 70%),
     radial-gradient(35% 30% at 90% 60%,rgba(255,47,185,.16),transparent 70%),
-    linear-gradient(180deg,var(--deep) 0,var(--deep) 140px,var(--void) 36rem)}
+    linear-gradient(180deg,#0B0710 0,var(--deep) 140px,var(--void) 36rem)}
 
 /* =========================================================
    RESPONSIVE
@@ -1282,6 +1289,29 @@ body.gal-open{overflow:hidden}
 
   <section class="montage" id="montage" aria-labelledby="montage-title">
     <h2 class="sr" id="montage-title">Montage portfolio Flux Creative Universe</h2>
+    <div class="tear" aria-hidden="true">
+      <svg viewBox="0 0 1440 140" preserveAspectRatio="none">
+        <defs>
+          <!-- tekstur serat kertas sobek -->
+          <filter id="fray" x="-2%" y="-20%" width="104%" height="140%">
+            <feTurbulence type="fractalNoise" baseFrequency=".9 .3" numOctaves="3" seed="7"/>
+            <feDisplacementMap in="SourceGraphic" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+          </filter>
+          <filter id="fray2" x="-2%" y="-20%" width="104%" height="140%">
+            <feTurbulence type="fractalNoise" baseFrequency=".6 .2" numOctaves="2" seed="21"/>
+            <feDisplacementMap in="SourceGraphic" scale="5" xChannelSelector="R" yChannelSelector="G"/>
+          </filter>
+          <!-- noise grunge untuk isi sobekan -->
+          <filter id="grnoise" x="0" y="0" width="100%" height="100%">
+            <feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="3" stitchTiles="stitch"/>
+            <feColorMatrix values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .55 -.18"/>
+            <feComposite in2="SourceGraphic" operator="in"/>
+          </filter>
+        </defs>
+        <!-- glow neon, lapisan kertas terang (tepi sobek), lalu isi ungu -->
+        <path class="glow"/><path class="paper"/><path class="speck"/><path class="fill"/><path class="grn"/>
+      </svg>
+    </div>
     <!-- Ganti montage-stage dengan video showreel final setelah berkas video tersedia. -->
     <div class="montage-stage" aria-hidden="true">
       <div class="montage-shot is-active" data-brand="BRI" data-project="BRI Liga 1" style="--position:center 48%;--zoom:1.3"><img src="aset/montage/bri.jpg" alt="" width="1280" height="720" fetchpriority="low"></div>
@@ -1313,29 +1343,6 @@ body.gal-open{overflow:hidden}
        Logo/sertifikat MURI: isi <div class="face"> dengan <img src="aset/muri.webp" alt="Rekor MURI">
        Setelah data asli masuk, hapus <span class="dummy-tag">. -->
   <section class="next awards grunge" id="awards" aria-labelledby="aw-title">
-    <div class="tear" aria-hidden="true">
-      <svg viewBox="0 0 1440 140" preserveAspectRatio="none">
-        <defs>
-          <!-- tekstur serat kertas sobek -->
-          <filter id="fray" x="-2%" y="-20%" width="104%" height="140%">
-            <feTurbulence type="fractalNoise" baseFrequency=".9 .3" numOctaves="3" seed="7"/>
-            <feDisplacementMap in="SourceGraphic" scale="7" xChannelSelector="R" yChannelSelector="G"/>
-          </filter>
-          <filter id="fray2" x="-2%" y="-20%" width="104%" height="140%">
-            <feTurbulence type="fractalNoise" baseFrequency=".6 .2" numOctaves="2" seed="21"/>
-            <feDisplacementMap in="SourceGraphic" scale="5" xChannelSelector="R" yChannelSelector="G"/>
-          </filter>
-          <!-- noise grunge untuk isi sobekan -->
-          <filter id="grnoise" x="0" y="0" width="100%" height="100%">
-            <feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="3" stitchTiles="stitch"/>
-            <feColorMatrix values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .55 -.18"/>
-            <feComposite in2="SourceGraphic" operator="in"/>
-          </filter>
-        </defs>
-        <!-- glow neon, lapisan kertas terang (tepi sobek), lalu isi ungu -->
-        <path class="glow"/><path class="paper"/><path class="speck"/><path class="fill"/><path class="grn"/>
-      </svg>
-    </div>
     <div class="gr-bgtext" aria-hidden="true">AWARDS</div>
     <div class="aw-in">
       <div class="aw-head rv">
