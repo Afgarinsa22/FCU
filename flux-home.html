@@ -215,18 +215,13 @@ h1{margin:.4rem 0 0;font:900 clamp(2.2rem,6.2vw,5.4rem)/1 var(--display);letter-
 .montage-shot.is-active{opacity:1;z-index:1}
 .montage-shot img{display:block;object-fit:cover;object-position:var(--position,center);transform:scale(calc(var(--zoom,1) * 1.08));transition:transform 3.8s linear}
 .montage-shot.is-active img{transform:scale(var(--zoom,1))}
-.montage-shot::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,3,14,.6),transparent 30%,transparent 45%,rgba(6,3,14,.82) 100%),linear-gradient(90deg,rgba(7,3,16,.35),transparent 65%)}
+.montage-shot::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,3,14,.48),transparent 27%,transparent 62%,rgba(6,3,14,.58) 100%)}
 .montage::before{content:"";position:absolute;z-index:2;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 4px);opacity:.45}
 .montage::after{content:"";position:absolute;z-index:2;inset:0;pointer-events:none;box-shadow:inset 0 0 12vw rgba(6,2,14,.55)}
 .montage-top,.montage-bottom,.montage-progress{position:absolute;z-index:3;left:clamp(1.25rem,5vw,6rem);right:clamp(1.25rem,5vw,6rem)}
-.montage-top{top:calc(var(--nav-h) + clamp(1rem,4vh,3rem));display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;font:600 .7rem/1.4 var(--display);letter-spacing:.18em;text-transform:uppercase;text-shadow:0 2px 12px #080310}
-.montage-top span:last-child{color:#ffd2f1;text-align:right}
-.montage-top b{display:inline-block;width:.5rem;height:.5rem;margin-right:.65rem;border-radius:50%;background:var(--magenta);box-shadow:0 0 12px var(--magenta)}
-.montage-bottom{bottom:clamp(3.4rem,7vh,6rem);display:flex;align-items:end;justify-content:space-between;gap:2rem}
-.montage-copy{max-width:min(70vw,55rem);text-shadow:0 3px 22px rgba(0,0,0,.75)}
-.montage-copy .eyebrow{display:block;margin-bottom:.6rem;font:600 .75rem/1.3 var(--display);letter-spacing:.2em;color:#ffd2f1;text-transform:uppercase}
-.montage-copy strong{display:block;font:400 clamp(3.5rem,8vw,8rem)/.9 "Anton","Impact",sans-serif;letter-spacing:.015em;text-transform:uppercase}
-.montage-copy .project{display:block;margin-top:.8rem;font:600 clamp(.9rem,1.5vw,1.15rem)/1.3 var(--body);letter-spacing:.13em;text-transform:uppercase}
+.montage-top{top:calc(var(--nav-h) + clamp(1rem,4vh,3rem));display:flex;align-items:flex-start;justify-content:flex-end;gap:1rem;font:600 .7rem/1.4 var(--display);letter-spacing:.18em;text-transform:uppercase;text-shadow:0 2px 12px #080310}
+.montage-top span{color:#ffd2f1;text-align:right}
+.montage-bottom{bottom:clamp(3.4rem,7vh,6rem);display:flex;align-items:end;justify-content:flex-end;gap:2rem}
 .montage-actions{display:flex;align-items:center;gap:.55rem;flex:none}
 .montage-actions a{font:600 .72rem/1.2 var(--display);letter-spacing:.1em;text-transform:uppercase;text-decoration:none;white-space:nowrap;margin-right:1rem;padding:.9rem 0;border-bottom:2px solid var(--magenta)}
 .montage-actions a:hover{color:#ffd2f1}
@@ -238,11 +233,9 @@ h1{margin:.4rem 0 0;font:900 clamp(2.2rem,6.2vw,5.4rem)/1 var(--display);letter-
 @keyframes montage-progress{to{transform:scaleX(1)}}
 @media(max-width:700px){
   .montage-top{font-size:.58rem;letter-spacing:.1em}
-  .montage-top span:last-child{display:none}
-  .montage-bottom{display:block;bottom:3.5rem}
-  .montage-copy{max-width:100%}
-  .montage-copy strong{font-size:clamp(3rem,15vw,5.5rem)}
-  .montage-actions{margin-top:1.3rem;justify-content:flex-end}
+  .montage-shot img{object-position:var(--mobile-position,var(--position,center))}
+  .montage-bottom{bottom:3.5rem}
+  .montage-actions{justify-content:flex-end}
   .montage-actions a{margin-right:auto;font-size:.6rem}
   .montage-actions button{width:2.35rem;height:2.35rem}
 }
@@ -1316,21 +1309,16 @@ body.gal-open{overflow:hidden}
         <path class="glow"/><path class="paper"/><path class="speck"/><path class="fill"/><path class="grn"/>
       </svg>
     </div>
-    <!-- Ganti montage-stage dengan video showreel final setelah berkas video tersedia. -->
+    <!-- Lima key visual portfolio, otomatis berganti dan bisa dinavigasi manual. -->
     <div class="montage-stage" aria-hidden="true">
-      <div class="montage-shot is-active" data-brand="BRI" data-project="BRI Liga 1" style="--position:center 48%;--zoom:1.3"><img src="aset/montage/bri.jpg" alt="" width="1280" height="720" fetchpriority="low"></div>
-      <div class="montage-shot" data-brand="BPJS Ketenagakerjaan" data-project="Andai Tau Duluan" style="--position:center 48%;--zoom:1.45"><img src="aset/montage/bpjs.jpg" alt="" width="1280" height="720" loading="lazy"></div>
-      <div class="montage-shot" data-brand="Fitbar" data-project="Fitbar TVC" style="--position:center 48%"><img src="aset/montage/fitbar.jpg" alt="" width="1280" height="720" loading="lazy"></div>
-      <div class="montage-shot" data-brand="Lion Parcel" data-project="Berani Diandelin" style="--position:center 38%"><img src="aset/360/lion-parcel/cover.webp" alt="" width="1280" height="720" loading="lazy"></div>
-      <div class="montage-shot" data-brand="Dilan Cokelat" data-project="Social Media Campaign" style="--position:center 45%"><img src="aset/sosmed/dilan/cover.webp" alt="" width="640" height="800" loading="lazy"></div>
+      <div class="montage-shot is-active" style="--position:center;--mobile-position:50% center"><img src="aset/montage/coway.webp" alt="" width="1672" height="941" fetchpriority="low" decoding="async"></div>
+      <div class="montage-shot" style="--position:center;--mobile-position:65% center"><img src="aset/montage/lion-parcel.webp" alt="" width="1672" height="941" loading="lazy" decoding="async"></div>
+      <div class="montage-shot" style="--position:center;--mobile-position:52% center"><img src="aset/montage/kitchen.webp" alt="" width="1672" height="941" loading="lazy" decoding="async"></div>
+      <div class="montage-shot" style="--position:center;--mobile-position:57% center"><img src="aset/montage/no-drop.webp" alt="" width="1672" height="941" loading="lazy" decoding="async"></div>
+      <div class="montage-shot" style="--position:center;--mobile-position:48% center"><img src="aset/montage/deterjen-sayang.webp" alt="" width="1672" height="941" loading="lazy" decoding="async"></div>
     </div>
-    <div class="montage-top" aria-hidden="true"><span><b></b>Flux / Portfolio montage</span><span>Showreel preview</span></div>
+    <div class="montage-top" aria-hidden="true"><span>Showreel preview</span></div>
     <div class="montage-bottom">
-      <div class="montage-copy" aria-hidden="true">
-        <span class="eyebrow">Selected work / <span id="montage-count">01</span> — 05</span>
-        <strong id="montage-brand">BRI</strong>
-        <span class="project" id="montage-project">BRI Liga 1</span>
-      </div>
       <div class="montage-actions">
         <a href="#portfolio">Lihat portfolio ↗</a>
         <button type="button" id="montage-prev" aria-label="Proyek sebelumnya">←</button>
@@ -1815,13 +1803,10 @@ body.gal-open{overflow:hidden}
   },{passive:true});
 })();
 
-/* Montage demo: cuplikan karya berganti otomatis hanya saat terlihat. */
+/* Slideshow portfolio: berganti otomatis hanya saat terlihat. */
 (function(){
   const section=document.querySelector('#montage'); if(!section) return;
   const shots=[...section.querySelectorAll('.montage-shot')];
-  const brand=section.querySelector('#montage-brand');
-  const project=section.querySelector('#montage-project');
-  const count=section.querySelector('#montage-count');
   const fill=section.querySelector('.montage-progress i');
   const toggle=section.querySelector('#montage-toggle');
   const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1838,10 +1823,7 @@ body.gal-open{overflow:hidden}
   function show(index){
     shots[current].classList.remove('is-active');
     current=(index+shots.length)%shots.length;
-    const shot=shots[current];shot.classList.add('is-active');
-    brand.textContent=shot.dataset.brand;
-    project.textContent=shot.dataset.project;
-    count.textContent=String(current+1).padStart(2,'0');
+    shots[current].classList.add('is-active');
     schedule();
   }
   section.querySelector('#montage-prev').addEventListener('click',()=>show(current-1));
