@@ -921,20 +921,24 @@ body.gal-open{overflow:hidden}
 }
 @media (prefers-reduced-motion:reduce){ .work.grunge .pf-card{animation:none} }
 
-/* BRAND KLIEN — logo saja, tanpa bingkai atau teks pengantar */
-.clients.grunge{position:relative;z-index:10;padding:clamp(1rem,2vw,2rem) clamp(1.25rem,5vw,5rem) clamp(4rem,8vw,7rem);background:var(--ink)}
-.clients-in{position:relative;z-index:1;max-width:80rem;margin:0 auto}
-.client-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));column-gap:clamp(1rem,3vw,3rem);row-gap:clamp(1.4rem,3vw,3rem);list-style:none;margin:0;padding:0}
-.client-card{position:relative;min-width:0;height:clamp(7.5rem,12vw,10rem);perspective:900px}
+/* BRAND KLIEN — grid logo monokrom yang lapang seperti dinding kolaborator */
+.clients.grunge{position:relative;z-index:10;min-height:88vh;padding:clamp(4rem,7vw,7rem) clamp(1.25rem,4vw,4.5rem) clamp(5rem,8vw,8rem);background:var(--ink);display:flex;align-items:center}
+.clients-in{position:relative;z-index:1;width:100%;max-width:100rem;margin:0 auto}
+.client-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));column-gap:clamp(1rem,2.4vw,2.8rem);row-gap:clamp(.9rem,2vw,1.8rem);list-style:none;margin:0;padding:0}
+.client-card{position:relative;min-width:0;height:clamp(5.8rem,7.5vw,7.6rem);perspective:900px}
 .client-flip{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .65s cubic-bezier(.2,.75,.2,1)}
 .client-card.is-flipped .client-flip{transform:rotateX(180deg)}
 .client-face{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;backface-visibility:hidden;-webkit-backface-visibility:hidden}
 .client-back{transform:rotateX(180deg)}
-.client-logo-img{display:block;max-width:90%;max-height:78%;width:auto;height:auto;object-fit:contain;transform:scale(var(--logo-scale,1));filter:drop-shadow(0 4px 8px rgba(0,0,0,.3))}
-.client-logo-img[data-tone="light"]{filter:brightness(0) invert(1)}
-.client-logo-img[data-tone="bright"]{filter:brightness(1.8) drop-shadow(0 3px 7px rgba(0,0,0,.3))}
-@media (max-width:900px){.client-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media (max-width:650px){.client-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}.client-card{height:7.5rem}}
+.client-logo-img{display:block;max-width:82%;max-height:58%;width:auto;height:auto;object-fit:contain;opacity:.94;filter:grayscale(1) brightness(1.08) drop-shadow(0 3px 7px rgba(0,0,0,.3))}
+@media (max-width:1100px){.client-grid{grid-template-columns:repeat(5,minmax(0,1fr))}.client-card{height:6.4rem}}
+@media (max-width:650px){
+  .clients.grunge{min-height:0;padding-block:4rem}
+  .client-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:.75rem}
+  .client-card{height:5.5rem}
+  .client-card:nth-child(n+16){display:none}
+  .client-logo-img{max-width:86%;max-height:54%}
+}
 @media (prefers-reduced-motion:reduce){.client-flip{transition:none}}
 
 /* award: 4 kartu besar, 2 kolom */
@@ -1474,19 +1478,10 @@ body.gal-open{overflow:hidden}
   </section>
 
   <!-- BRAND KLIEN =======================================================
-       Logo yang tampil adalah contoh; data sumber ada di bagian "BRAND KLIEN — DATA". -->
-  <section class="clients grunge" id="clients" aria-label="Contoh logo brand">
+       Logo bersumber dari daftar klien pada referensi yang diberikan. -->
+  <section class="clients grunge" id="clients" aria-label="Brand yang pernah ditangani Flux">
     <div class="clients-in">
-      <ul class="client-grid" id="client-grid" aria-label="Contoh logo brand">
-        <li class="client-card" aria-label="GarudaFood"><div class="client-flip"><div class="client-face client-front"><img class="client-logo-img" data-tone="bright" src="aset/klien/garudafood.png" alt=""></div><div class="client-face client-back" aria-hidden="true"></div></div></li>
-        <li class="client-card" aria-label="Kalbe"><div class="client-flip"><div class="client-face client-front"><img class="client-logo-img" data-tone="light" src="aset/klien/kalbe-farma.svg" alt=""></div><div class="client-face client-back" aria-hidden="true"></div></div></li>
-        <li class="client-card" aria-label="Fitbar"><div class="client-flip"><div class="client-face client-front"><img class="client-logo-img" style="--logo-scale:1.6" src="aset/klien/fitbar.webp" alt=""></div><div class="client-face client-back" aria-hidden="true"></div></div></li>
-        <li class="client-card" aria-label="Gery"><div class="client-flip"><div class="client-face client-front"><img class="client-logo-img" src="aset/klien/gery.png" alt=""></div><div class="client-face client-back" aria-hidden="true"></div></div></li>
-        <li class="client-card" aria-label="Prenagen"><div class="client-flip"><div class="client-face client-front"><img class="client-logo-img" src="aset/klien/prenagen.webp" alt=""></div><div class="client-face client-back" aria-hidden="true"></div></div></li>
-        <li class="client-card" aria-label="Entrasol"><div class="client-flip"><div class="client-face client-front"><img class="client-logo-img" data-tone="bright" style="--logo-scale:1.35" src="aset/klien/entrasol.webp" alt=""></div><div class="client-face client-back" aria-hidden="true"></div></div></li>
-        <li class="client-card" aria-label="Mountea"><div class="client-flip"><div class="client-face client-front"><img class="client-logo-img" src="aset/klien/mountea.png" alt=""></div><div class="client-face client-back" aria-hidden="true"></div></div></li>
-        <li class="client-card" aria-label="Milna"><div class="client-flip"><div class="client-face client-front"><img class="client-logo-img" style="--logo-scale:1.25" src="aset/klien/milna.webp" alt=""></div><div class="client-face client-back" aria-hidden="true"></div></div></li>
-      </ul>
+      <ul class="client-grid" id="client-grid" aria-label="Brand yang pernah ditangani Flux"></ul>
     </div>
   </section>
 
@@ -2166,38 +2161,34 @@ const unitOf=c=>c.type==='album'?'album':'karya';
    ========================================================= */
 (function(){
   const brands=[
-    {name:'GarudaFood',img:'aset/klien/garudafood.png',tone:'bright'},
-    {name:'Kalbe',img:'aset/klien/kalbe-farma.svg',tone:'light'},
-    {name:'Fitbar',img:'aset/klien/fitbar.webp',scale:1.6},
-    {name:'Gery',img:'aset/klien/gery.png'},
-    {name:'Prenagen',img:'aset/klien/prenagen.webp'},
-    {name:'Entrasol',img:'aset/klien/entrasol.webp',tone:'bright',scale:1.35},
-    {name:'Mountea',img:'aset/klien/mountea.png'},
-    {name:'Milna',img:'aset/klien/milna.webp',scale:1.25},
-    {name:'Diabetasol',img:'aset/klien/diabetasol.webp',tone:'light',scale:1.3},
-    {name:'Okky',img:'aset/klien/okky.png'},
-    {name:'Clevo',img:'aset/klien/clevo.png',tone:'bright'},
-    {name:'Hydro Coco',img:'aset/klien/hydro-coco.webp'},
-    {name:'Morinaga',img:'aset/klien/morinaga.webp'},
-    {name:'Zee',img:'aset/klien/zee.webp',scale:1.15},
-    {name:'Nutrive Benecol',img:'aset/klien/nutrive-benecol.webp'},
-    {name:'Prenagen Lova',img:'aset/klien/prenagen-lova.webp'}
-  ];
+    ['XL Axiata','xl-axiata'],['UNIQLO','uniqlo'],['Garuda Indonesia','garuda-indonesia'],['Citilink','citilink'],['Sriwijaya Air','sriwijaya-air'],['NAM Air','nam-air'],['Lion Parcel','lion-parcel'],
+    ['BNI','bni'],['Bank Mega','bank-mega'],['BCA','bca'],['Standard Chartered','standard-chartered'],['Bank BJB','bank-bjb'],['Maybank','maybank'],['Mandiri','mandiri'],
+    ['Layanan Syariah LinkAja','layanan-syariah-linkaja'],['OY! Indonesia','oy-indonesia'],['Pegadaian','pegadaian'],['Tanamduit','tanamduit'],['Mastercard','mastercard'],['Mandiri Taspen','mandiri-taspen'],['CIMB Niaga','cimb-niaga'],
+    ['BNI Life','bni-life'],['AIA','aia'],['Zurich','zurich'],['AXA Mandiri','axa-mandiri'],['Chubb','chubb'],['Sun Life','sun-life'],['Siloam Hospitals','siloam-hospitals'],
+    ['Sony','sony'],['Panasonic','panasonic'],['LG','lg'],['Brother','brother'],['Porsche','porsche'],['DFSK','dfsk'],['Uber','uber'],
+    ['Gudang Garam','gudang-garam'],['Delfi','delfi'],['Van Houten','van-houten'],['Inaco','inaco'],["I'm Coco",'im-coco'],['FKS Food','fks-food'],['Sosro','sosro'],
+    ['DNAku','dnaku'],['Kimia Farma','kimia-farma'],['Cap Lang','cap-lang'],['MURI','muri'],['Energizer','energizer'],['Zilingo','zilingo'],['Traveloka','traveloka']
+  ].map(([name,file])=>({name,img:'aset/klien-mono/'+file+'.png'}));
   const section=document.getElementById('clients');
-  const cards=[...document.querySelectorAll('#client-grid .client-card')];
-  if(!section||!cards.length)return;
+  const grid=document.getElementById('client-grid');
+  if(!section||!grid)return;
+  const visibleCount=35;
+  for(let i=0;i<visibleCount;i++){
+    const card=document.createElement('li');
+    card.className='client-card';
+    card.innerHTML='<div class="client-flip"><div class="client-face client-front" aria-hidden="true"></div><div class="client-face client-back" aria-hidden="true"></div></div>';
+    grid.appendChild(card);
+  }
+  const cards=[...grid.querySelectorAll('.client-card')];
   const motion=matchMedia('(prefers-reduced-motion: reduce)');
   function paint(face,brand){
     const img=document.createElement('img');
     img.className='client-logo-img';img.src=brand.img;img.alt='';img.decoding='async';
-    if(brand.tone)img.dataset.tone=brand.tone;
-    if(brand.scale)img.style.setProperty('--logo-scale',brand.scale);
     face.replaceChildren(img);
   }
   cards.forEach((card,i)=>{
     const front=card.querySelector('.client-front'),back=card.querySelector('.client-back');
-    paint(front,brands[i]);paint(back,brands[i+cards.length]);
-    front.setAttribute('aria-hidden','true');back.setAttribute('aria-hidden','true');
+    paint(front,brands[i]);paint(back,brands[(i+cards.length)%brands.length]);
     card.setAttribute('aria-label',brands[i].name);
   });
   let step=0,timer=null,visible=false;
