@@ -39,7 +39,7 @@ export const Bubbles: React.FC<{ count?: number }> = ({ count = 28 }) => {
   );
 };
 
-const LightRays: React.FC = () => {
+export const LightRays: React.FC = () => {
   const frame = useCurrentFrame();
   return (
     <AbsoluteFill style={{ mixBlendMode: "screen" }}>
