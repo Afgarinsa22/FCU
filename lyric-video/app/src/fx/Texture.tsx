@@ -54,35 +54,24 @@ export const Dust: React.FC<{ color?: string; amount?: number }> = ({
   );
 };
 
-/** Dirty, crumpled paper with stains and burnt edges. Oversized so camera moves never show its edge. */
+/** Crumpled paper. Oversized so camera moves never show its edge. */
 const PAD = 400;
 export const Paper: React.FC = () => (
   <div style={{ position: "absolute", inset: -PAD, backgroundColor: COLORS.paper }}>
     <svg width={WIDTH + PAD * 2} height={HEIGHT + PAD * 2}>
       <filter id="paper-fiber">
         <feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="4" seed={7} result="n" />
-        <feDiffuseLighting in="n" lightingColor="#fff" surfaceScale="3.2" result="l">
+        <feDiffuseLighting in="n" lightingColor="#fff" surfaceScale="2.2" result="l">
           <feDistantLight azimuth="235" elevation="50" />
         </feDiffuseLighting>
         <feColorMatrix type="saturate" values="0" />
-      </filter>
-      <filter id="paper-stain">
-        <feTurbulence type="fractalNoise" baseFrequency="0.004" numOctaves="3" seed={11} />
-        <feColorMatrix type="matrix" values="0 0 0 0 0.16  0 0 0 0 0.12  0 0 0 0 0.09  0 0 0 -2.6 1.45" />
       </filter>
       <filter id="paper-grain">
         <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="2" seed={3} />
         <feColorMatrix type="saturate" values="0" />
       </filter>
-      <radialGradient id="paper-burn" cx="50%" cy="50%" r="62%">
-        <stop offset="55%" stopColor="#1a120c" stopOpacity="0" />
-        <stop offset="88%" stopColor="#1a120c" stopOpacity="0.6" />
-        <stop offset="100%" stopColor="#0b0806" stopOpacity="1" />
-      </radialGradient>
-      <rect width="100%" height="100%" filter="url(#paper-fiber)" opacity={0.75} style={{ mixBlendMode: "multiply" }} />
-      <rect width="100%" height="100%" filter="url(#paper-stain)" opacity={0.55} style={{ mixBlendMode: "multiply" }} />
+      <rect width="100%" height="100%" filter="url(#paper-fiber)" opacity={0.5} style={{ mixBlendMode: "multiply" }} />
       <rect width="100%" height="100%" filter="url(#paper-grain)" opacity={0.2} style={{ mixBlendMode: "multiply" }} />
-      <rect x={PAD} y={PAD} width={WIDTH} height={HEIGHT} fill="url(#paper-burn)" />
     </svg>
   </div>
 );

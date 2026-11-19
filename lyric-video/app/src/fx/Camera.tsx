@@ -3,7 +3,7 @@ import { AbsoluteFill, random, useCurrentFrame } from "remotion";
 import { CameraMotionBlur } from "@remotion/motion-blur";
 import { FPS, HEIGHT, WIDTH } from "../theme";
 import { TIMING } from "../timing";
-import { Dust, Grain, Vignette } from "./Texture";
+import { Dust, Grain } from "./Texture";
 
 /** The Indonesian half is aggressive; the underwater half drifts. */
 const UNDERWATER_FROM = 49.2;
@@ -154,7 +154,6 @@ export const Shell: React.FC<{ offset?: number; children: React.ReactNode; blurS
         <Dust amount={1.6} />
       </AbsoluteFill>
       <Grain opacity={0.34} />
-      <Vignette strength={0.92} />
     </AbsoluteFill>
   );
 };

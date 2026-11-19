@@ -4,7 +4,7 @@ import { staticFile } from "remotion";
 export const COLORS = {
   black: "#0B0B0B",
   red: "#B0101B",
-  paper: "#C9C1B2",
+  paper: "#DDD7CC",
   ink: "#141210",
   grey: "#6B6B6B",
   white: "#F2EFE9",

@@ -123,17 +123,6 @@ export const S04Melupakan: React.FC = () => {
         </div>
       </AbsoluteFill>
 
-      {/* ink creeping in from the edges before the cut to black */}
-      <AbsoluteFill
-        style={{
-          background: `radial-gradient(ellipse at 50% 50%, rgba(11,11,11,0) ${interpolate(
-            frame,
-            [sceneEnd - 24, sceneEnd],
-            [95, 0],
-            clamp,
-          )}%, ${COLORS.black} ${interpolate(frame, [sceneEnd - 24, sceneEnd], [165, 20], clamp)}%)`,
-        }}
-      />
     </AbsoluteFill>
   );
 };
