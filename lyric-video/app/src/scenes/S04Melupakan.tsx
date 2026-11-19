@@ -1,6 +1,6 @@
 import React from "react";
 import { AbsoluteFill, Easing, interpolate, useCurrentFrame } from "remotion";
-import { Grain, Paper } from "../fx/Texture";
+import { Paper } from "../fx/Texture";
 import { Typewriter } from "../fx/Type";
 import { COLORS, FONTS } from "../theme";
 import { lineEndFrame, sec, wordFrame } from "../timing";
@@ -134,7 +134,6 @@ export const S04Melupakan: React.FC = () => {
           )}%, ${COLORS.black} ${interpolate(frame, [sceneEnd - 24, sceneEnd], [165, 20], clamp)}%)`,
         }}
       />
-      <Grain opacity={0.1} />
     </AbsoluteFill>
   );
 };

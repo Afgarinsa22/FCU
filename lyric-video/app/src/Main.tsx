@@ -5,6 +5,7 @@ import { S01Menyesal } from "./scenes/S01Menyesal";
 import { S04Melupakan } from "./scenes/S04Melupakan";
 import { S09Breathe } from "./scenes/S09Breathe";
 import { COLORS } from "./theme";
+import { Shell } from "./fx/Camera";
 import { lineStart, sec } from "./timing";
 
 /** Scenes placed at the start of their lyric line, lasting until the next line. */
@@ -18,11 +19,24 @@ export const sceneFrames = (s: (typeof SCENES)[number]) => sec(s.until - lineSta
 
 export const Main: React.FC = () => (
   <AbsoluteFill style={{ backgroundColor: COLORS.black }}>
-    {SCENES.map((s) => (
-      <Sequence key={s.id} name={s.id} from={sec(lineStart(s.line))} durationInFrames={sceneFrames(s)}>
-        <s.component />
-      </Sequence>
-    ))}
+    <Shell>
+      {SCENES.map((s) => (
+        <Sequence key={s.id} name={s.id} from={sec(lineStart(s.line))} durationInFrames={sceneFrames(s)}>
+          <s.component />
+        </Sequence>
+      ))}
+    </Shell>
+    {/* Audio stays outside the motion-blur shell so it is not duplicated. */}
     <Audio src={staticFile("song.mp3")} />
   </AbsoluteFill>
 );
+
+/** A single scene wrapped in the camera shell, for previewing it on its own. */
+export const ScenePreview: React.FC<{ index: number }> = ({ index }) => {
+  const s = SCENES[index];
+  return (
+    <Shell offset={sec(lineStart(s.line))}>
+      <s.component />
+    </Shell>
+  );
+};

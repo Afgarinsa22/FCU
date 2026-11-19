@@ -1,6 +1,6 @@
 import React from "react";
 import { AbsoluteFill, Easing, interpolate, random, useCurrentFrame } from "remotion";
-import { Dust, Grain, Vignette } from "../fx/Texture";
+
 import { Typewriter } from "../fx/Type";
 import { COLORS, FONTS, HEIGHT, WIDTH } from "../theme";
 import { sec, wordFrame } from "../timing";
@@ -145,10 +145,6 @@ export const S09Breathe: React.FC = () => {
           })}
         </div>
       </AbsoluteFill>
-
-      <Dust amount={0.5} />
-      <Grain opacity={0.14} />
-      <Vignette strength={0.85} />
     </AbsoluteFill>
   );
 };

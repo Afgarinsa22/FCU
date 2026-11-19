@@ -3,8 +3,8 @@ import { staticFile } from "remotion";
 
 export const COLORS = {
   black: "#0B0B0B",
-  red: "#C1121F",
-  paper: "#E8E3D9",
+  red: "#B0101B",
+  paper: "#C9C1B2",
   ink: "#141210",
   grey: "#6B6B6B",
   white: "#F2EFE9",

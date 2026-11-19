@@ -1,6 +1,6 @@
 import React from "react";
 import { AbsoluteFill, Easing, interpolate, random, useCurrentFrame } from "remotion";
-import { Dust, Grain, Vignette } from "../fx/Texture";
+
 import { Typewriter } from "../fx/Type";
 import { COLORS, FONTS } from "../theme";
 import { lineEndFrame, wordFrame } from "../timing";
@@ -108,10 +108,6 @@ export const S01Menyesal: React.FC = () => {
           </div>
         </AbsoluteFill>
       </AbsoluteFill>
-
-      <Dust />
-      <Grain />
-      <Vignette />
     </AbsoluteFill>
   );
 };
